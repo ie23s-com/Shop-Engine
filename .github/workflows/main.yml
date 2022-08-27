@@ -1,22 +1,19 @@
-on: push
-name: 🚀 Deploy website on push
-jobs:
-  web-deploy:
-    name: 🎉 Deploy
-    runs-on: ubuntu-latest
-    steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v2
+on: [push]
 
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@4.3.1
-      with:
-        server: ${{ secrets.ip }}
-        username: ${{ secrets.user }}
-        password: ${{ secrets.password }}
-        protocol: ftps
-        server-dir: ${{ secrets.path }}
-        port: 22 # todo replace with your web hosts ftps port
-        security: strict
-        timeout: 600000
-        log-level: verbose
+jobs:
+    deploy_job:
+    runs-on: ubuntu-latest
+    name: deploy
+    steps:
+        - name: Checkout
+        uses: actions/checkout@v2
+        - name: Deploy file
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+            username: ${{ secrets.user }}
+            server: ${{ secrets.ip }}
+            port: 22
+            local_path: './*'
+            remote_path: ${{ secrets.path }}
+            sftp_only: true
+            password: ${{ secrets.password }}
