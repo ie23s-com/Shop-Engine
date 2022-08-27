@@ -1,0 +1,17 @@
+{
+    "name": "ie23s/shop",
+    "description": "Testing shop",
+    "type": "project",
+    "license": "GPLv3",
+    "authors": [
+        {
+            "name": "ie23s",
+            "email": "me@ie23s.com"
+        }
+    ],
+    "require": {
+        "smarty/smarty": "^4.2",
+        "simplon/mysql": "^2.2",
+        "vlucas/phpdotenv": "^5.4"
+    }
+}
