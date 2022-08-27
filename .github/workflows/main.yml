@@ -1,19 +1,20 @@
-on: [push]
+on: [push] 
 
 jobs:
-    deploy_job:
-    runs-on: ubuntu-latest
-    name: deploy
+  deploy_job:
+    runs-on: ubuntu-latest  
+    name: sftp
     steps:
-        - name: Checkout
-        uses: actions/checkout@v2
-        - name: Deploy file
+      - name: Checkout    
+        uses: actions/checkout@v2 
+
+      - name: Deploy file
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-            username: ${{ secrets.user }}
-            server: ${{ secrets.ip }}
-            port: 22
-            local_path: './*'
-            remote_path: ${{ secrets.path }}
-            sftp_only: true
-            password: ${{ secrets.password }}
+                username: ${{ secrets.user }}
+                server: ${{ secrets.ip }}
+                port: 22
+                local_path: './*'
+                remote_path: ${{ secrets.path }}
+                sftp_only: true
+                password: ${{ secrets.password }}
