@@ -17,3 +17,6 @@ jobs:
         protocol: ftps
         server-dir: ${{ secrets.path }}
         port: 22 # todo replace with your web hosts ftps port
+        security: strict
+        timeout: 600000
+        log-level: verbose
