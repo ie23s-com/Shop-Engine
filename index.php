@@ -4,7 +4,7 @@ ini_set('display_errors', 'On');
 
 $time_start = microtime(true);
 
-define("__SHOP_DIR__", __DIR__ . "/");
+const __SHOP_DIR__ = __DIR__ . "/";
 
 require_once(__SHOP_DIR__ . 'vendor/autoload.php');
 require_once(__SHOP_DIR__ . 'system/System.class.php');
