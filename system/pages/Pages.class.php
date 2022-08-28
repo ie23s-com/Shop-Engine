@@ -6,20 +6,19 @@ namespace ie23s\shop\system\pages;
 require_once __SHOP_DIR__ . "system/pages/Theme.class.php";
 
 use ie23s\shop\system\Component;
-use ie23s\shop\system\System;
+use SmartyException;
 
 class Pages extends Component
 {
-    private $path;
+    private string $path;
     private Theme $theme;
 
     /**
      * @return void
      */
-    public function init(System $system)
+    public function init()
     {
-        $this->setSystem($system);
-        @       $this->path = $_GET['do'];
+        $this->path = $_GET['do'] ?? '';
         $this->theme = new Theme();
         $this->theme->init($this);
     }
@@ -30,11 +29,12 @@ class Pages extends Component
     public function load()
     {
         $this->theme->load();
-        $this->theme->addText("name", "Hello, Sasha!");
+        $this->theme->addText("title", $this->getSystem()->getLang()->getRow('title'));
     }
 
     /**
      * @return void
+     * @throws SmartyException
      */
     public function unload()
     {

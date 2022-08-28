@@ -3,14 +3,14 @@
 namespace ie23s\shop\system\pages;
 
 use Smarty;
+use SmartyException;
 
 class Theme
 {
-    private $texts = array();
-    private $params = array();
-    private $blocks = array();
+    private array $texts = array();
+    private array $blocks = array();
 
-    private $theme;
+    private string $theme;
     private Smarty $smarty;
 
     /**
@@ -38,11 +38,11 @@ class Theme
      *
      * @param string $name - name of tpl file
      * @return String
+     * @throws SmartyException
      */
     public function getTpl(string $name): string
     {
         $this->smarty->assign($this->blocks);
-        $this->smarty->assign($this->params);
         $this->smarty->assign($this->texts);
 
         return $this->smarty->fetch("{$name}.tpl");
@@ -72,15 +72,6 @@ class Theme
     public function addText(string $name, string $text)
     {
         $this->texts[$name] = $text;
-    }
-
-    /**
-     * @param string $name
-     * @param string $blocks
-     */
-    public function addParam(string $name, string $param)
-    {
-        $this->params[$name] = $param;
     }
 
 }

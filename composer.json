@@ -12,6 +12,7 @@
   "require": {
     "smarty/smarty": "^4.2",
     "simplon/mysql": "^2.2",
-    "vlucas/phpdotenv": "^5.4"
+    "vlucas/phpdotenv": "^5.4",
+    "ext-pdo": "*"
   }
 }

@@ -4,7 +4,7 @@ namespace ie23s\shop\system\database;
 
 use Exception;
 use ie23s\shop\system\Component;
-use ie23s\shop\system\System;
+use PDO;
 use Simplon\Mysql;
 
 /**
@@ -12,8 +12,16 @@ use Simplon\Mysql;
  */
 class MySQLMod extends Component
 {
-    private $pdoConnection = null;
-    private $dbConnection = null;
+    private PDO $pdoConnection;
+    private Mysql\Mysql $dbConnection;
+
+    /**
+     * @return Mysql\Mysql
+     */
+    public function getConn(): Mysql\Mysql
+    {
+        return $this->dbConnection;
+    }
 
     //Database info init
 
@@ -21,9 +29,8 @@ class MySQLMod extends Component
      * MysqlConnection init
      * @throws Exception
      */
-    public function init(System $system)
+    public function init()
     {
-        $this->setSystem($system);
         $pdo = new Mysql\PDOConnector(
             $_ENV['DB_HOST'], // server
             $_ENV['DB_USER'],      // user
@@ -36,17 +43,11 @@ class MySQLMod extends Component
 
     /**
      * Mysql connection
-     * @throws Mysql\MysqlException
      */
     public function load()
     {
-        /** @noinspection PhpParamsInspection */
         $this->dbConnection =
             new Mysql\Mysql($this->pdoConnection);
-
-        $result = $this->dbConnection->fetchColumn('SHOW TABLES');
-
-        //var_dump($result);
     }
 
     public function unload()

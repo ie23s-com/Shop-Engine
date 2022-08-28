@@ -8,20 +8,31 @@ namespace ie23s\shop\system;
  ***/
 abstract class Component
 {
-    private $system;
+    private System $system;
 
-    public abstract function init(System $system);
-
-    public abstract function load();
-
-    public abstract function unload();
-
-    public final function setSystem(System $system)
+    public function __construct(System $system)
     {
         $this->system = $system;
     }
 
-    public final function getSystem()
+    /**
+     * @return void
+     */
+    public abstract function init();
+
+    /**
+     * @return void
+     */
+    public abstract function load();
+
+    /**
+     * @return void
+     */
+    public function unload()
+    {
+    }
+
+    public final function getSystem(): System
     {
         return $this->system;
     }
