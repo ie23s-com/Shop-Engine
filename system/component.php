@@ -6,11 +6,23 @@ namespace ie23s\shop\system;
  *
  * @author ie23s
  ***/
-interface Component
+abstract class Component
 {
-    public function init($system);
+    private $system;
 
-    public function load();
+    public abstract function init(System $system);
 
-    public function unload();
+    public abstract function load();
+
+    public abstract function unload();
+
+    public final function setSystem(System $system)
+    {
+        $this->system = $system;
+    }
+
+    public final function getSystem()
+    {
+        return $this->system;
+    }
 }

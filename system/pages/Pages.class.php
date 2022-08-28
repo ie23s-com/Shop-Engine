@@ -2,38 +2,42 @@
 
 namespace ie23s\shop\system\pages;
 
-use ie23s\shop\system\Component;
+//Component interface loader
+require_once __SHOP_DIR__ . "system/pages/Theme.class.php";
 
-class Pages implements Component
+use ie23s\shop\system\Component;
+use ie23s\shop\system\System;
+
+class Pages extends Component
 {
     private $path;
-    private $system;
-    private $theme;
+    private Theme $theme;
 
     /**
-     * @return mixed
+     * @return void
      */
-    public function init($system)
+    public function init(System $system)
     {
-        $this->path = $_GET['do'];
-        $this->system = $system;
+        $this->setSystem($system);
+        @       $this->path = $_GET['do'];
         $this->theme = new Theme();
         $this->theme->init($this);
     }
 
     /**
-     * @return mixed
+     * @return void
      */
     public function load()
     {
-        // TODO: Implement load() method.
+        $this->theme->load();
+        $this->theme->addText("name", "Hello, Sasha!");
     }
 
     /**
-     * @return mixed
+     * @return void
      */
     public function unload()
     {
-        // TODO: Implement unload() method.
+        echo $this->theme->getTpl('main');
     }
 }

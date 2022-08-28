@@ -4,16 +4,17 @@ namespace ie23s\shop\system\config;
 
 use Dotenv\Dotenv;
 use ie23s\shop\system\Component;
+use ie23s\shop\system\System;
 
 /**
  * Configuration system component
  */
-class Config implements Component
+class Config extends Component
 {
     private $dotenv = null;
 
     //Loading configuration file .config
-    public function init($system)
+    public function init(System $system)
     {
         $this->dotenv = Dotenv::createImmutable(__SHOP_DIR__,
             '.config.env');
@@ -24,6 +25,7 @@ class Config implements Component
     public function load()
     {
         $this->dotenv->required(['DB_HOST', 'DB_NAME', 'DB_USER', 'DB_PASS']);
+        $this->dotenv->required(['THEME']);
     }
 
     public function unload()
