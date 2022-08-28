@@ -11,6 +11,7 @@ require_once(__SHOP_DIR__ . 'system/System.class.php');
 
 $system = new ie23s\shop\system\System();
 $system->init();
+
 $system->load();
 
 $time_end = microtime(true);

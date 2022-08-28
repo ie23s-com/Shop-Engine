@@ -9,7 +9,7 @@ use Simplon\Mysql;
 /**
  * MySQL PDO system component
  */
-class MySQLC implements Component
+class MySQLMod implements Component
 {
     private $pdoConnection = null;
     private $dbConnection = null;
@@ -20,7 +20,7 @@ class MySQLC implements Component
      * MysqlConnection init
      * @throws Exception
      */
-    public function init()
+    public function init($system)
     {
         $pdo = new Mysql\PDOConnector(
             $_ENV['DB_HOST'], // server

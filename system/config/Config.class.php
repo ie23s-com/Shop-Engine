@@ -13,7 +13,7 @@ class Config implements Component
     private $dotenv = null;
 
     //Loading configuration file .config
-    public function init()
+    public function init($system)
     {
         $this->dotenv = Dotenv::createImmutable(__SHOP_DIR__,
             '.config.env');
