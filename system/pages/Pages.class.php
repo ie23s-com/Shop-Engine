@@ -6,6 +6,7 @@ namespace ie23s\shop\system\pages;
 require_once __SHOP_DIR__ . "system/pages/Theme.class.php";
 
 use ie23s\shop\system\Component;
+use Simplon\Mysql\MysqlException;
 use SmartyException;
 
 class Pages extends Component
@@ -25,6 +26,7 @@ class Pages extends Component
 
     /**
      * @return void
+     * @throws MysqlException
      */
     public function load()
     {

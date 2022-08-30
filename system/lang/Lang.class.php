@@ -85,4 +85,42 @@ class Lang extends Component
                                                         WHERE lang_id = :id AND `key` = :key",
             ['id' => $this->lang_id, 'key' => $key]);
     }
+
+    /**
+     * @throws MysqlException
+     */
+    public function getEditableRow($key): string
+    {
+        return $this->mySQL->getConn()->fetchColumn("SELECT `value`
+                                                        FROM `language_editable`
+                                                        WHERE lang_id = :id AND `key` = :key",
+            ['id' => $this->lang_id, 'key' => $key]);
+    }
+
+    /**
+     * @throws MysqlException
+     */
+    public function addEditableRow($value, $lang_id): int
+    {
+        return $this->mySQL->getConn()->insert("language_editable",
+            ['lang_id' => $lang_id, 'value' => $value]);
+    }
+
+    /**
+     * @throws MysqlException
+     */
+    public function deleteEditableRow($id): int
+    {
+        return $this->mySQL->getConn()->delete("language_editable",
+            ['id' => $id]);
+    }
+
+    /**
+     * @throws MysqlException
+     */
+    public function editEditableRow($id, $value, $lang_id): int
+    {
+        return $this->mySQL->getConn()->update("language_editable",
+            ['id' => $id], ['lang_id' => $lang_id, 'value' => $value]);
+    }
 }
