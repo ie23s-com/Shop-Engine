@@ -4,34 +4,60 @@ namespace ie23s\shop\system\pages;
 
 //Component interface loader
 require_once __SHOP_DIR__ . "system/pages/Theme.class.php";
+//Page component
+require_once __SHOP_DIR__ . "system/pages/Page.php";
+require_once __SHOP_DIR__ . "system/pages/ErrorPage.class.php";
 
 use ie23s\shop\system\Component;
-use Simplon\Mysql\MysqlException;
 use SmartyException;
 
 class Pages extends Component
 {
-    private string $path;
+    private array $path = array();
     private Theme $theme;
+    private string $title;
+
+    private array $modules = array();
+    private Component $mySQL;
 
     /**
      * @return void
      */
     public function init()
     {
-        $this->path = $_GET['do'] ?? '';
-        $this->theme = new Theme();
-        $this->theme->init($this);
+        if (isset($_GET['do'])) {
+            $this->path = self::getPath($_GET['do']);
+        }
+
     }
 
     /**
      * @return void
-     * @throws MysqlException
      */
     public function load()
     {
-        $this->theme->load();
-        $this->theme->addText("title", $this->getSystem()->getLang()->getRow('title'));
+        $this->theme = new Theme();
+        $this->mySQL = $this->getSystem()->getComponent('database');
+
+        new ErrorPage('error', $this);
+        $this->title = $this->getSystem()->getLang()->getRow('title');
+        $this->theme->addBlock('content', $this->getModule()->request($this->path));
+    }
+
+    private function getModule(): Page
+    {
+
+        $name = $this->mySQL->getConn()->fetchColumn("SELECT `module`
+                                                        FROM `pages`
+                                                        WHERE  `path` = :path", ['path' => $this->path[0]]);
+        return $this->modules[$name];
+    }
+
+    /**
+     */
+    public function setTitle(string $title)
+    {
+        $this->title .= ' - ' . $title;
     }
 
     /**
@@ -40,6 +66,23 @@ class Pages extends Component
      */
     public function unload()
     {
+        $this->theme->addText("title", $this->title);
         echo $this->theme->getTpl('main');
+    }
+
+    public function loadModule(Page $page)
+    {
+        $this->modules[$page->getName()] = $page;
+    }
+
+    public static function getPath(string $path): array
+    {
+        $do = preg_replace('|(/+)|', '/', trim($path, '/'));
+        return explode('/', $do);
+    }
+
+    public static function toPath(array $array): string
+    {
+        return implode('/', $array);
     }
 }
