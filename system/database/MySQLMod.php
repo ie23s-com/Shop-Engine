@@ -4,6 +4,7 @@ namespace ie23s\shop\system\database;
 
 use Exception;
 use ie23s\shop\system\Component;
+use ie23s\shop\system\System;
 use PDO;
 use Simplon\Mysql;
 
@@ -29,8 +30,9 @@ class MySQLMod extends Component
      * MysqlConnection init
      * @throws Exception
      */
-    public function init()
+    public function __construct(System $system)
     {
+        parent::__construct($system);
         $pdo = new Mysql\PDOConnector(
             $_ENV['DB_HOST'], // server
             $_ENV['DB_USER'],      // user

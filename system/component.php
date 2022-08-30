@@ -18,11 +18,6 @@ abstract class Component
     /**
      * @return void
      */
-    public abstract function init();
-
-    /**
-     * @return void
-     */
     public abstract function load();
 
     /**

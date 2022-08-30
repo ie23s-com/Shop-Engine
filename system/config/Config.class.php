@@ -4,6 +4,7 @@ namespace ie23s\shop\system\config;
 
 use Dotenv\Dotenv;
 use ie23s\shop\system\Component;
+use ie23s\shop\system\System;
 
 /**
  * Configuration system component
@@ -13,8 +14,9 @@ class Config extends Component
     private Dotenv $dotenv;
 
     //Loading configuration file .config
-    public function init()
+    public function __construct(System $system)
     {
+        parent::__construct($system);
         $this->dotenv = Dotenv::createImmutable(__SHOP_DIR__,
             '.config.env');
         $this->dotenv->load();

@@ -4,6 +4,7 @@ namespace ie23s\shop\system\lang;
 
 use ie23s\shop\system\Component;
 use ie23s\shop\system\database\MySQLMod;
+use ie23s\shop\system\System;
 use Simplon\Mysql\MysqlException;
 
 class Lang extends Component
@@ -17,8 +18,9 @@ class Lang extends Component
     /**
      * @return void
      */
-    public function init()
+    public function __construct(System $system)
     {
+        parent::__construct($system);
         $this->lang = isset($_COOKIE['language']) && !empty($_COOKIE['language']) ? $_COOKIE['language'] : '';
         $this->accept = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
     }

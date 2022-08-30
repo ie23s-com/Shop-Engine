@@ -9,6 +9,7 @@ require_once __SHOP_DIR__ . "system/pages/Page.php";
 require_once __SHOP_DIR__ . "system/pages/ErrorPage.class.php";
 
 use ie23s\shop\system\Component;
+use ie23s\shop\system\System;
 use SmartyException;
 
 class Pages extends Component
@@ -23,8 +24,9 @@ class Pages extends Component
     /**
      * @return void
      */
-    public function init()
+    public function __construct(System $system)
     {
+        parent::__construct($system);
         if (isset($_GET['do'])) {
             $this->path = self::getPath($_GET['do']);
         }
