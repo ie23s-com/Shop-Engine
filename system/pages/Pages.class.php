@@ -28,7 +28,7 @@ class Pages extends Component
     {
         parent::__construct($system);
         if (isset($_GET['do'])) {
-            $this->path = self::getPath($_GET['do']);
+            $this->path = self::fromPath($_GET['do']);
         }
 
     }
@@ -77,7 +77,15 @@ class Pages extends Component
         $this->modules[$page->getName()] = $page;
     }
 
-    public static function getPath(string $path): array
+    /**
+     * @return array
+     */
+    public function getPath(): array
+    {
+        return $this->path;
+    }
+
+    public static function fromPath(string $path): array
     {
         $do = preg_replace('|(/+)|', '/', trim($path, '/'));
         return explode('/', $do);

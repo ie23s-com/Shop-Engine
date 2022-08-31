@@ -4,6 +4,7 @@ namespace ie23s\shop\system;
 
 //Component interface loader
 use Exception;
+use ie23s\shop\engine\Engine;
 use ie23s\shop\system\lang\Lang;
 use ie23s\shop\system\pages\Pages;
 

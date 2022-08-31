@@ -11,7 +11,6 @@ class ErrorPage extends Page
 
     /**
      * @throws SmartyException
-     * @throws MysqlException
      */
     public function request(array $request): string
     {

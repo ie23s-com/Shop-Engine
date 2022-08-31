@@ -6,7 +6,7 @@ use ie23s\shop\system\lang\Lang;
 
 abstract class Page
 {
-    private $name;
+    private string $name;
     private Pages $pages;
     private Lang $lang;
 
@@ -25,9 +25,9 @@ abstract class Page
     public abstract function request(array $request): string;
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
