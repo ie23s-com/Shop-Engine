@@ -16,6 +16,8 @@ require_once __SHOP_DIR__ . "system/lang/Lang.class.php";
 require_once __SHOP_DIR__ . "system/database/MySQLMod.php";
 //MySQL component loader
 require_once __SHOP_DIR__ . "system/pages/Pages.class.php";
+//MySQL component loader
+require_once __SHOP_DIR__ . "engine/Engine.class.php";
 
 
 /**
@@ -58,8 +60,11 @@ class System
         $this->components["database"]->load();
         //Load Lang
         $this->components["lang"]->load();
+        //Init Shop engine
+        $this->components["sEngine"]->load();
 
         //Load Theme
+        //LAST!
         $this->components["pages"]->load();
     }
 

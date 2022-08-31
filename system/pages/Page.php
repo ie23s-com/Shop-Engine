@@ -2,10 +2,13 @@
 
 namespace ie23s\shop\system\pages;
 
+use ie23s\shop\system\lang\Lang;
+
 abstract class Page
 {
     private $name;
     private Pages $pages;
+    private Lang $lang;
 
     /**
      * @param $name
@@ -14,6 +17,7 @@ abstract class Page
     {
         $this->name = $name;
         $this->pages = $pages;
+        $this->lang = $pages->getSystem()->getLang();
 
         $pages->loadModule($this);
     }
@@ -34,6 +38,14 @@ abstract class Page
     public function getPages(): Pages
     {
         return $this->pages;
+    }
+
+    /**
+     * @return Lang
+     */
+    public function getLang(): Lang
+    {
+        return $this->lang;
     }
 
 
