@@ -2,7 +2,6 @@
 
 namespace ie23s\shop\system\pages;
 
-use Simplon\Mysql\MysqlException;
 use SmartyException;
 
 class ErrorPage extends Page
