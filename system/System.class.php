@@ -37,21 +37,20 @@ class System
 
         //Init Config
         $config = new config\Config($this);
-        $config->init();
         $config->load();
         $config = null;
 
         //Init DB
         $this->components["database"] = new database\MySQLMod($this);
-        $this->components["database"]->init();//TODO Exception
 
         //Init Lang
         $this->components["lang"] = new Lang($this);
-        $this->components["lang"]->init();
 
         //Init Theme
         $this->components["pages"] = new Pages($this);
-        $this->components["pages"]->init();
+
+        //Init Shop engine
+        $this->components["sEngine"] = new Engine($this);
     }
 
     public function load()
@@ -75,6 +74,7 @@ class System
     }
 
     /**
+     * @param $component
      * @return Component
      */
     public function getComponent($component): Component
