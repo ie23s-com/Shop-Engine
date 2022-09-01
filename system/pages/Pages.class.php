@@ -30,6 +30,7 @@ class Pages extends Component
         if (isset($_GET['do'])) {
             $this->path = self::fromPath($_GET['do']);
         }
+        $this->theme = new Theme();
 
     }
 
@@ -38,20 +39,25 @@ class Pages extends Component
      */
     public function load()
     {
-        $this->theme = new Theme();
         $this->mySQL = $this->getSystem()->getComponent('database');
 
-        new ErrorPage('error', $this);
         $this->title = $this->getSystem()->getLang()->getRow('title');
-        $this->theme->addBlock('content', $this->getModule()->request($this->path));
+
     }
 
+    /**
+     * @throws SmartyException
+     */
     private function getModule(): Page
     {
-
+        if (!isset($this->path[0]) || empty($this->path[0])) {
+            $this->path[0] = 'index';
+        }
         $name = $this->mySQL->getConn()->fetchColumn("SELECT `module`
                                                         FROM `pages`
                                                         WHERE  `path` = :path", ['path' => $this->path[0]]);
+        if ($name == null)
+            $this->error(404, 'Not found. Please, try to find other page!');
         return $this->modules[$name];
     }
 
@@ -69,6 +75,7 @@ class Pages extends Component
     public function unload()
     {
         $this->theme->addText("title", $this->title);
+        $this->theme->addBlock('content', $this->getModule()->request($this->path));
         echo $this->theme->getTpl('main');
     }
 
@@ -95,4 +102,16 @@ class Pages extends Component
     {
         return implode('/', $array);
     }
+
+    /**
+     * @return void
+     * @throws SmartyException
+     */
+    public function error($num, $text = "")
+    {
+        $this->path[0] = 'error';
+
+        (new ErrorPage('error', $this))->setError($num, $text);
+    }
+
 }

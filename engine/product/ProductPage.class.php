@@ -20,6 +20,8 @@ class ProductPage extends Page
     public function request(array $request): string
     {
         $product = $this->productEngine->getProductById($request[1]);
+        if ($product == null)
+            $this->getPages()->error(404, "This product not found");
         $theme = new Theme();
         $theme->addText('product_name', $this->getLang()->getEditableRow("product-{$product->getId()}-name"));
         $theme->addText('product_description', $this->getLang()->
