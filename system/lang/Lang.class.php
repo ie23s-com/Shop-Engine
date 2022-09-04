@@ -102,10 +102,13 @@ class Lang extends Component
     /**
      * @throws MysqlException
      */
-    public function addEditableRow($value, $lang_id): int
+    public function addEditableRow($name, array $values): array
     {
-        return $this->mySQL->getConn()->insert("language_editable",
-            ['lang_id' => $lang_id, 'value' => $value]);
+        foreach ($values as $i => $value) {
+            $values[$i]['key'] = $name;
+        }
+        return $this->mySQL->getConn()->insertMany("language_editable",
+            $values);
     }
 
     /**

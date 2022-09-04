@@ -4,6 +4,7 @@ namespace ie23s\shop\engine\product;
 
 class Product
 {
+
     private int $id;
 
     private float $cost;
@@ -25,7 +26,7 @@ class Product
      * @param array $photos
      */
     public function __construct(int $id, float $cost, int $art, int $code,
-                                int $sold, int $balance, int $category, array $photos)
+                                int $sold, int $balance, int $category, array $photos = [])
     {
         $this->id = $id;
         $this->cost = $cost;
@@ -91,6 +92,67 @@ class Product
     public function getCategory(): int
     {
         return $this->category;
+    }
+
+    /**
+     * @param float $cost
+     */
+    public function setCost(float $cost): void
+    {
+        $this->cost = $cost;
+    }
+
+    /**
+     * @param int $art
+     */
+    public function setArt(int $art): void
+    {
+        $this->art = $art;
+    }
+
+    /**
+     * @param int $code
+     */
+    public function setCode(int $code): void
+    {
+        $this->code = $code;
+    }
+
+    /**
+     * @param int $sold
+     */
+    public function setSold(int $sold): void
+    {
+        $this->sold = $sold;
+    }
+
+    /**
+     * @param int $balance
+     */
+    public function setBalance(int $balance): void
+    {
+        $this->balance = $balance;
+    }
+
+    /**
+     * @param int $category
+     */
+    public function setCategory(int $category): void
+    {
+        $this->category = $category;
+    }
+
+    /**
+     * @param array $photos
+     */
+    public function setPhotos(array $photos): void
+    {
+        $this->photos = $photos;
+    }
+
+    public function getPhotos(): array
+    {
+        return $this->photos;
     }
 
 

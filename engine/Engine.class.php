@@ -54,5 +54,13 @@ class Engine extends Component
         return $this->categoriesEngine;
     }
 
+    /**
+     * @return ProductEngine
+     */
+    public function getProductEngine(): ProductEngine
+    {
+        return $this->productEngine;
+    }
+
 
 }

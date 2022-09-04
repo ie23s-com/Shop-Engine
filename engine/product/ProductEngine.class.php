@@ -41,4 +41,47 @@ class ProductEngine
             $product['art'], $product['code'], $product['sold'], $product['balance'], $product['category'],
             json_decode($product['photos']));
     }
+
+    /**
+     * @throws MysqlException
+     */
+    public function getAllProducts(): ?array
+    {
+        $returnProducts = array();
+        $products = $this->engine->getDb()->fetchRowMany(
+            'SELECT * FROM products');
+        if ($products == null)
+            return null;
+        foreach ($products as $product) {
+            $returnProducts[] = new Product($product['id'], $product['cost'],
+                $product['art'], $product['code'], $product['sold'], $product['balance'], $product['category'],
+                json_decode($product['photos']));
+        }
+        return $returnProducts;
+    }
+
+    public function updateProduct(Product $product)
+    {
+        $this->engine->getDb()->update('products', ['id' => $product->getId()], [
+            'cost' => $product->getCost(), 'art' => $product->getArt(), 'code' => $product->getCode(),
+            'sold' => $product->getSold(), 'balance' => $product->getBalance(), 'category' => $product->getCategory(),
+            'photos' => json_encode($product->getPhotos())
+        ]);
+    }
+
+    /**
+     * @throws MysqlException
+     */
+    public function createProduct(Product $product, $names, $descriptions): int
+    {
+        $id = $this->engine->getDb()->insert('products', [
+            'cost' => $product->getCost(), 'art' => $product->getArt(), 'code' => $product->getCode(),
+            'sold' => $product->getSold(), 'balance' => $product->getBalance(), 'category' => $product->getCategory(),
+            'photos' => json_encode($product->getPhotos())
+        ]);
+        $this->engine->getSystem()->getLang()->addEditableRow("product-{$id}-name", $names);
+        $this->engine->getSystem()->getLang()->addEditableRow("product-{$id}-description", $descriptions);
+
+        return $id;
+    }
 }
