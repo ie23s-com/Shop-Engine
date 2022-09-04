@@ -9,6 +9,7 @@ class Theme
 {
     private array $texts = array();
     private array $blocks = array();
+    private array $arrays = array();
 
     private string $theme;
     private Smarty $smarty;
@@ -32,8 +33,9 @@ class Theme
      */
     public function getTpl(string $name): string
     {
-        $this->smarty->assign($this->blocks);
+        $this->smarty->assign($this->arrays);
         $this->smarty->assign($this->texts);
+        $this->smarty->assign($this->blocks);
 
         return $this->smarty->fetch("{$name}.tpl");
     }
@@ -62,6 +64,15 @@ class Theme
     public function addText(string $name, string $text)
     {
         $this->texts[$name] = $text;
+    }
+
+    /**
+     * @param string $name
+     * @param array $array
+     */
+    public function addArray(string $name, array $array)
+    {
+        $this->arrays[$name] = $array;
     }
 
 }
