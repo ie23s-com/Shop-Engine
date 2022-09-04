@@ -1,5 +1,5 @@
 ./.git
 atom-sftp-sync.json
 .remote-sync.json
-.config
+.config.env
 /.idea/**
