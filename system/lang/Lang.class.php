@@ -91,6 +91,36 @@ class Lang extends Component
     /**
      * @throws MysqlException
      */
+    public function remRow($key): string
+    {
+        return $this->mySQL->getConn()->delete('language',
+            ['lang_id' => $this->lang_id, 'key' => $key]);
+    }
+
+    public function addRow($key, $value)
+    {
+        return $this->mySQL->getConn()->insert('language', ['key' => $key, 'value' => $value,
+            'lang_id' => $this->lang_id]);
+    }
+
+    public function updateRow($key, $value)
+    {
+        $this->mySQL->getConn()->update('language',
+            ['lang_id' => $this->lang_id, 'key' => $key],
+            ['value' => $value]);
+    }
+
+    public function getAllLang(): array
+    {
+        return $this->mySQL->getConn()->fetchRowMany("SELECT *
+                                                        FROM `language`
+                                                        WHERE lang_id = :id",
+            ['id' => $this->lang_id]);
+    }
+
+    /**
+     * @throws MysqlException
+     */
     public function getEditableRow($key): string
     {
         return $this->mySQL->getConn()->fetchColumn("SELECT `value`
@@ -117,15 +147,18 @@ class Lang extends Component
     public function deleteEditableRow($id): int
     {
         return $this->mySQL->getConn()->delete("language_editable",
-            ['id' => $id]);
+            ['key' => $id]);
     }
 
     /**
      * @throws MysqlException
      */
-    public function editEditableRow($id, $value, $lang_id): int
+    public function editEditableRow($name, $array)
     {
-        return $this->mySQL->getConn()->update("language_editable",
-            ['id' => $id], ['lang_id' => $lang_id, 'value' => $value]);
+        foreach ($array as $value) {
+
+            $this->mySQL->getConn()->update("language_editable",
+                ['key' => $name], ['lang_id' => $value['lang_id'], 'value' => $value['value']]);
+        }
     }
 }

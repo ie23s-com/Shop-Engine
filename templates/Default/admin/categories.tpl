@@ -1,8 +1,8 @@
-{foreach $admin_edit_cats as $category}
+{foreach $admin_cats_edit as $category}
     <form method="post">
 
         <input name="id" type="text" value="{$category.id}" disabled/>
-        <input name="name" type="text" value="{$category.name}" />
+        <input name="name" type="text" value="{$category.name}"/>
         <select name="parent">
             <option value="0" {if $category.parent_id == 0} selected {/if}>none</option>
             {foreach $admin_cats_list as $category1}

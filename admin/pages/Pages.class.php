@@ -6,6 +6,7 @@ require_once __SHOP_DIR__ . 'admin/pages/AdminPage.php';
 require_once __SHOP_DIR__ . 'admin/pages/Categories.class.php';
 require_once __SHOP_DIR__ . 'admin/pages/MainPage.class.php';
 require_once __SHOP_DIR__ . 'admin/pages/ProductsPage.class.php';
+require_once __SHOP_DIR__ . 'admin/pages/LangPage.class.php';
 
 use ie23s\shop\system\pages\Page;
 use ie23s\shop\system\pages\Theme;
@@ -42,13 +43,16 @@ class Pages extends Page
     /**
      * @throws MysqlException
      */
-    private function loadModules() {
+    private function loadModules()
+    {
         $this->modules['main'] = new MainPage($this->getPages()->getSystem(), 'admin_menu_main',
             '/administrator/?admin=ok');
         $this->modules['categories'] = new Categories($this->getPages()->getSystem(), 'admin_menu_categories',
             '/administrator/categories/?admin=ok');
         $this->modules['products'] = new ProductsPage($this->getPages()->getSystem(), 'admin_menu_products',
             '/administrator/products/?admin=ok');
+        $this->modules['language'] = new LangPage($this->getPages()->getSystem(), 'admin_menu_lang',
+            '/administrator/language/?admin=ok');
     }
 
     private function getCurrentPage() {
