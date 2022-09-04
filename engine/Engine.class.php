@@ -27,14 +27,14 @@ class Engine extends Component
     {
         parent::__construct($system);
         $this->mySQLMod = $system->getComponent('database');
-        $this->categoriesEngine = new CategoriesEngine($this);
-
-        $this->productEngine = new ProductEngine($this);
     }
 
     public function load()
     {
         $this->db = $this->mySQLMod->getConn();
+        $this->categoriesEngine = new CategoriesEngine($this);
+
+        $this->productEngine = new ProductEngine($this);
         $this->productEngine->load();
     }
 
@@ -45,4 +45,14 @@ class Engine extends Component
     {
         return $this->db;
     }
+
+    /**
+     * @return CategoriesEngine
+     */
+    public function getCategoriesEngine(): CategoriesEngine
+    {
+        return $this->categoriesEngine;
+    }
+
+
 }

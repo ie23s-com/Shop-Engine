@@ -4,6 +4,7 @@ namespace ie23s\shop\system;
 
 //Component interface loader
 use Exception;
+use ie23s\shop\admin\Admin;
 use ie23s\shop\engine\Engine;
 use ie23s\shop\system\lang\Lang;
 use ie23s\shop\system\pages\Pages;
@@ -19,6 +20,8 @@ require_once __SHOP_DIR__ . "system/database/MySQLMod.php";
 require_once __SHOP_DIR__ . "system/pages/Pages.class.php";
 //MySQL component loader
 require_once __SHOP_DIR__ . "engine/Engine.class.php";
+//MySQL component loader
+require_once __SHOP_DIR__ . "admin/Admin.class.php";
 
 
 /**
@@ -52,6 +55,8 @@ class System
 
         //Init Shop engine
         $this->components["sEngine"] = new Engine($this);
+        //Init Shop engine
+        $this->components["admin"] = new Admin($this);
     }
 
     public function load()
@@ -87,6 +92,19 @@ class System
     {
         /** @var $r Lang */
         $r = $this->getComponent('lang');
+        return $r;
+    }
+
+    public function getPages(): Pages
+    {
+        /** @var $r Pages */
+        $r = $this->getComponent('pages');
+        return $r;
+    }
+    public function getEngine(): Engine
+    {
+        /** @var $r Engine */
+        $r = $this->getComponent('sEngine');
         return $r;
     }
 }
