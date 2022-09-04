@@ -5,6 +5,7 @@ namespace ie23s\shop\admin\pages;
 require_once __SHOP_DIR__ . 'admin/pages/AdminPage.php';
 require_once __SHOP_DIR__ . 'admin/pages/Categories.class.php';
 require_once __SHOP_DIR__ . 'admin/pages/MainPage.class.php';
+require_once __SHOP_DIR__ . 'admin/pages/ProductsPage.class.php';
 
 use ie23s\shop\system\pages\Page;
 use ie23s\shop\system\pages\Theme;
@@ -46,6 +47,8 @@ class Pages extends Page
             '/administrator/?admin=ok');
         $this->modules['categories'] = new Categories($this->getPages()->getSystem(), 'admin_menu_categories',
             '/administrator/categories/?admin=ok');
+        $this->modules['products'] = new ProductsPage($this->getPages()->getSystem(), 'admin_menu_products',
+            '/administrator/products/?admin=ok');
     }
 
     private function getCurrentPage() {

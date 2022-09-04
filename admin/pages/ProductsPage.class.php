@@ -1,0 +1,53 @@
+<?php
+
+namespace ie23s\shop\admin\pages;
+
+use ie23s\shop\engine\categories\CategoriesEngine;
+use ie23s\shop\engine\product\Product;
+use ie23s\shop\engine\product\ProductEngine;
+use ie23s\shop\system\pages\Theme;
+
+require_once __SHOP_DIR__ . 'admin/pages/ProductsPage.class.php';
+
+class ProductsPage extends AdminPage
+{
+
+    private CategoriesEngine $categoriesEngine;
+    private ProductEngine $productsEngine;
+
+    function getPage(): string
+    {
+        $this->categoriesEngine = $this->getEngine()->getCategoriesEngine();
+        $this->productsEngine = $this->getEngine()->getProductEngine();
+
+        $theme = new Theme();
+        if(@$_POST['type'] == 'edit')
+            $this->edit();
+        elseif (@$_POST['type'] == 'add')
+            $this->add();
+        $theme->addArray('admin_products_edit', $this->productsEngine->getAllProducts());
+        $theme->addArray('admin_cats_list', $this->categoriesEngine->getCategories());
+        $theme->getSmarty()->assign('lang', $this->getSystem()->getLang());
+
+        return $theme->getTpl('admin/products');
+    }
+
+    private function edit() {
+        $product = $this->productsEngine->getProductById($_GET['id']);
+
+        $product->setCost($_POST['cost']);
+        $product->setArt($_POST['art']);
+        $product->setCode($_POST['code']);
+        $product->setSold($_POST['sold']);
+        $product->setBalance($_POST['balance']);
+        $product->setCategory($_POST['category']);
+        $this->productsEngine->updateProduct($product);
+    }
+    private function add() {
+        $product = new Product(0, $_POST['cost'],$_POST['art'],$_POST['code'],$_POST['sold'],$_POST['balance'],
+            $_POST['category']);
+        $names = [['lang_id' => 1, 'value' => $_POST['display_name']]];
+        $descs = [['lang_id' => 1, 'value' => $_POST['description']]];
+        $this->productsEngine->createProduct($product, $names, $descs);
+    }
+}

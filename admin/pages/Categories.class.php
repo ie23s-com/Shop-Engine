@@ -18,7 +18,7 @@ class Categories extends AdminPage
 
         $theme = new Theme();
 
-        $theme->addArray('admin_edit_cats', $this->editableCategories());
+        $theme->addArray('admin_cats_edit', $this->editableCategories());
         $theme->addArray('admin_cats_list', $this->categoriesEngine->getCategories());
 
         return $theme->getTpl('admin/categories');
