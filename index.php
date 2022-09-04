@@ -19,4 +19,4 @@ $system->unload();
 $time_end = microtime(true);
 $time = round($time_end - $time_start, 6) * 1000;
 
-echo "<div style=\"position: absolute; bottom:5px; right:5px\">{$time} ms";
+echo "<div style=\"position: fixed; bottom:5px; right:5px\">{$time} ms";

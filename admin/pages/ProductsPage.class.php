@@ -25,6 +25,8 @@ class ProductsPage extends AdminPage
             $this->edit();
         elseif (@$_POST['type'] == 'add')
             $this->add();
+        elseif (@$_POST['type'] == 'remove')
+            $this->remove();
         $theme->addArray('admin_products_edit', $this->productsEngine->getAllProducts());
         $theme->addArray('admin_cats_list', $this->categoriesEngine->getCategories());
         $theme->getSmarty()->assign('lang', $this->getSystem()->getLang());
@@ -33,7 +35,7 @@ class ProductsPage extends AdminPage
     }
 
     private function edit() {
-        $product = $this->productsEngine->getProductById($_GET['id']);
+        $product = $this->productsEngine->getProductById($_POST['id']);
 
         $product->setCost($_POST['cost']);
         $product->setArt($_POST['art']);
@@ -41,7 +43,9 @@ class ProductsPage extends AdminPage
         $product->setSold($_POST['sold']);
         $product->setBalance($_POST['balance']);
         $product->setCategory($_POST['category']);
-        $this->productsEngine->updateProduct($product);
+        $names = [['lang_id' => 1, 'value' => $_POST['display_name']]];
+        $descs = [['lang_id' => 1, 'value' => $_POST['description']]];
+        $this->productsEngine->updateProduct($product, $names, $descs);
     }
     private function add() {
         $product = new Product(0, $_POST['cost'],$_POST['art'],$_POST['code'],$_POST['sold'],$_POST['balance'],
@@ -49,5 +53,9 @@ class ProductsPage extends AdminPage
         $names = [['lang_id' => 1, 'value' => $_POST['display_name']]];
         $descs = [['lang_id' => 1, 'value' => $_POST['description']]];
         $this->productsEngine->createProduct($product, $names, $descs);
+    }
+    private function remove() {
+        $product = $this->productsEngine->getProductById($_POST['id']);
+        $this->productsEngine->removeProduct($product);
     }
 }

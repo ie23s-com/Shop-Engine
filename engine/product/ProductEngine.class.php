@@ -60,13 +60,16 @@ class ProductEngine
         return $returnProducts;
     }
 
-    public function updateProduct(Product $product)
+    public function updateProduct(Product $product, $names, $descriptions)
     {
         $this->engine->getDb()->update('products', ['id' => $product->getId()], [
             'cost' => $product->getCost(), 'art' => $product->getArt(), 'code' => $product->getCode(),
             'sold' => $product->getSold(), 'balance' => $product->getBalance(), 'category' => $product->getCategory(),
             'photos' => json_encode($product->getPhotos())
         ]);
+        $this->engine->getSystem()->getLang()->editEditableRow("product-{$product->getId()}-name", $names);
+        $this->engine->getSystem()->getLang()->editEditableRow("product-{$product->getId()}-description", $descriptions);
+
     }
 
     /**
@@ -83,5 +86,12 @@ class ProductEngine
         $this->engine->getSystem()->getLang()->addEditableRow("product-{$id}-description", $descriptions);
 
         return $id;
+    }
+
+    public function removeProduct(?Product $product)
+    {
+        $this->engine->getDb()->delete('products', ['id' => $product->getId()]);
+        $this->engine->getSystem()->getLang()->deleteEditableRow("product-{$product->getId()}-name");
+        $this->engine->getSystem()->getLang()->deleteEditableRow("product-{$product->getId()}-description");
     }
 }
