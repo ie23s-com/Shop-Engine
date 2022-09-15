@@ -9,6 +9,9 @@ class Category
 
     private string $display_name;
 
+    private array $parents_array = [];
+    private array $children_array = [];
+
     /**
      * @param int $id
      * @param string $name
@@ -105,6 +108,29 @@ class Category
         $this->display_name = $display_name;
     }
 
+    function addParent(Category $category)
+    {
+        array_unshift($this->parents_array, $category);
+    }
 
+    /**
+     * @return array
+     */
+    public function getParentsArray(): array
+    {
+        return $this->parents_array;
+    }
 
+    /**
+     * @return array
+     */
+    public function getChildrenArray(): array
+    {
+        return $this->children_array;
+    }
+
+    public function addChild(Category $category)
+    {
+        $this->children_array[] = $category;
+    }
 }

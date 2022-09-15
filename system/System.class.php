@@ -65,12 +65,12 @@ class System
         $this->components["database"]->load();
         //Load Lang
         $this->components["lang"]->load();
-        //Init Shop engine
-        $this->components["sEngine"]->load();
-
         //Load Theme
         //LAST!
         $this->components["pages"]->load();
+        //Init Shop engine
+        $this->components["sEngine"]->load();
+
     }
 
     public function unload()

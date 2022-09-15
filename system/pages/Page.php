@@ -3,6 +3,7 @@
 namespace ie23s\shop\system\pages;
 
 use ie23s\shop\system\lang\Lang;
+use ie23s\shop\system\System;
 
 abstract class Page
 {
@@ -48,5 +49,9 @@ abstract class Page
         return $this->lang;
     }
 
+    public function getSystem(): System
+    {
+        return $this->pages->getSystem();
+    }
 
 }

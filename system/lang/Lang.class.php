@@ -121,12 +121,13 @@ class Lang extends Component
     /**
      * @throws MysqlException
      */
-    public function getEditableRow($key): string
+    public function getEditableRow($key): ?string
     {
-        return $this->mySQL->getConn()->fetchColumn("SELECT `value`
+        $row = $this->mySQL->getConn()->fetchColumn("SELECT `value`
                                                         FROM `language_editable`
                                                         WHERE lang_id = :id AND `key` = :key",
             ['id' => $this->lang_id, 'key' => $key]);
+        return $row == null ? 'undefined' : $row;
     }
 
     /**

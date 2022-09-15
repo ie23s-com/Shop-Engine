@@ -13,6 +13,7 @@ class Theme
 
     private string $theme;
     private Smarty $smarty;
+    private $objects;
 
     public function __construct()
     {
@@ -36,6 +37,7 @@ class Theme
         $this->smarty->assign($this->arrays);
         $this->smarty->assign($this->texts);
         $this->smarty->assign($this->blocks);
+        $this->smarty->assign($this->objects);
 
         return $this->smarty->fetch("{$name}.tpl");
     }
@@ -73,6 +75,11 @@ class Theme
     public function addArray(string $name, array $array)
     {
         $this->arrays[$name] = $array;
+    }
+
+    public function addObject(string $name, object $object)
+    {
+        $this->objects[$name] = $object;
     }
 
 }

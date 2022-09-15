@@ -10,6 +10,7 @@ require_once __SHOP_DIR__ . "system/pages/ErrorPage.class.php";
 
 use ie23s\shop\system\Component;
 use ie23s\shop\system\System;
+use Simplon\Mysql\MysqlException;
 use SmartyException;
 
 class Pages extends Component
@@ -36,6 +37,7 @@ class Pages extends Component
 
     /**
      * @return void
+     * @throws MysqlException
      */
     public function load()
     {

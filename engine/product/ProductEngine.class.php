@@ -34,28 +34,51 @@ class ProductEngine
     public function getProductById($id): ?Product
     {
         $product = $this->engine->getDb()->fetchRow(
-            'SELECT * FROM products WHERE id = :id', array('id' => $id));
+            'SELECT *, (SELECT language_editable.value
+                        FROM language_editable
+                        WHERE language_editable.`key` = CONCAT(\'product-\',products.id,\'-name\')
+                        AND lang_id = :lang_id)
+                            as display_name,
+                        (SELECT language_editable.value
+                        FROM language_editable
+                        WHERE language_editable.`key` = CONCAT(\'product-\',products.id,\'-description\')
+                        AND lang_id = :lang_id)
+                            as description
+                    FROM products WHERE id = :id', array('id' => $id, 'lang_id' => 1));
         if ($product == null)
             return null;
         return new Product($product['id'], $product['cost'],
             $product['art'], $product['code'], $product['sold'], $product['balance'], $product['category'],
-            json_decode($product['photos']));
+            json_decode($product['photos']), $product['display_name'], $product['description']);
+
     }
 
     /**
      * @throws MysqlException
      */
-    public function getAllProducts(): ?array
+    public function getAllProducts(int $category = null): array
     {
         $returnProducts = array();
+
         $products = $this->engine->getDb()->fetchRowMany(
-            'SELECT * FROM products');
+            'SELECT *, (SELECT language_editable.value
+                        FROM language_editable
+                        WHERE language_editable.`key` = CONCAT(\'product-\',products.id,\'-name\')
+                        AND lang_id = :lang_id)
+                            as display_name,
+                        (SELECT language_editable.value
+                        FROM language_editable
+                        WHERE language_editable.`key` = CONCAT(\'product-\',products.id,\'-description\')
+                        AND lang_id = :lang_id)
+                            as description
+                    FROM products WHERE category LIKE CONCAT(\'%\', :category)',
+            array('lang_id' => 1, 'category' => $category ?? ''));
         if ($products == null)
-            return null;
+            return [];
         foreach ($products as $product) {
             $returnProducts[] = new Product($product['id'], $product['cost'],
                 $product['art'], $product['code'], $product['sold'], $product['balance'], $product['category'],
-                json_decode($product['photos']));
+                json_decode($product['photos']), $product['display_name'], $product['description']);
         }
         return $returnProducts;
     }

@@ -29,6 +29,9 @@ class Engine extends Component
         $this->mySQLMod = $system->getComponent('database');
     }
 
+    /**
+     * @throws MysqlException
+     */
     public function load()
     {
         $this->db = $this->mySQLMod->getConn();
@@ -36,6 +39,7 @@ class Engine extends Component
 
         $this->productEngine = new ProductEngine($this);
         $this->productEngine->load();
+        $this->categoriesEngine->load();
     }
 
     /**

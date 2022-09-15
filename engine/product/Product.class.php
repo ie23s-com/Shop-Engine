@@ -15,6 +15,9 @@ class Product
     private int $category;
     private array $photos;
 
+    private string $display_name;
+    private string $description;
+
     /**
      * @param int $id
      * @param float $cost
@@ -24,9 +27,12 @@ class Product
      * @param int $balance
      * @param int $category
      * @param array $photos
+     * @param string $display_name
+     * @param string $description
      */
-    public function __construct(int $id, float $cost, int $art, int $code,
-                                int $sold, int $balance, int $category, array $photos = [])
+    public function __construct(int    $id, float $cost, int $art, int $code,
+                                int    $sold, int $balance, int $category, array $photos = [],
+                                string $display_name = 'undefined', string $description = 'undefined')
     {
         $this->id = $id;
         $this->cost = $cost;
@@ -36,6 +42,8 @@ class Product
         $this->balance = $balance;
         $this->category = $category;
         $this->photos = $photos;
+        $this->display_name = $display_name;
+        $this->description = $description;
     }
 
     /**
@@ -155,5 +163,27 @@ class Product
         return $this->photos;
     }
 
+    /**
+     * @return string
+     */
+    public function getDisplayName(): string
+    {
+        return $this->display_name;
+    }
 
+    /**
+     * @param string $display_name
+     */
+    public function setDisplayName(string $display_name): void
+    {
+        $this->display_name = $display_name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
 }
