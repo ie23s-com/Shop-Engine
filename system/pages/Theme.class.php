@@ -10,10 +10,10 @@ class Theme
     private array $texts = array();
     private array $blocks = array();
     private array $arrays = array();
+    private array $objects = [];
 
     private string $theme;
     private Smarty $smarty;
-    private $objects;
 
     public function __construct()
     {
