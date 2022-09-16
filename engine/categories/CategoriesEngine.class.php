@@ -9,6 +9,7 @@ use Category;
 use ie23s\shop\engine\Engine;
 use ie23s\shop\system\pages\Pages;
 use Simplon\Mysql\MysqlException;
+use SmartyException;
 
 class CategoriesEngine
 {
@@ -26,18 +27,31 @@ class CategoriesEngine
     {
         $this->engine = $engine;
 
-        $cursor = $this->engine->getDb()->fetchRowMany('SELECT * FROM categories');
-        foreach ($cursor as $result) {
-            $this->categories[$result['id']] =
-                new Category($result['id'], $result['name'], $result['parent'], json_decode($result['parameters']),
-                    $engine->getSystem()->getLang()->getEditableRow("category-{$result['id']}-name"));
-        }
+        $this->loadCategories();
+
         $this->pages = $engine->getSystem()->getPages();
     }
 
     public function load()
     {
         new CategoryPage('category', $this->pages);
+    }
+
+    /**
+     * @throws MysqlException
+     */
+    public function loadCategories()
+    {
+        $cursor = $this->engine->getDb()->fetchRowMany('SELECT *,
+               (SELECT language_editable.value
+                FROM language_editable 
+                WHERE language_editable.`key` = CONCAT(\'category-\',categories.id,\'-name\')) AS display_name
+        FROM categories');
+        foreach ($cursor as $result) {
+            $this->categories[$result['id']] =
+                new Category($result['id'], $result['name'], $result['parent'], json_decode($result['parameters']),
+                    $result['display_name']);
+        }
     }
 
     /**
@@ -76,5 +90,62 @@ class CategoriesEngine
                 $category->addChild($mChild);
             }
         }
+    }
+
+    /**
+     * @throws MysqlException
+     */
+    public function createCategory(Category $category)
+    {
+        $id = $this->engine->getDb()->insert('categories',
+            ['name' => $category->getName(), 'parent' => $category->getParentId(), 'parameters' => '[]']);
+        $names = [['lang_id' => 1, 'value' => $category->getDisplayName()]];
+        $this->engine->getSystem()->getLang()->addEditableRow("category-$id-name", $names);
+        $category->setId($id);
+        $this->categories[$id] = $category;
+    }
+
+    /**
+     * @throws MysqlException
+     * @throws SmartyException
+     */
+    public function removeCategory(int $id)
+    {
+
+        $category = $this->getCategory($id);
+        $this->findChildren($category);
+        $categoriesToDelete = [$id];
+        /**
+         * var $child Category
+         */
+        foreach ($category->getChildrenArray() as $child) {
+            $categoriesToDelete[] = $child->getId();
+        }
+        $count = $this->engine->getDb()->fetchColumn('SELECT COUNT(*) FROM products WHERE category IN (:ids)',
+            ['ids' => $categoriesToDelete]);
+        if ($count != 0) {
+            $this->pages->error('401', 'You cannot remove category with products');
+        }
+
+        $this->engine->getDb()->fetchColumn('DELETE FROM categories WHERE id IN (:ids)',
+            ['ids' => $categoriesToDelete]);
+        foreach ($categoriesToDelete as $id) {
+            $this->engine->getSystem()->getLang()->deleteEditableRow("category-$id-name");
+            unset($this->categories[$id]);
+        }
+    }
+
+    /**
+     * @throws MysqlException
+     */
+    public function updateCategory(?Category $category)
+    {
+        $this->engine->getDb()->update('categories', ['id' => $category->getId()], [
+            'name' => $category->getName(), 'parent' => $category->getParentId(),
+            'parameters' => json_encode($category->getParams())
+        ]);
+
+        $names = [['lang_id' => 1, 'value' => $category->getDisplayName()]];
+        $this->engine->getSystem()->getLang()->editEditableRow("category-{$category->getId()}-name", $names);
     }
 }
