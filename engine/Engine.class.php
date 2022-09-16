@@ -2,6 +2,7 @@
 namespace ie23s\shop\engine;
 
 use ie23s\shop\engine\categories\CategoriesEngine;
+use ie23s\shop\engine\parameters\ParametersEngine;
 use ie23s\shop\engine\product\ProductEngine;
 use ie23s\shop\system\Component;
 use ie23s\shop\system\database\MySQLMod;
@@ -19,6 +20,7 @@ class Engine extends Component
 
     private CategoriesEngine $categoriesEngine;
     private ProductEngine $productEngine;
+    private ParametersEngine $parametersEngine;
 
     /**
      * @throws MysqlException
@@ -38,6 +40,7 @@ class Engine extends Component
         $this->categoriesEngine = new CategoriesEngine($this);
 
         $this->productEngine = new ProductEngine($this);
+        $this->parametersEngine = new ParametersEngine($this);
         $this->productEngine->load();
         $this->categoriesEngine->load();
     }
