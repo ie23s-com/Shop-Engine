@@ -13,6 +13,7 @@ return array(
     'Simplon\\Mysql\\' => array($vendorDir . '/simplon/mysql/src'),
     'Simplon\\Helper\\' => array($vendorDir . '/simplon/helper/src'),
     'PhpOption\\' => array($vendorDir . '/phpoption/phpoption/src/PhpOption'),
+    'MyCLabs\\Enum\\' => array($vendorDir . '/myclabs/php-enum/src'),
     'GrahamCampbell\\ResultType\\' => array($vendorDir . '/graham-campbell/result-type/src'),
     'DusanKasan\\Knapsack\\' => array($vendorDir . '/dusank/knapsack/src'),
     'Dotenv\\' => array($vendorDir . '/vlucas/phpdotenv/src'),

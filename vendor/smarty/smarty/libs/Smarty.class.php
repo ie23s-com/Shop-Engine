@@ -98,7 +98,7 @@ class Smarty extends Smarty_Internal_TemplateBase
     /**
      * smarty version
      */
-    const SMARTY_VERSION = '4.2.0';
+    const SMARTY_VERSION = '4.2.1';
     /**
      * define variable scopes
      */
@@ -674,7 +674,7 @@ class Smarty extends Smarty_Internal_TemplateBase
      * @param string $resource_name template name
      *
      * @return bool status
-     * @throws \SmartyException
+     * @throws SmartyException
      */
     public function templateExists($resource_name)
     {
@@ -689,7 +689,7 @@ class Smarty extends Smarty_Internal_TemplateBase
      * @param string|Smarty_Security $security_class if a string is used, it must be class-name
      *
      * @return Smarty                 current Smarty instance for chaining
-     * @throws \SmartyException
+     * @throws SmartyException
      */
     public function enableSecurity($security_class = null)
     {
@@ -782,7 +782,7 @@ class Smarty extends Smarty_Internal_TemplateBase
      * @param string|array $template_dir directory(s) of template sources
      * @param bool         $isConfig     true for config_dir
      *
-     * @return \Smarty current Smarty instance for chaining
+     * @return Smarty current Smarty instance for chaining
      */
     public function setTemplateDir($template_dir, $isConfig = false)
     {
@@ -953,8 +953,8 @@ class Smarty extends Smarty_Internal_TemplateBase
      * @param object  $parent     next higher level of Smarty variables
      * @param boolean $do_clone   flag is Smarty object shall be cloned
      *
-     * @return \Smarty_Internal_Template template object
-     * @throws \SmartyException
+     * @return Smarty_Internal_Template template object
+     * @throws SmartyException
      */
     public function createTemplate($template, $cache_id = null, $compile_id = null, $parent = null, $do_clone = true)
     {
@@ -1017,7 +1017,7 @@ class Smarty extends Smarty_Internal_TemplateBase
      * @param bool   $check       check if already loaded
      *
      * @return string |boolean filepath of loaded file or false
-     * @throws \SmartyException
+     * @throws SmartyException
      */
     public function loadPlugin($plugin_name, $check = true)
     {
@@ -1031,10 +1031,10 @@ class Smarty extends Smarty_Internal_TemplateBase
      * @param null|mixed                $cache_id
      * @param null|mixed                $compile_id
      * @param null                      $caching
-     * @param \Smarty_Internal_Template $template
+     * @param Smarty_Internal_Template $template
      *
      * @return string
-     * @throws \SmartyException
+     * @throws SmartyException
      */
     public function _getTemplateId(
         $template_name,

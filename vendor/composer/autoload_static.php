@@ -4,6 +4,8 @@
 
 namespace Composer\Autoload;
 
+use Closure;
+
 class ComposerStaticInitaed255958a41c3d0b05d6d429c390baf
 {
     public static $files = array (
@@ -30,6 +32,10 @@ class ComposerStaticInitaed255958a41c3d0b05d6d429c390baf
         'P' => 
         array (
             'PhpOption\\' => 10,
+        ),
+        'M' => 
+        array (
+            'MyCLabs\\Enum\\' => 13,
         ),
         'G' => 
         array (
@@ -70,6 +76,10 @@ class ComposerStaticInitaed255958a41c3d0b05d6d429c390baf
         'PhpOption\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
+        ),
+        'MyCLabs\\Enum\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/myclabs/php-enum/src',
         ),
         'GrahamCampbell\\ResultType\\' => 
         array (
@@ -256,7 +266,7 @@ class ComposerStaticInitaed255958a41c3d0b05d6d429c390baf
         'Smarty_Template_Source' => __DIR__ . '/..' . '/smarty/smarty/libs/sysplugins/smarty_template_source.php',
         'Smarty_Undefined_Variable' => __DIR__ . '/..' . '/smarty/smarty/libs/sysplugins/smarty_undefined_variable.php',
         'Smarty_Variable' => __DIR__ . '/..' . '/smarty/smarty/libs/sysplugins/smarty_variable.php',
-        'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
+        'Stringable' => __DIR__ . '/..' . '/myclabs/php-enum/stubs/Stringable.php',
         'TPC_yyStackEntry' => __DIR__ . '/..' . '/smarty/smarty/libs/sysplugins/smarty_internal_configfileparser.php',
         'TP_yyStackEntry' => __DIR__ . '/..' . '/smarty/smarty/libs/sysplugins/smarty_internal_templateparser.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
@@ -265,7 +275,7 @@ class ComposerStaticInitaed255958a41c3d0b05d6d429c390baf
 
     public static function getInitializer(ClassLoader $loader)
     {
-        return \Closure::bind(function () use ($loader) {
+        return Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitaed255958a41c3d0b05d6d429c390baf::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitaed255958a41c3d0b05d6d429c390baf::$prefixDirsPsr4;
             $loader->classMap = ComposerStaticInitaed255958a41c3d0b05d6d429c390baf::$classMap;

@@ -7,7 +7,7 @@ class TP_yyStackEntry
                      ** number for the token at this stack level */
     public $minor; /* The user-supplied minor token value.  This
                      ** is the value of the token  */
-};
+}
 
 
 // line 11 "../smarty/lexer/smarty_internal_templateparser.y"
@@ -132,14 +132,14 @@ class Smarty_Internal_Templateparser
     /**
      * template prefix array
      *
-     * @var \Smarty_Internal_ParseTree[]
+     * @var Smarty_Internal_ParseTree[]
      */
     public $template_prefix = array();
 
     /**
      * template prefix array
      *
-     * @var \Smarty_Internal_ParseTree[]
+     * @var Smarty_Internal_ParseTree[]
      */
     public $template_postfix = array();
 

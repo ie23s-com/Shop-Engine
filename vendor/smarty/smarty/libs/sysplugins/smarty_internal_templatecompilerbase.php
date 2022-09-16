@@ -381,7 +381,7 @@ abstract class Smarty_Internal_TemplateCompilerBase
      * @param null|Smarty_Internal_TemplateCompilerBase $parent_compiler
      *
      * @return bool true if compiling succeeded, false if it failed
-     * @throws \Exception
+     * @throws Exception
      */
     public function compileTemplate(
         Smarty_Internal_Template $template,
@@ -407,12 +407,12 @@ abstract class Smarty_Internal_TemplateCompilerBase
     /**
      * Compile template source and run optional post filter
      *
-     * @param \Smarty_Internal_Template             $template
+     * @param Smarty_Internal_Template $template
      * @param null|bool                             $nocache flag if template must be compiled in nocache mode
-     * @param \Smarty_Internal_TemplateCompilerBase $parent_compiler
+     * @param Smarty_Internal_TemplateCompilerBase $parent_compiler
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     public function compileTemplateSource(
         Smarty_Internal_Template $template,
@@ -492,7 +492,7 @@ abstract class Smarty_Internal_TemplateCompilerBase
      * @param string $code compiled code
      *
      * @return string
-     * @throws \SmartyException
+     * @throws SmartyException
      */
     public function postFilter($code)
     {
@@ -512,7 +512,7 @@ abstract class Smarty_Internal_TemplateCompilerBase
      * @param string $_content template source
      *
      * @return string
-     * @throws \SmartyException
+     * @throws SmartyException
      */
     public function preFilter($_content)
     {
@@ -597,7 +597,7 @@ abstract class Smarty_Internal_TemplateCompilerBase
      * @param array  $parameter
      *
      * @return string
-     * @throws \SmartyCompilerException
+     * @throws SmartyCompilerException
      */
     public function compilePHPFunctionCall($name, $parameter)
     {
@@ -739,7 +739,7 @@ abstract class Smarty_Internal_TemplateCompilerBase
      * @param mixed  $param3 optional parameter
      *
      * @return bool|string compiled code or false
-     * @throws \SmartyCompilerException
+     * @throws SmartyCompilerException
      */
     public function callTagCompiler($tag, $args, $param1 = null, $param2 = null, $param3 = null)
     {
@@ -757,7 +757,7 @@ abstract class Smarty_Internal_TemplateCompilerBase
      *
      * @param string $tag tag name
      *
-     * @return bool|\Smarty_Internal_CompileBase tag compiler object or false if not found
+     * @return bool|Smarty_Internal_CompileBase tag compiler object or false if not found
      */
     public function getTagCompiler($tag)
     {
@@ -785,7 +785,7 @@ abstract class Smarty_Internal_TemplateCompilerBase
      * @param string $plugin_type type of plugin
      *
      * @return string call name of function
-     * @throws \SmartyException
+     * @throws SmartyException
      */
     public function getPlugin($plugin_name, $plugin_type)
     {
@@ -851,7 +851,7 @@ abstract class Smarty_Internal_TemplateCompilerBase
      * @param string $plugin_type type of plugin
      *
      * @return bool true if found
-     * @throws \SmartyCompilerException
+     * @throws SmartyCompilerException
      */
     public function getPluginFromDefaultHandler($tag, $plugin_type)
     {
@@ -1018,7 +1018,7 @@ abstract class Smarty_Internal_TemplateCompilerBase
      * @param array $validScopes
      *
      * @return int|string
-     * @throws \SmartyCompilerException
+     * @throws SmartyCompilerException
      */
     public function convertScope($_attr, $validScopes)
     {
@@ -1065,7 +1065,7 @@ abstract class Smarty_Internal_TemplateCompilerBase
      * @param string    $line    line-number
      * @param null|bool $tagline if true the line number of last tag
      *
-     * @throws \SmartyCompilerException when an unexpected token is found
+     * @throws SmartyCompilerException when an unexpected token is found
      */
     public function trigger_template_error($args = null, $line = null, $tagline = null)
     {
@@ -1224,7 +1224,7 @@ abstract class Smarty_Internal_TemplateCompilerBase
      *  leave double quoted string
      *  - throw exception if block in string was not closed
      *
-     * @throws \SmartyCompilerException
+     * @throws SmartyCompilerException
      */
     public function leaveDoubleQuote()
     {
