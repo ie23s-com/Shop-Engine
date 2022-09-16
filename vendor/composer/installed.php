@@ -3,7 +3,7 @@
         'name' => 'ie23s/shop',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '45fc84f185a587f014f598f75be7eaf74f6b0322',
+        'reference' => '66a04bca117d5fc98653e728e1852744d0197dfd',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -31,7 +31,7 @@
         'ie23s/shop' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '45fc84f185a587f014f598f75be7eaf74f6b0322',
+            'reference' => '66a04bca117d5fc98653e728e1852744d0197dfd',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

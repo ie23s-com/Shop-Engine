@@ -12,6 +12,7 @@ use Simplon\Mysql\MysqlException;
 
 require_once __SHOP_DIR__ . '/engine/categories/CategoriesEngine.class.php';
 require_once __SHOP_DIR__ . '/engine/product/ProductEngine.class.php';
+require_once __SHOP_DIR__ . '/engine/parameters/ParametersEngine.class.php';
 
 class Engine extends Component
 {

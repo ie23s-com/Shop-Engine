@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c3bdba8f0a58729c1bd8b1bbfae32914",
+    "content-hash": "98e01ecd3d636e2dbc87445ceaf5b6a0",
     "packages": [
         {
             "name": "dusank/knapsack",
