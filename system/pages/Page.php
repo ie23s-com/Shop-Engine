@@ -13,6 +13,7 @@ abstract class Page
 
     /**
      * @param $name
+     * @param Pages $pages
      */
     public function __construct($name, Pages $pages)
     {

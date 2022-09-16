@@ -7,6 +7,7 @@ require_once __SHOP_DIR__ . 'engine/categories/CategoryPage.php';
 
 use Category;
 use ie23s\shop\engine\Engine;
+use ie23s\shop\system\pages\Pages;
 use Simplon\Mysql\MysqlException;
 
 class CategoriesEngine
@@ -15,7 +16,7 @@ class CategoriesEngine
     private Engine $engine;
 
     private array $categories = array();
-    private $pages;
+    private Pages $pages;
 
     /**
      * @param Engine $engine

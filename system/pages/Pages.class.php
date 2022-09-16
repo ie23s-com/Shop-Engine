@@ -76,8 +76,8 @@ class Pages extends Component
      */
     public function unload()
     {
-        $this->theme->addText("title", $this->title);
         $this->theme->addBlock('content', $this->getModule()->request($this->path));
+        $this->theme->addText("title", $this->title);
         echo $this->theme->getTpl('main');
     }
 
