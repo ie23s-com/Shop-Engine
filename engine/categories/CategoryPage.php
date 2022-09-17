@@ -25,12 +25,13 @@ class CategoryPage extends Page
         $ce->findChildren($cat);
 
         $theme = new Theme();
-        $theme->addArray('category_parent_categories', $cat->getParentsArray());
-        $theme->addArray('category_children_categories', $cat->getChildrenArray());
+        $theme->addObject('category_parent_categories', $cat->getParentsArray());
+        $theme->addObject('category_children_categories', $cat->getChildrenArray());
         $theme->addObject('category_current', $cat);
-        $theme->addArray('category_products',
+        $theme->addObject('category_products',
             $this->getSystem()->getEngine()->getProductEngine()->getAllProducts($cat->getId()));
         $this->getPages()->setTitle($cat->getDisplayName());
+
         return $theme->getTpl('category');
     }
 }

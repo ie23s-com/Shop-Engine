@@ -19,7 +19,7 @@ class LangPage extends AdminPage
             $this->add();
         elseif (@$_POST['type'] == 'remove')
             $this->remove();
-        $theme->addArray('admin_lang_edit', $this->lang->getAllLang());
+        $theme->addObject('admin_lang_edit', $this->lang->getAllLang());
 
         return $theme->getTpl('admin/language');
 

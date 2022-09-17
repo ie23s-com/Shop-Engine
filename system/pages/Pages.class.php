@@ -47,7 +47,7 @@ class Pages extends Component
         $this->title = $this->getSystem()->getLang()->getRow('title');
 
 
-        $this->errorPage =  (new ErrorPage('error', ['error'], $this));
+        $this->errorPage =  (new ErrorPage('error', $this, 'error'));
 
     }
 
@@ -56,7 +56,7 @@ class Pages extends Component
         if (!isset($this->path[0]) || empty($this->path[0])) {
             $this->path[0] = 'index';
         }
-        $name = $this->pathsModules[$this->path[0]];
+        $name = $this->pathsModules[$this->path[0]] ?? null;
         if ($name == null)
             $this->error(404, 'Not found. Please, try to find other page!');
         return $this->modules[$name];
@@ -76,7 +76,7 @@ class Pages extends Component
     public function unload()
     {
         $this->theme->addBlock('content', $this->getModule()->request($this->path));
-        $this->theme->addText("title", $this->title);
+        $this->theme->addBlock("title", $this->title);
         echo $this->theme->getTpl('main');
     }
 

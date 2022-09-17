@@ -27,8 +27,8 @@ class Categories extends AdminPage
             $this->remove();
         elseif (@$_POST['type'] == 'edit')
             $this->edit();
-        $theme->addArray('admin_cats_edit', $this->editableCategories());
-        $theme->addArray('admin_cats_list', $this->categoriesEngine->getCategories());
+        $theme->addObject('admin_cats_edit', $this->editableCategories());
+        $theme->addObject('admin_cats_list', $this->categoriesEngine->getCategories());
 
         return $theme->getTpl('admin/categories');
     }

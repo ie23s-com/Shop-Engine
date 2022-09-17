@@ -25,7 +25,7 @@ class ProductEngine
 
     public function load()
     {
-        (new ProductPage('product', ['product'], $this->pages))->load($this);
+        (new ProductPage('product', $this->pages, 'product'))->load($this);
     }
 
     /**

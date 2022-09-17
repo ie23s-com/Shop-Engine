@@ -20,7 +20,7 @@ class Category
      * @param ?string $display_name
      */
     public function __construct(int   $id, string $name, int $parent_id,
-                                array $params, ?string $display_name)
+                                array $params, ?string $display_name = null)
     {
         $this->id = $id;
         $this->name = $name;

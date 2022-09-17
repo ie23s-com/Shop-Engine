@@ -34,7 +34,7 @@ class CategoriesEngine
 
     public function load()
     {
-        new CategoryPage('category', ['category', 'cat'], $this->pages);
+        new CategoryPage('category', $this->pages, 'category', 'cat');
     }
 
     /**
@@ -52,6 +52,7 @@ class CategoriesEngine
                 new Category($result['id'], $result['name'], $result['parent'], json_decode($result['parameters']),
                     $result['display_name']);
         }
+        $this->categories[0] = new Category(0, 'main', -1, []);
     }
 
     /**
@@ -76,7 +77,7 @@ class CategoriesEngine
     {
         $parent = $category;
 
-        while ($this->getCategory($parent->getParentId()) !== null) {
+        while ($parent->getParentId() != 0 && $this->getCategory($parent->getParentId()) !== null) {
             $parent = $this->getCategory($parent->getParentId());
             $category->addParent($this->getCategory($parent->getId()));
         }

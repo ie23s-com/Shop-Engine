@@ -15,8 +15,8 @@ class ErrorPage extends Page
     public function request(array $request): string
     {
         $theme = new Theme();
-        $theme->addText('error_num', $this->error);
-        $theme->addText('error_text', $this->text);
+        $theme->addBlock('error_num', $this->error);
+        $theme->addBlock('error_text', $this->text);
         $this->getPages()->setTitle($this->error);
         return $theme->getTpl('error');
     }

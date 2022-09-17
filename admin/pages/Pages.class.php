@@ -73,6 +73,6 @@ class Pages extends Page
 
             $buttons[] = array('name' => $module->getName(), 'uri' => $module->getUri());
         }
-        $this->theme->addArray('admin_buttons', $buttons);
+        $this->theme->addObject('admin_buttons', $buttons);
     }
 }

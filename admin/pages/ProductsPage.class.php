@@ -27,8 +27,8 @@ class ProductsPage extends AdminPage
             $this->add();
         elseif (@$_POST['type'] == 'remove')
             $this->remove();
-        $theme->addArray('admin_products_edit', $this->productsEngine->getAllProducts());
-        $theme->addArray('admin_cats_list', $this->categoriesEngine->getCategories());
+        $theme->addObject('admin_products_edit', $this->productsEngine->getAllProducts());
+        $theme->addObject('admin_cats_list', $this->categoriesEngine->getCategories());
         $theme->getSmarty()->assign('lang', $this->getSystem()->getLang());
 
         return $theme->getTpl('admin/products');

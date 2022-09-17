@@ -14,10 +14,10 @@ abstract class Page
 
     /**
      * @param $name
-     * @param array $paths
      * @param Pages $pages
+     * @param ...$paths
      */
-    public function __construct($name, array $paths, Pages $pages)
+    public function __construct($name, Pages $pages, ...$paths)
     {
         $this->name = $name;
         $this->paths = $paths;

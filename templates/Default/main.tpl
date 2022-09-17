@@ -12,6 +12,9 @@
     </style>
 </head>
 <body>
+    <header>
+        <a href="/">Main Page</a>
+    </header>
     {$content}
 </body>
 </html>
