@@ -20,7 +20,9 @@ class Pages extends Component
     private string $title;
 
     private array $modules = array();
-    private Component $mySQL;
+    private array $pathsModules = [];
+
+    private ErrorPage $errorPage;
 
     /**
      * @return void
@@ -41,23 +43,20 @@ class Pages extends Component
      */
     public function load()
     {
-        $this->mySQL = $this->getSystem()->getComponent('database');
 
         $this->title = $this->getSystem()->getLang()->getRow('title');
 
+
+        $this->errorPage =  (new ErrorPage('error', ['error'], $this));
+
     }
 
-    /**
-     * @throws SmartyException
-     */
     private function getModule(): Page
     {
         if (!isset($this->path[0]) || empty($this->path[0])) {
             $this->path[0] = 'index';
         }
-        $name = $this->mySQL->getConn()->fetchColumn("SELECT `module`
-                                                        FROM `pages`
-                                                        WHERE  `path` = :path", ['path' => $this->path[0]]);
+        $name = $this->pathsModules[$this->path[0]];
         if ($name == null)
             $this->error(404, 'Not found. Please, try to find other page!');
         return $this->modules[$name];
@@ -83,6 +82,13 @@ class Pages extends Component
 
     public function loadModule(Page $page)
     {
+        foreach ($page->getPaths() as $path) {
+            if(isset($this->pathsModules[$path])) {
+                $this->error(503, "Conflict modules! Module [{$page->getName()}] is going to reserve
+                path '$path' which used by {$this->pathsModules[$path]}!");
+            }
+            $this->pathsModules[$path] = $page->getName();
+        }
         $this->modules[$page->getName()] = $page;
     }
 
@@ -107,13 +113,11 @@ class Pages extends Component
 
     /**
      * @return void
-     * @throws SmartyException
      */
     public function error($num, $text = "")
     {
         $this->path[0] = 'error';
-
-        (new ErrorPage('error', $this))->setError($num, $text);
+        $this->errorPage->setError($num, $text);
     }
 
 }

@@ -21,16 +21,16 @@ class ErrorPage extends Page
         return $theme->getTpl('error');
     }
 
-    /**
-     * @param int $error
-     * @throws SmartyException
-     */
     public function setError(int $error, string $text = ''): void
     {
         $this->error = $error;
         $this->text = $text;
         http_response_code($error);
-        $this->getPages()->unload();
+        try {
+            $this->getPages()->unload();
+        } catch (SmartyException $e) {
+            echo ($e->getTraceAsString());
+        }
         die();
     }
 

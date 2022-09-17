@@ -10,14 +10,17 @@ abstract class Page
     private string $name;
     private Pages $pages;
     private Lang $lang;
+    private array $paths;
 
     /**
      * @param $name
+     * @param array $paths
      * @param Pages $pages
      */
-    public function __construct($name, Pages $pages)
+    public function __construct($name, array $paths, Pages $pages)
     {
         $this->name = $name;
+        $this->paths = $paths;
         $this->pages = $pages;
         $this->lang = $pages->getSystem()->getLang();
 
@@ -53,6 +56,14 @@ abstract class Page
     public function getSystem(): System
     {
         return $this->pages->getSystem();
+    }
+
+    /**
+     * @return array
+     */
+    public function getPaths(): array
+    {
+        return $this->paths;
     }
 
 }

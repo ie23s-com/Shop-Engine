@@ -34,7 +34,7 @@ class CategoriesEngine
 
     public function load()
     {
-        new CategoryPage('category', $this->pages);
+        new CategoryPage('category', ['category', 'cat'], $this->pages);
     }
 
     /**

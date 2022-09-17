@@ -13,7 +13,7 @@ class Admin extends Component
     public function __construct(System $system)
     {
         parent::__construct($system);
-        new Pages('admin', $system->getPages());
+        new Pages('admin', ['administrator', 'adm'], $system->getPages());
 
     }
     /**
