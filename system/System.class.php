@@ -43,15 +43,14 @@ class System
         $config = new config\Config($this);
         $config->load();
         $config = null;
-
+        //Init Theme
+        $this->components["pages"] = new Pages($this);
         //Init DB
         $this->components["database"] = new database\MySQLMod($this);
 
         //Init Lang
         $this->components["lang"] = new Lang($this);
 
-        //Init Theme
-        $this->components["pages"] = new Pages($this);
 
         //Init Shop engine
         $this->components["sEngine"] = new Engine($this);

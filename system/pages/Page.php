@@ -9,7 +9,6 @@ abstract class Page
 {
     private string $name;
     private Pages $pages;
-    private Lang $lang;
     private array $paths;
 
     /**
@@ -22,7 +21,6 @@ abstract class Page
         $this->name = $name;
         $this->paths = $paths;
         $this->pages = $pages;
-        $this->lang = $pages->getSystem()->getLang();
 
         $pages->loadModule($this);
     }
@@ -50,7 +48,7 @@ abstract class Page
      */
     public function getLang(): Lang
     {
-        return $this->lang;
+        return $this->pages->getSystem()->getLang();
     }
 
     public function getSystem(): System

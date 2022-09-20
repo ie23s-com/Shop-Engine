@@ -35,6 +35,9 @@ class Pages extends Component
         }
         $this->theme = new Theme();
 
+
+        $this->errorPage = (new ErrorPage('error', $this, 'error'));
+
     }
 
     /**
@@ -45,9 +48,6 @@ class Pages extends Component
     {
 
         $this->title = $this->getSystem()->getLang()->getRow('title');
-
-
-        $this->errorPage =  (new ErrorPage('error', $this, 'error'));
 
     }
 
@@ -116,6 +116,7 @@ class Pages extends Component
      */
     public function error($num, $text = "")
     {
+        $this->title = "{$num} error";
         $this->path[0] = 'error';
         $this->errorPage->setError($num, $text);
     }
