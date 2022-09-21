@@ -48,6 +48,8 @@ class Pages extends Component
     {
 
         $this->title = $this->getSystem()->getLang()->getRow('title');
+        $this->theme->addBlock("theme_path", __SHOP_DIR__ . 'templates/' . $this->theme->getThemeName());
+        $this->theme->addBlock("time", time());
 
     }
 

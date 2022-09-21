@@ -6,6 +6,7 @@ use ie23s\shop\system\pages\Page;
 use ie23s\shop\system\pages\Theme;
 use Simplon\Mysql\MysqlException;
 use SmartyException;
+use TypeError;
 
 class CategoryPage extends Page
 {
@@ -17,8 +18,11 @@ class CategoryPage extends Page
     public function request(array $request): string
     {
         $ce = $this->getSystem()->getEngine()->getCategoriesEngine();
-        $cat = $ce->getCategory($request[1]);
-        if ($cat == null) {
+        try {
+            $cat = $ce->getCategory($request[1]);
+        } catch (TypeError $e) {
+        }
+        if (@$cat == null) {
             $this->getPages()->error(404, "Not found");
         }
         $ce->findParents($cat);

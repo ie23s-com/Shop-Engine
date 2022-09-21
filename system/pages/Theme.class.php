@@ -60,4 +60,9 @@ class Theme
         $this->objects[$name] = $object;
     }
 
+    public function getThemeName(): string
+    {
+        return $this->theme;
+    }
+
 }
