@@ -7,7 +7,7 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="/templates/Default/css/materialize.css?t={$time}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Compiled and minified JavaScript -->
@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
     <!--<script src="{$theme_path}/js/script.js"></script> -->
+
     <script src="/templates/Default/js/script.js?t={$time}"></script>
+    <link rel="stylesheet" href="/templates/Default/css/styles.css?t={$time}">
 
 
 </head>
@@ -43,6 +45,8 @@
     </ul>
 
 </header>
-{$content}
+<div class="container">
+    {$content}
+</div>
 </body>
 </html>

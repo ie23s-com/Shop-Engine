@@ -14,11 +14,11 @@ require_once(__SHOP_DIR__ . 'vendor/autoload.php');
 require_once(__SHOP_DIR__ . 'system/System.class.php');
 
 $system = new ie23s\shop\system\System();
-try {
+//try {
     $system->init();
-} catch (Exception $e) {
+/*} catch (Exception $e) {
     $system->getPages()->error(500, "Internal server error: " . $e->getTraceAsString());
-}
+}*/
 
 $system->load();
 
