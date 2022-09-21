@@ -33,6 +33,7 @@
                 <li><a href="badges.html">Components</a></li>
                 <li><a href="collapsible.html">Javascript</a></li>
                 <li><a href="mobile.html">Mobile</a></li>
+                <li><a href="https://shop.ie23s.com/administrator/categories/?admin=ok">Admin</a></li>
             </ul>
         </div>
     </nav>
@@ -42,11 +43,10 @@
         <li><a href="badges.html">Components</a></li>
         <li><a href="collapsible.html">Javascript</a></li>
         <li><a href="mobile.html">Mobile</a></li>
+        <li><a href="https://shop.ie23s.com/administrator/categories/?admin=ok">Admin</a></li>
     </ul>
 
 </header>
-<div class="container">
-    {$content}
-</div>
+{$content}
 </body>
 </html>
