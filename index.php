@@ -14,20 +14,22 @@ require_once(__SHOP_DIR__ . 'vendor/autoload.php');
 require_once(__SHOP_DIR__ . 'system/System.class.php');
 
 $system = new ie23s\shop\system\System();
-//try {
+
+try {
+
     $system->init();
-/*} catch (Exception $e) {
-    $system->getPages()->error(500, "Internal server error: " . $e->getTraceAsString());
-}*/
 
-$system->load();
+    $system->load();
 
-$system->unload();
+    $system->unload();
+} catch (Exception|Error $e) {
+    $system->getPages()->error(500, "Internal server error: " . $e);
+}
 
 //DEV
 $time_end = microtime(true);
 $time = round($time_end - $time_start, 6) * 1000;
-
-echo "<div style=\"position: fixed; bottom:5px; right:5px\">{$time} ms";
+if (!defined('offTimer'))
+    echo "<div style=\"position: fixed; bottom:5px; right:5px\">{$time} ms";
 
 //\DEV

@@ -10,6 +10,7 @@ abstract class Page
     private string $name;
     private Pages $pages;
     private array $paths;
+    private array $headers = [];
 
     /**
      * @param $name
@@ -67,5 +68,20 @@ abstract class Page
     public function needTheme(): bool
     {
         return true;
+    }
+
+    /**
+     * @param string $header
+     */
+    protected function addHeader(string $header): void
+    {
+        $this->headers[] = $header;
+    }
+
+    public function runHeaders(): void
+    {
+        foreach ($this->headers as $header) {
+            header($header);
+        }
     }
 }

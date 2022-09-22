@@ -78,6 +78,7 @@ class Pages extends Component
     public function unload()
     {
         $module = $this->getModule();
+        $module->runHeaders();
         if ($module->needTheme()) {
             $this->theme->addBlock('content', $module->request($this->path));
             $this->theme->addBlock("title", $this->title);

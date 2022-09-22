@@ -6,6 +6,7 @@ namespace ie23s\shop\system;
 use Exception;
 use ie23s\shop\admin\Admin;
 use ie23s\shop\engine\Engine;
+use ie23s\shop\system\api\Api;
 use ie23s\shop\system\lang\Lang;
 use ie23s\shop\system\pages\Pages;
 
@@ -22,6 +23,8 @@ require_once __SHOP_DIR__ . "system/pages/Pages.class.php";
 require_once __SHOP_DIR__ . "engine/Engine.class.php";
 //MySQL component loader
 require_once __SHOP_DIR__ . "admin/Admin.class.php";
+//MySQL component loader
+require_once __SHOP_DIR__ . "system/api/Api.class.php";
 
 
 /**
@@ -51,6 +54,8 @@ class System
         //Init Lang
         $this->components["lang"] = new Lang($this);
 
+        //Init API
+        $this->components["api"] = new Api($this);
 
         //Init Shop engine
         $this->components["sEngine"] = new Engine($this);
@@ -67,6 +72,7 @@ class System
         //Load Theme
         //LAST!
         $this->components["pages"]->load();
+        $this->components["api"]->load();
         //Init Shop engine
         $this->components["sEngine"]->load();
 
