@@ -64,4 +64,8 @@ abstract class Page
         return $this->paths;
     }
 
+    public function needTheme(): bool
+    {
+        return true;
+    }
 }

@@ -77,9 +77,14 @@ class Pages extends Component
      */
     public function unload()
     {
-        $this->theme->addBlock('content', $this->getModule()->request($this->path));
-        $this->theme->addBlock("title", $this->title);
-        echo $this->theme->getTpl('main');
+        $module = $this->getModule();
+        if ($module->needTheme()) {
+            $this->theme->addBlock('content', $module->request($this->path));
+            $this->theme->addBlock("title", $this->title);
+            echo $this->theme->getTpl('main');
+        } else {
+            echo $module->request($this->path);
+        }
     }
 
     public function loadModule(Page $page)
