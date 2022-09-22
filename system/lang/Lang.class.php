@@ -22,7 +22,7 @@ class Lang extends Component
     {
         parent::__construct($system);
         $this->lang = isset($_COOKIE['language']) && !empty($_COOKIE['language']) ? $_COOKIE['language'] : '';
-        $this->accept = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+        $this->accept = $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '';
     }
 
     /**

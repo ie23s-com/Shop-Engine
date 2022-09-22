@@ -15,7 +15,21 @@ class ApiPage extends Page
     public function request(array $request): string
     {
         define('offTimer', 'off');
-        return 'lol';
+        $this->addHeader('Content-Type: application/json; charset=utf-8');
+        $module = $this->api->getPath($request);
+        if ($module != null)
+            switch (getenv('REQUEST_METHOD')) {
+                case 'GET':
+                    return $module->get();
+                case 'POST':
+                    return $module->post();
+                case 'PUT':
+                    return $module->put();
+                case 'DELETE':
+                    return $module->delete();
+            }
+
+        return json_encode(['error' => 404, 'text' => 'Not found']);
     }
 
     /**

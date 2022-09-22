@@ -106,10 +106,18 @@ class System
         $r = $this->getComponent('pages');
         return $r;
     }
+
     public function getEngine(): Engine
     {
         /** @var $r Engine */
         $r = $this->getComponent('sEngine');
+        return $r;
+    }
+
+    public function getApi(): Api
+    {
+        /** @var $r Api */
+        $r = $this->getComponent('api');
         return $r;
     }
 }
