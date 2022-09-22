@@ -19,6 +19,9 @@
     <script src="/templates/Default/js/script.js?t={$time}"></script>
     <link rel="stylesheet" href="/templates/Default/css/styles.css?t={$time}">
 
+    <!-- ONLY FOR DEV -->
+    <script src="/templates/Default/js/admin-script.js?t={$time}"></script>
+
 
 </head>
 <body>
@@ -37,7 +40,6 @@
             </ul>
         </div>
     </nav>
-
     <ul class="sidenav" id="mobile-demo">
         <li><a href="sass.html">Sass</a></li>
         <li><a href="badges.html">Components</a></li>
@@ -45,7 +47,6 @@
         <li><a href="mobile.html">Mobile</a></li>
         <li><a href="https://shop.ie23s.com/administrator/categories/?admin=ok">Admin</a></li>
     </ul>
-
 </header>
 {$content}
 </body>
