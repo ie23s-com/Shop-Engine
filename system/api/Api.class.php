@@ -1,6 +1,7 @@
 <?php
 
 namespace ie23s\shop\system\api;
+require_once __SHOP_DIR__ . "system/api/ApiInterface.php";
 
 require_once __SHOP_DIR__ . "system/api/ApiPage.class.php";
 

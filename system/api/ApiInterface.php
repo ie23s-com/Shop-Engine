@@ -12,4 +12,5 @@ interface ApiInterface
 
     public function delete(): string;
 
+    public function code(): int;
 }

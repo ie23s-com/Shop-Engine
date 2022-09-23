@@ -20,11 +20,11 @@ require_once __SHOP_DIR__ . "system/database/MySQLMod.php";
 //MySQL component loader
 require_once __SHOP_DIR__ . "system/pages/Pages.class.php";
 //MySQL component loader
+require_once __SHOP_DIR__ . "system/api/Api.class.php";
+//MySQL component loader
 require_once __SHOP_DIR__ . "engine/Engine.class.php";
 //MySQL component loader
 require_once __SHOP_DIR__ . "admin/Admin.class.php";
-//MySQL component loader
-require_once __SHOP_DIR__ . "system/api/Api.class.php";
 
 
 /**

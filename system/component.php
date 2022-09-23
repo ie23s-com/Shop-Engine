@@ -8,7 +8,7 @@ namespace ie23s\shop\system;
  ***/
 abstract class Component
 {
-    private System $system;
+    protected System $system;
 
     public function __construct(System $system)
     {
