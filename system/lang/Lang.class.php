@@ -121,22 +121,24 @@ class Lang extends Component
     /**
      * @throws MysqlException
      */
-    public function getEditableRow($key): ?string
+    public function getEditableRow($type, $id): ?string
     {
         $row = $this->mySQL->getConn()->fetchColumn("SELECT `value`
                                                         FROM `language_editable`
-                                                        WHERE lang_id = :id AND `key` = :key",
-            ['id' => $this->lang_id, 'key' => $key]);
+                                                        WHERE lang_id = :id AND `external_id` = :ex_id
+                                                        AND `type` = :type",
+            ['id' => $this->lang_id, 'iex_idd' => $id, 'type' => $type]);
         return $row == null ? 'undefined' : $row;
     }
 
     /**
      * @throws MysqlException
      */
-    public function addEditableRow($name, array $values): array
+    public function addEditableRow($type, $id, array $values): array
     {
         foreach ($values as $i => $value) {
-            $values[$i]['key'] = $name;
+            $values[$i]['external_id'] = $id;
+            $values[$i]['type'] = $type;
         }
         return $this->mySQL->getConn()->insertMany("language_editable",
             $values);
@@ -145,21 +147,22 @@ class Lang extends Component
     /**
      * @throws MysqlException
      */
-    public function deleteEditableRow($id): int
+    public function deleteEditableRow(string $type, int $id): int
     {
         return $this->mySQL->getConn()->delete("language_editable",
-            ['key' => $id]);
+            ['external_id' => $id, 'type' => $type]);
     }
 
     /**
      * @throws MysqlException
      */
-    public function editEditableRow($name, $array)
+    public function editEditableRow($type, $id, $array)
     {
         foreach ($array as $value) {
 
             $this->mySQL->getConn()->update("language_editable",
-                ['key' => $name], ['lang_id' => $value['lang_id'], 'value' => $value['value']]);
+                ['external_id' => $id, 'type' => $type, 'lang_id' => $value['lang_id']],
+                ['value' => $value['value']]);
         }
     }
 }

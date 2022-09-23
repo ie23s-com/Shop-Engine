@@ -36,12 +36,12 @@ class ProductEngine
         $product = $this->engine->getDb()->fetchRow(
             'SELECT *, (SELECT language_editable.value
                         FROM language_editable
-                        WHERE language_editable.`key` = CONCAT(\'product-\',products.id,\'-name\')
+                        WHERE language_editable.`type` = \'product-name\' AND `external_id` = :id
                         AND lang_id = :lang_id)
                             as display_name,
                         (SELECT language_editable.value
                         FROM language_editable
-                        WHERE language_editable.`key` = CONCAT(\'product-\',products.id,\'-description\')
+                        WHERE language_editable.`type` = \'product-description\' AND `external_id` = :id
                         AND lang_id = :lang_id)
                             as description
                     FROM products WHERE id = :id', array('id' => $id, 'lang_id' => 1));
@@ -63,12 +63,12 @@ class ProductEngine
         $products = $this->engine->getDb()->fetchRowMany(
             'SELECT *, (SELECT language_editable.value
                         FROM language_editable
-                        WHERE language_editable.`key` = CONCAT(\'product-\',products.id,\'-name\')
+                        WHERE language_editable.`type` = \'product-name\' AND `external_id` = products.id
                         AND lang_id = :lang_id)
                             as display_name,
                         (SELECT language_editable.value
                         FROM language_editable
-                        WHERE language_editable.`key` = CONCAT(\'product-\',products.id,\'-description\')
+                        WHERE language_editable.`type` = \'product-description\' AND `external_id` = products.id
                         AND lang_id = :lang_id)
                             as description
                     FROM products WHERE category LIKE CONCAT(\'%\', :category)',
@@ -90,8 +90,9 @@ class ProductEngine
             'sold' => $product->getSold(), 'balance' => $product->getBalance(), 'category' => $product->getCategory(),
             'photos' => json_encode($product->getPhotos())
         ]);
-        $this->engine->getSystem()->getLang()->editEditableRow("product-{$product->getId()}-name", $names);
-        $this->engine->getSystem()->getLang()->editEditableRow("product-{$product->getId()}-description", $descriptions);
+        $this->engine->getSystem()->getLang()->editEditableRow('product-name', $product->getId(), $names);
+        $this->engine->getSystem()->getLang()->editEditableRow("product-description", $product->getId(),
+            $descriptions);
 
     }
 
@@ -105,8 +106,8 @@ class ProductEngine
             'sold' => $product->getSold(), 'balance' => $product->getBalance(), 'category' => $product->getCategory(),
             'photos' => json_encode($product->getPhotos())
         ]);
-        $this->engine->getSystem()->getLang()->addEditableRow("product-{$id}-name", $names);
-        $this->engine->getSystem()->getLang()->addEditableRow("product-{$id}-description", $descriptions);
+        $this->engine->getSystem()->getLang()->addEditableRow('product-name', $id, $names);
+        $this->engine->getSystem()->getLang()->addEditableRow("product-description", $id, $descriptions);
 
         return $id;
     }
@@ -114,7 +115,7 @@ class ProductEngine
     public function removeProduct(?Product $product)
     {
         $this->engine->getDb()->delete('products', ['id' => $product->getId()]);
-        $this->engine->getSystem()->getLang()->deleteEditableRow("product-{$product->getId()}-name");
-        $this->engine->getSystem()->getLang()->deleteEditableRow("product-{$product->getId()}-description");
+        $this->engine->getSystem()->getLang()->deleteEditableRow('product-name', $product->getId());
+        $this->engine->getSystem()->getLang()->deleteEditableRow('product-description', $product->getId());
     }
 }

@@ -45,7 +45,8 @@ class CategoriesEngine
         $cursor = $this->engine->getDb()->fetchRowMany('SELECT *,
                (SELECT language_editable.value
                 FROM language_editable 
-                WHERE language_editable.`key` = CONCAT(\'category-\',categories.id,\'-name\')) AS display_name
+                WHERE language_editable.`type` = \'category-name\' AND language_editable.external_id = categories.id)
+                   AS display_name
         FROM categories');
         foreach ($cursor as $result) {
             $this->categories[$result['id']] =
@@ -101,7 +102,7 @@ class CategoriesEngine
         $id = $this->engine->getDb()->insert('categories',
             ['name' => $category->getName(), 'parent' => $category->getParentId(), 'parameters' => '[]']);
         $names = [['lang_id' => 1, 'value' => $category->getDisplayName()]];
-        $this->engine->getSystem()->getLang()->addEditableRow("category-$id-name", $names);
+        $this->engine->getSystem()->getLang()->addEditableRow('category-name', $id, $names);
         $category->setId($id);
         $this->categories[$id] = $category;
     }
@@ -131,7 +132,7 @@ class CategoriesEngine
         $this->engine->getDb()->fetchColumn('DELETE FROM categories WHERE id IN (:ids)',
             ['ids' => $categoriesToDelete]);
         foreach ($categoriesToDelete as $id) {
-            $this->engine->getSystem()->getLang()->deleteEditableRow("category-$id-name");
+            $this->engine->getSystem()->getLang()->deleteEditableRow("category-name", $id);
             unset($this->categories[$id]);
         }
     }
@@ -147,6 +148,6 @@ class CategoriesEngine
         ]);
 
         $names = [['lang_id' => 1, 'value' => $category->getDisplayName()]];
-        $this->engine->getSystem()->getLang()->editEditableRow("category-{$category->getId()}-name", $names);
+        $this->engine->getSystem()->getLang()->editEditableRow("category-name", $category->getId(), $names);
     }
 }
