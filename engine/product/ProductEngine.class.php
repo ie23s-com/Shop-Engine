@@ -56,6 +56,26 @@ class ProductEngine
     /**
      * @throws MysqlException
      */
+    public function getProductByIdAsArray($id): array
+    {
+        return $this->engine->getDb()->fetchRow(
+            'SELECT *, (SELECT language_editable.value
+                        FROM language_editable
+                        WHERE language_editable.`type` = \'product-name\' AND `external_id` = :id
+                        AND lang_id = :lang_id)
+                            as display_name,
+                        (SELECT language_editable.value
+                        FROM language_editable
+                        WHERE language_editable.`type` = \'product-description\' AND `external_id` = :id
+                        AND lang_id = :lang_id)
+                            as description
+                    FROM products WHERE id = :id', array('id' => $id, 'lang_id' => 1));
+
+    }
+
+    /**
+     * @throws MysqlException
+     */
     public function getAllProducts(int $category = null): array
     {
         $returnProducts = array();

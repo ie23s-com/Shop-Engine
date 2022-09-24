@@ -18,7 +18,15 @@ class ProductApi extends ApiAbstract
 
     public function get(): string
     {
-        return $this->withCode(405);
+        try {
+            $product = $this->productEngine->getProductByIdAsArray($this->getRequest('id'));
+        } catch (MysqlException $e) {
+            return $this->withCode(500);
+        }
+        if($product == null) {
+            return $this->withCode(404);
+        }
+        return json_encode($product);
     }
 
     public function post(): string
@@ -38,7 +46,24 @@ class ProductApi extends ApiAbstract
 
     public function put(): string
     {
-        return $this->withCode(405);
+        try {
+            $product = $this->productEngine->getProductById($this->getRequest('id'));
+            if($product == null) {
+                return $this->withCode(404);
+            }
+            $product->setCost($this->getRequest('cost'));
+            $product->setArt($this->getRequest('art'));
+            $product->setCode($this->getRequest('code'));
+            $product->setSold($this->getRequest('sold'));
+            $product->setBalance($this->getRequest('balance'));
+            $product->setCategory($this->getRequest('category'));
+            $names = [['lang_id' => 1, 'value' => $this->getRequest('display_name')]];
+            $descs = [['lang_id' => 1, 'value' => $this->getRequest('description')]];
+            $this->productEngine->updateProduct($product, $names, $descs);
+            return $this->withCode(200);
+        } catch (MysqlException $e) {
+            return $this->withCode(500);
+        }
     }
 
     public function delete(): string
