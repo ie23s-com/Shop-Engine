@@ -5,3 +5,8 @@
 .ie23s-auto-margin-0 {
     margin: 0 auto !important;
 }
+
+.ie23s-right {
+    position: absolute;
+    right: 0;
+}

@@ -1,37 +1,42 @@
-<div id="modal1" class="modal">
+<div id="adm-modal-product" class="modal">
+    <div class="progress" style="display: none">
+        <div class="indeterminate"></div>
+    </div>
 
-    <form method="post">
+    <form id="admin-product-form">
         <div class="modal-content">
             <h4>Create product</h4>
+
+            <div class="red-text center-align error-message"></div>
             <div class="row ie23s-auto-margin-0">
                 <div class="input-field col s12">
-                    <input id="display_name" type="text" class="validate">
+                    <input id="display_name" name="display_name" type="text" class="validate">
                     <label for="display_name">Display name</label>
                 </div>
             </div>
             <div class="row ie23s-auto-margin-0">
                 <div class="input-field col s12">
-                    <textarea id="description" class="materialize-textarea"></textarea>
+                    <textarea id="description" name="description" class="materialize-textarea"></textarea>
                     <label for="description">Description</label>
                 </div>
             </div>
             <div class="row ie23s-auto-margin-0">
                 <div class="input-field col s6">
-                    <input id="cost" type="number" class="validate">
+                    <input id="cost" name="cost" type="number" class="validate">
                     <label for="cost">Cost</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="balance" type="text" class="validate">
+                    <input id="balance" name="balance" type="text" class="validate">
                     <label for="balance">Balance</label>
                 </div>
             </div>
             <div class="row ie23s-auto-margin-0">
                 <div class="input-field col s6">
-                    <input id="art" type="number" class="validate">
+                    <input id="art" name="art" type="number" class="validate">
                     <label for="art">Code</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="code" type="number" class="validate">
+                    <input id="code" name="code" type="number" class="validate">
                     <label for="code">Barcode</label>
                 </div>
             </div>
@@ -49,22 +54,25 @@
             </div>
             <div class="row ie23s-auto-margin-0">
                 <div class="input-field col s6">
-                    <button class="btn waves-effect waves-light" type="button" name="create">Cancel
+                    <button class="btn waves-effect waves-block waves-light center-block" name="cancel" type="button">
+                        Cancel
                         <i class="material-icons right">cancel</i>
                     </button>
                 </div>
                 <div class="input-field col s6">
-                    <button class="btn waves-effect waves-light" type="submit" name="create">Create
+                    <button class="btn waves-effect waves-block waves-light center-block" type="submit" name="create">
+                        Create
                         <i class="material-icons right">add</i>
                     </button>
                 </div>
             </div>
+            <input name="type" type="hidden" value="1">
         </div>
     </form>
 </div>
-<button data-target="modal1" class="btn modal-trigger">Create</button>
+<button class="btn create-product">Create</button>
 
-<table>
+<table id="adm-product-list">
     <thead>
     <tr>
         <th>ID</th>
