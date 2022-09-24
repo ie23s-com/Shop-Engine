@@ -9,6 +9,7 @@ use ie23s\shop\engine\Engine;
 use ie23s\shop\system\api\Api;
 use ie23s\shop\system\lang\Lang;
 use ie23s\shop\system\pages\Pages;
+require_once __SHOP_DIR__ . "system/Codes.php";
 
 require_once __SHOP_DIR__ . "system/component.php";
 //Config component loader

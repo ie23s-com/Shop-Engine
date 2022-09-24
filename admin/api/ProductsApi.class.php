@@ -40,8 +40,8 @@ class ProductsApi extends ApiAbstract
      */
     public function post(): string
     {
-        $this->setCode(400);
-        return json_encode(['error' => '400', 'text' => 'Bad Request']);
+
+        return $this->withCode(405);
     }
 
     /**
@@ -49,7 +49,7 @@ class ProductsApi extends ApiAbstract
      */
     public function put(): string
     {
-        return 1;
+        return $this->withCode(405);
     }
 
     /**
@@ -57,6 +57,6 @@ class ProductsApi extends ApiAbstract
      */
     public function delete(): string
     {
-        return 1;
+        return $this->withCode(405);
     }
 }

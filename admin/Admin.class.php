@@ -16,7 +16,6 @@ class Admin extends Component
     {
         parent::__construct($system);
         new Pages('admin', $system->getPages(), 'administrator', 'adm');
-        (new AdminApi($this->getSystem()))->loadApiMethods();
 
     }
     /**
@@ -24,6 +23,7 @@ class Admin extends Component
      */
     public function load()
     {
+        (new AdminApi($this->getSystem()))->loadApiMethods();
     }
 
 }
