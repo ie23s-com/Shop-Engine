@@ -55,7 +55,7 @@ abstract class ApiAbstract implements ApiInterface
 
     public function getRequest(string $param)
     {
-        return $this->request[$param];
+        return @$this->request[$param];
     }
 
     public function withCode($code, $text = null) {
