@@ -165,4 +165,13 @@ class Lang extends Component
                 ['value' => $value['value']]);
         }
     }
+
+    /**
+     * @return int
+     */
+    public function getLangId(): int
+    {
+        return $this->lang_id;
+    }
+
 }

@@ -10,6 +10,7 @@ abstract class ApiAbstract implements ApiInterface
 {
     private System $system;
     private Engine $engine;
+    private array $request;
     private int $code = 200;
 
     /**
@@ -19,6 +20,7 @@ abstract class ApiAbstract implements ApiInterface
     {
         $this->system = $system;
         $this->engine = $system->getEngine();
+        $this->request =  $_REQUEST;
     }
 
     /**
@@ -50,4 +52,8 @@ abstract class ApiAbstract implements ApiInterface
         $this->code = $code;
     }
 
+    public function getRequest(string $param)
+    {
+        return $this->request[$param];
+    }
 }
