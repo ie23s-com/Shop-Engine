@@ -2,24 +2,63 @@
 
     <form method="post">
         <div class="modal-content">
-            <div><p>Display name:</p><input name="display_name" value=""/></div>
-            <div><p>Description</p><textarea name="description"></textarea></div>
-            <div><p>Cost</p><input name="cost" type="number" value=""/></div>
-            <div><p>Art</p><input name="art" type="number" value=""/></div>
-            <div><p>Barcode</p><input name="code" type="number" value=""/></div>
-            <div><p>Sold</p><input name="sold" type="number" value=""/></div>
-            <div><p>Balance</p><input name="balance" type="number" value=""/></div>
-            <div><p>Category</p><select name="category">
-                    <option value="0" selected>none</option>
-                    {foreach $admin_cats_list as $category1}
-                        <option value="{$category1->getId()}">{$category1->getDisplayName()}</option>
-                    {/foreach}
-                </select>
+            <h4>Create product</h4>
+            <div class="row ie23s-auto-margin-0">
+                <div class="input-field col s12">
+                    <input id="display_name" type="text" class="validate">
+                    <label for="display_name">Display name</label>
+                </div>
             </div>
-        </div>
-        <input type="hidden" name="type" value="add"/>
-        <div class="modal-footer">
-            <div><input type="submit" name="submit" value="Create"/></div>
+            <div class="row ie23s-auto-margin-0">
+                <div class="input-field col s12">
+                    <textarea id="description" class="materialize-textarea"></textarea>
+                    <label for="description">Description</label>
+                </div>
+            </div>
+            <div class="row ie23s-auto-margin-0">
+                <div class="input-field col s6">
+                    <input id="cost" type="number" class="validate">
+                    <label for="cost">Cost</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="balance" type="text" class="validate">
+                    <label for="balance">Balance</label>
+                </div>
+            </div>
+            <div class="row ie23s-auto-margin-0">
+                <div class="input-field col s6">
+                    <input id="art" type="number" class="validate">
+                    <label for="art">Code</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="code" type="number" class="validate">
+                    <label for="code">Barcode</label>
+                </div>
+            </div>
+
+            <div class="row ie23s-auto-margin-0">
+                <div class="input-field col s12">
+                    <select name="category">
+                        <option value="0" selected>none</option>
+                        {foreach $admin_cats_list as $category1}
+                            <option value="{$category1->getId()}">{$category1->getDisplayName()}</option>
+                        {/foreach}
+                    </select>
+                    <label for="category">Category</label>
+                </div>
+            </div>
+            <div class="row ie23s-auto-margin-0">
+                <div class="input-field col s6">
+                    <button class="btn waves-effect waves-light" type="button" name="create">Cancel
+                        <i class="material-icons right">cancel</i>
+                    </button>
+                </div>
+                <div class="input-field col s6">
+                    <button class="btn waves-effect waves-light" type="submit" name="create">Create
+                        <i class="material-icons right">add</i>
+                    </button>
+                </div>
+            </div>
         </div>
     </form>
 </div>

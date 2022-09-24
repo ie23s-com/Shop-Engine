@@ -32,7 +32,7 @@ class ProductApi extends ApiAbstract
     public function post(): string
     {
         $product = new Product(0, $this->getRequest('cost'), $this->getRequest('art'),
-            $this->getRequest('code'), $this->getRequest('sold'),
+            $this->getRequest('code'), 0,
             $this->getRequest('balance'), $this->getRequest('category'));
         $names = [['lang_id' => 1, 'value' => $this->getRequest('display_name')]];
         $descs = [['lang_id' => 1, 'value' => $this->getRequest('description')]];
