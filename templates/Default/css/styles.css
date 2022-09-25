@@ -3,10 +3,19 @@
 }
 
 .ie23s-auto-margin-0 {
+    display: block !important;
     margin: 0 auto !important;
 }
 
 .ie23s-right {
     position: absolute;
     right: 0;
+}
+
+.ie23s-red-gb {
+    background-color: #d32f2f !important;
+}
+
+.ie23s-hidden {
+    display: none;
 }

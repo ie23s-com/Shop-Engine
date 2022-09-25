@@ -70,7 +70,21 @@
         </div>
     </form>
 </div>
-<button class="btn create-product">Create</button>
+<div class="row ie23s-auto-margin-0">
+    <div class="col s11"></div>
+    <button class="btn create-product col s1">Create</button>
+</div>
+<div class="row ie23s-auto-margin-0">
+    <form class="col s12 ie23s-auto-margin-0" id="adm-products-search">
+        <div class="row ie23s-auto-margin-0">
+            <div class="input-field col s12 ie23s-auto-margin-0">
+                <i class="material-icons prefix">search</i>
+                <input id="icon_prefix" name="search" type="text" class="validate">
+                <label for="icon_prefix">Search</label>
+            </div>
+        </div>
+    </form>
+</div>
 
 <table id="adm-product-list">
     <thead>
@@ -85,8 +99,21 @@
         <th>Sold</th>
         <th>Balance</th>
     </tr>
+    <tr class="preloader" style="display: none;">
+        <th colspan="10">
+        <div class="preloader-wrapper big active ie23s-auto-margin-0">
+            <div class="spinner-layer spinner-blue-only">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div><div class="gap-patch">
+                    <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+    </tr>
     </thead>
-
     <tbody>
     {foreach $admin_products_edit as $product}
         <tr>
@@ -105,18 +132,40 @@
             <td><a href="/product/{$product->getId()}" target="_blank"
                    class="waves-effect waves-light btn-small"><i class="material-icons center">open_in_new
                     </i></a></td>
+            <td><a href="#" data-id="{$product->getId()}"
+                   class="waves-effect waves-light btn-small product-remove ie23s-red-gb"><i class="material-icons center">cancel
+                    </i></a></td>
 
         </tr>
-    {literal}
-        <!-- value="{$product->getBalance()}"/></div>
-             <div><p>Category</p><select name="category">
-                 <option value="0" {if $product->getCategory() == 0} selected {/if}>none</option>
-                 {foreach $admin_cats_list as $category1}
-                     <option value="{$category1->getId()}" {if $product->getCategory() == $category1->getId()} selected {/if}>{$category1->getDisplayName()}</option>
-                 {/foreach}
-             </select></div>-->
-    {/literal}
     {/foreach}
 
     </tbody>
 </table>
+{literal}
+    <div class="ie23s-hidden" id="adm-product-template">
+        <table>
+            <tbody>
+        <tr>
+            <td>{id}</td>
+            <td>{display_name}</td>
+            <td>{category}</td>
+            <td>{cost}</td>
+            <td>{description}</td>
+            <td>{art}</td>
+            <td>{code}</td>
+            <td>{sold}</td>
+            <td>{balance}</td>
+            <td><a href="#" data-id="{id}"
+                   class="waves-effect waves-light btn-small product-edit"><i class="material-icons center">mode_edit
+                    </i></a></td>
+            <td><a href="/product/{id}" target="_blank"
+                   class="waves-effect waves-light btn-small"><i class="material-icons center">open_in_new
+                    </i></a></td>
+            <td><a href="#" data-id="{id}"
+                   class="waves-effect waves-light btn-small product-remove ie23s-red-gb"><i class="material-icons center">cancel
+                    </i></a></td>
+
+        </tr></tbody>
+        </table>
+    </div>
+{/literal}

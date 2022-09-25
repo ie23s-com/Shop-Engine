@@ -11,7 +11,7 @@ abstract class ApiAbstract implements ApiInterface
 {
     private System $system;
     private Engine $engine;
-    private array $request;
+    private array $request = [];
     private int $code = 200;
 
     /**
@@ -21,7 +21,7 @@ abstract class ApiAbstract implements ApiInterface
     {
         $this->system = $system;
         $this->engine = $system->getEngine();
-        $this->request =  $_REQUEST;
+        parse_str(file_get_contents("php://input"),$this->request);
     }
 
     /**
@@ -55,11 +55,15 @@ abstract class ApiAbstract implements ApiInterface
 
     public function getRequest(string $param)
     {
-        return @$this->request[$param];
+@        $res = $this->request[$param];
+        if($res == null)
+@            $res = $_REQUEST[$param];
+        return $res;
     }
 
     public function withCode($code, $text = null) {
         $this->setCode($code);
+        http_response_code($code);
         if($text != null)
             return json_encode(['code' => $code, 'text' => $text]);
         return json_encode(['code' => $code, 'text' => Codes::getCodeText($code)]);

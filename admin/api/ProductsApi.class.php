@@ -28,10 +28,16 @@ class ProductsApi extends ApiAbstract
                         FROM language_editable
                         WHERE language_editable.`type` = \'product-description\' AND `external_id` = products.id
                         AND lang_id = :lang_id)
-                            as description FROM products
-          WHERE id IN (SELECT `external_id` FROM `language_editable`
+                            as description,
+                        (SELECT (SELECT language_editable.value
+                                FROM language_editable
+                                WHERE language_editable.`type` = \'category-name\' AND `external_id` = categories.id
+                                AND lang_id = :lang_id)
+                         FROM categories WHERE id = products.category) as category_name
+            FROM products
+            WHERE id IN (SELECT `external_id` FROM `language_editable`
                         WHERE value LIKE :q) OR 
-              code LIKE :q OR art LIKE :q', ['q' => $query, 'lang_id' => $this->getSystem()->getLang()->getLangId()]);
+              code LIKE :q OR art LIKE :q ORDER BY `id` DESC', ['q' => $query, 'lang_id' => $this->getSystem()->getLang()->getLangId()]);
         return json_encode($response);
     }
 

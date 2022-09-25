@@ -48,13 +48,15 @@ class ProductApi extends ApiAbstract
     {
         try {
             $product = $this->productEngine->getProductById($this->getRequest('id'));
+
+            parse_str(file_get_contents("php://input"),$putData);
+
             if($product == null) {
-                return $this->withCode(404);
+                return $this->withCode(404 );
             }
             $product->setCost($this->getRequest('cost'));
             $product->setArt($this->getRequest('art'));
             $product->setCode($this->getRequest('code'));
-            $product->setSold($this->getRequest('sold'));
             $product->setBalance($this->getRequest('balance'));
             $product->setCategory($this->getRequest('category'));
             $names = [['lang_id' => 1, 'value' => $this->getRequest('display_name')]];
