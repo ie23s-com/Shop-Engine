@@ -66,7 +66,7 @@
                     </button>
                 </div>
             </div>
-            <input name="type" type="hidden" value="1">
+            <input name="id" type="hidden" value="0">
         </div>
     </form>
 </div>
@@ -99,8 +99,12 @@
             <td>{$product->getCode()}</td>
             <td>{$product->getSold()}</td>
             <td>{$product->getBalance()}</td>
+            <td><a href="#" data-id="{$product->getId()}"
+                   class="waves-effect waves-light btn-small product-edit"><i class="material-icons center">mode_edit
+                    </i></a></td>
             <td><a href="/product/{$product->getId()}" target="_blank"
-                   class="waves-effect waves-light btn-small">Open</a></td>
+                   class="waves-effect waves-light btn-small"><i class="material-icons center">open_in_new
+                    </i></a></td>
 
         </tr>
     {literal}

@@ -127,7 +127,7 @@ class Lang extends Component
                                                         FROM `language_editable`
                                                         WHERE lang_id = :id AND `external_id` = :ex_id
                                                         AND `type` = :type",
-            ['id' => $this->lang_id, 'iex_idd' => $id, 'type' => $type]);
+            ['id' => $this->lang_id, 'ex_id' => $id, 'type' => $type]);
         return $row == null ? 'undefined' : $row;
     }
 

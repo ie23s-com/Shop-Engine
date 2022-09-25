@@ -23,12 +23,12 @@ class ProductPage extends Page
         if ($product == null)
             $this->getPages()->error(404, "This product not found");
         $theme = new Theme();
-        $theme->addBlock('product_name', $this->getLang()->getEditableRow("product-{$product->getId()}-name"));
+        $theme->addBlock('product_name', $this->getLang()->getEditableRow("product-name", $product->getId()));
         $theme->addBlock('product_description', $this->getLang()->
-        getEditableRow("product-{$product->getId()}-description"));
+        getEditableRow("product-description", $product->getId()));
         $theme->addBlock('product_cost', $product->getCost());
         $theme->addBlock('product_art', $product->getArt());
-        $this->getPages()->setTitle($this->getLang()->getEditableRow("product-{$product->getId()}-name"));
+        $this->getPages()->setTitle($this->getLang()->getEditableRow("product-name", $product->getId()));
         return $theme->getTpl('product');
     }
 

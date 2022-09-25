@@ -54,9 +54,33 @@ $(function () {
 
             });
         },
+        productEditFormLoaded: function (result) {
+            IE23S_A.unblock();
+            IE23S_A.modalForm.find(':input').each(function () {
+                let name = $(this).attr('name');
+                if (name && result[name])
+                    $(this).val(result[name]);
+            })
+            M.updateTextFields();
+            $('select').formSelect();
+        },
+        editLoad: function (id) {
+            $.ajax({
+                type: 'GET',
+                url: '/api/product',
+                dataType: 'json',
+                beforeSend: () => this.block(),
+                data: 'id=' + id,
+                success: this.productEditFormLoaded,
+                error: this.failed
+
+            });
+        },
         change_button: function (type) {
-            if (type == 'create') {
+            if (type === 'create') {
                 this.modalForm.find('button[type="submit"]').html('Create');
+            } else {
+                this.modalForm.find('button[type="submit"]').html('Edit');
             }
         },
         product_add: function () {
@@ -65,9 +89,22 @@ $(function () {
             this.modalForm.submit(e => this.onAdd(e));
             this.modalElement.find('button[name="cancel"]').click(() => this.modal.close());
         },
+        productEditForm: function (e) {
+            this.change_button('edit');
+            this.openForm();
+            this.block();
+            this.editLoad(e);
+            this.modalElement.find('button[name="cancel"]').click(() => this.modal.close());
+        },
         initCreate: function (e) {
             e.click(() => IE23S_A.product_add());
+        },
+        initEdit: function (e) {
+            e.click(function () {
+                IE23S_A.productEditForm($(this).attr('data-id'));
+            });
         }
     }
     IE23S_A.initCreate($('.create-product'));
+    IE23S_A.initEdit($('.product-edit'));
 });
