@@ -7,6 +7,7 @@ use Exception;
 use ie23s\shop\admin\Admin;
 use ie23s\shop\engine\Engine;
 use ie23s\shop\system\api\Api;
+use ie23s\shop\system\auth\Auth;
 use ie23s\shop\system\lang\Lang;
 use ie23s\shop\system\pages\Pages;
 
@@ -27,6 +28,8 @@ require_once __SHOP_DIR__ . "system/api/Api.class.php";
 require_once __SHOP_DIR__ . "engine/Engine.class.php";
 //MySQL component loader
 require_once __SHOP_DIR__ . "admin/Admin.class.php";
+//MySQL component loader
+require_once __SHOP_DIR__ . "system/auth/Auth.class.php";
 
 
 /**
@@ -52,6 +55,8 @@ class System
         $this->components["pages"] = new Pages($this);
         //Init DB
         $this->components["database"] = new database\MySQLMod($this);
+        //Init Auth
+        $this->components["auth"] = new Auth($this);
 
         //Init Lang
         $this->components["lang"] = new Lang($this);
