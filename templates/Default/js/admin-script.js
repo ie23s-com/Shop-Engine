@@ -6,7 +6,7 @@ $(function () {
         modalElement: $('#adm-modal-product'),
         modalForm: $('#adm-modal-product').find("form"),
         productsTable: $('#adm-product-list'),
-        isSearching: false,
+        ajaxSearching: null,
         isEdit: false,
         block: function () {
             this.modalElement.find(".progress").show();
@@ -67,7 +67,7 @@ $(function () {
                     sold: value.sold,
                     balance: value.balance
                 }
-                Object.keys(replace).forEach(function(key) {
+                Object.keys(replace).forEach(function (key) {
 
                     tr = tr.replaceAll('\{' + key + '\}', replace[key]);
 
@@ -80,23 +80,23 @@ $(function () {
             IE23S_A.productsTable.find('.preloader').hide();
         },
         runSearch: function (q) {
-            if (!this.isSearching) {
-                this.productsTable.find('.preloader').show();
-                this.productsTable.find('tbody').html('');
+            if (this.ajaxSearching != null)
+                this.ajaxSearching.abort();
+            this.productsTable.find('.preloader').show();
+            this.productsTable.find('tbody').html('');
 
-                $.ajax({
-                    type: 'GET',
-                    url: '/api/products',
-                    dataType: 'json',
-                    data: 'q=' + q,
-                    success: this.successSearch,
-                    error: function () {
-                        IE23S_A.isSearching = false;
-                    }
+            this.ajaxSearching = $.ajax({
+                type: 'GET',
+                url: '/api/products',
+                dataType: 'json',
+                data: 'q=' + q,
+                success: this.successSearch,
+                error: function () {
+                    IE23S_A.isSearching = false;
+                }
 
-                });
-                this.isSearching = true;
-            }
+            });
+
         },
         search: function (e) {
             e.on("input", function () {
@@ -198,7 +198,7 @@ $(function () {
             this.modalForm.submit(function (e) {
                 e.preventDefault();
 
-                if(IE23S_A.isEdit) {
+                if (IE23S_A.isEdit) {
                     IE23S_A.onEdit(e)
                 } else {
 
