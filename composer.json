@@ -15,6 +15,7 @@
     "vlucas/phpdotenv": "^5.4",
     "ext-pdo": "*",
     "ext-json": "*",
-    "myclabs/php-enum": "^1.8"
+    "myclabs/php-enum": "^1.8",
+    "phpmailer/phpmailer": "^6.6"
   }
 }
