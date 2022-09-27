@@ -36,6 +36,8 @@ class Session
 
         $_SESSION['EXPIRES'] = time() + $expire;
 
+
+
         session_regenerate_id();
 
         // Grab current session ID and close both sessions to allow other scripts to use them
@@ -73,14 +75,20 @@ class Session
 
             if ($user_id == null)
                 throw new Exception('User not found');
+/*
             if ($_SESSION['OBSOLETE'])
                 $this->db->update('sessions', ['session_id' => session_id()],
-                    ['expire_time' => Auth::timeToDate(time() + 3600)]);
+                    ['expire_time' => Auth::timeToDate(time() + 3600)]);*/
 
             return $user_id;
         } catch (Exception $e) {
             return -1;
         }
+    }
+
+    public function getSessionId(): string
+    {
+        return session_id();
     }
 
     /**
@@ -107,5 +115,42 @@ class Session
         $time = Auth::timeToDate(time());
         $this->db->executeSql("UPDATE sessions SET expired = true
                 WHERE expired = false AND expire_time <= '{$time}'");
+    }
+
+    /**
+     * Get header Authorization
+     * */
+     private static function getAuthorizationHeader(): ?string
+     {
+        $headers = null;
+        if (isset($_SERVER['Authorization'])) {
+            $headers = trim($_SERVER["Authorization"]);
+        }
+        else if (isset($_SERVER['HTTP_AUTHORIZATION'])) { //Nginx or fast CGI
+            $headers = trim($_SERVER["HTTP_AUTHORIZATION"]);
+        } elseif (function_exists('apache_request_headers')) {
+            $requestHeaders = apache_request_headers();
+            // Server-side fix for bug in old Android versions (a nice side effect of this fix means we don't care about capitalization for Authorization)
+            $requestHeaders = array_combine(array_map('ucwords', array_keys($requestHeaders)), array_values($requestHeaders));
+            //print_r($requestHeaders);
+            if (isset($requestHeaders['Authorization'])) {
+                $headers = trim($requestHeaders['Authorization']);
+            }
+        }
+        return $headers;
+    }
+
+    /**
+     * get access token from header
+     * */
+    private static function getBearerToken() {
+        $headers = self::getAuthorizationHeader();
+        // HEADER: Get the access token from the header
+        if (!empty($headers)) {
+            if (preg_match('/Bearer\s(\S+)/', $headers, $matches)) {
+                return $matches[1];
+            }
+        }
+        return null;
     }
 }

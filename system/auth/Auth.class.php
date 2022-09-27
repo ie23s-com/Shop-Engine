@@ -8,10 +8,12 @@ require_once __SHOP_DIR__ . '/system/auth/user/Session.class.php';
 require_once __SHOP_DIR__ . '/system/auth/pages/RegisterPage.php';
 require_once __SHOP_DIR__ . '/system/auth/api/RegisterApi.class.php';
 require_once __SHOP_DIR__ . '/system/auth/api/AuthApi.class.php';
+require_once __SHOP_DIR__ . '/system/auth/api/LogoutApi.php';
 
 
 use Exception;
 use ie23s\shop\system\auth\api\AuthApi;
+use ie23s\shop\system\auth\api\LogoutApi;
 use ie23s\shop\system\auth\api\RegisterApi;
 use ie23s\shop\system\auth\pages\RegisterPage;
 use ie23s\shop\system\auth\user\Session;
@@ -48,6 +50,7 @@ class Auth extends Component
 
         $this->system->getApi()->addPath('register', new RegisterApi($this->system));
         $this->system->getApi()->addPath('auth', new AuthApi($this->system));
+        $this->system->getApi()->addPath('logout', new LogoutApi($this->system));
 
 
     }
@@ -132,5 +135,12 @@ class Auth extends Component
     public function getUser(): User
     {
         return $this->user;
+    }
+
+    /**
+     * @throws MysqlException
+     */
+    public function logout() {
+        $this->db->update('sessions', ['session_id' => $this->session->getSessionId()], ['expired' => true]);
     }
 }
