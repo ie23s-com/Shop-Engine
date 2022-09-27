@@ -11,7 +11,7 @@ use ie23s\shop\system\auth\Auth;
 use ie23s\shop\system\lang\Lang;
 use ie23s\shop\system\pages\Pages;
 
-require_once __SHOP_DIR__ . "system/Codes.php";
+require_once __SHOP_DIR__ . "system/api/Codes.php";
 
 require_once __SHOP_DIR__ . "system/component.php";
 //Config component loader
@@ -77,8 +77,14 @@ class System
         //Load Lang
         $this->components["lang"]->load();
         //Load Theme
+
+        $this->components["auth"]->load();
         //LAST!
         $this->components["pages"]->load();
+        /**
+         * @var Auth $this- >components["auth"]
+         */
+        $this->components["auth"]->loadPages();
         $this->components["api"]->load();
         //Init Shop engine
         $this->components["sEngine"]->load();

@@ -45,8 +45,9 @@ class Codes
         '510' => 'Not Extended',
         '511' => 'Network Authentication Required'];
 
-        public static function getCodeText($code) {
-            return self::$CODES[$code] ?? 'none';
-        }
+    public static function getCodeText($code)
+    {
+        return self::$CODES[$code] ?? 'none';
+    }
 
 }

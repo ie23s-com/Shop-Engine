@@ -1,8 +1,8 @@
 <?php
 
-namespace ie23s\shop\system\auth;
+namespace ie23s\shop\system\auth\user;
 
-class User
+class UserModel
 {
     private int $id;
     private string $email;
@@ -142,10 +142,5 @@ class User
     public function setGroup(int $group): void
     {
         $this->group = $group;
-    }
-
-    public function verifyPassword($password): bool
-    {
-        return password_verify($this->salt . $_ENV['PEPPER'] . $password, $this->hash);
     }
 }

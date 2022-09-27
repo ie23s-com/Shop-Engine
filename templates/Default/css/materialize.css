@@ -3072,14 +3072,15 @@ table.responsive-table td {
 }
 
 .progress {
-  position: relative;
-  height: 4px;
-  display: block;
-  width: 100%;
-  background-color: #acece6;
-  border-radius: 2px;
-  margin: 0.5rem 0 1rem 0;
-  overflow: hidden;
+    margin: 0 !important;
+    position: relative;
+    height: 4px;
+    display: block;
+    width: 100%;
+    background-color: #acece6;
+    border-radius: 2px;
+    margin: 0.5rem 0 1rem 0;
+    overflow: hidden;
 }
 .progress .determinate {
   position: absolute;

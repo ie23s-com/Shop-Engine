@@ -27,6 +27,9 @@
 <body>
 
 <header>
+    <div class="progress" style="display: none">
+        <div class="indeterminate"></div>
+    </div>
     <nav>
         <div class="nav-wrapper">
             <a href="/" class="brand-logo">IE23S Shop</a>
