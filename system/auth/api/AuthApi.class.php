@@ -5,17 +5,20 @@ namespace ie23s\shop\system\auth\api;
 use Exception;
 use ie23s\shop\engine\api\ApiAbstract;
 use ie23s\shop\system\auth\Auth;
-use ie23s\shop\system\auth\user\UserModel;
 
-class RegisterApi extends ApiAbstract
+class AuthApi extends ApiAbstract
 {
 
+    /**
+     * @return string
+     */
     public function get(): string
     {
         return $this->withCode(400);
     }
 
     /**
+     * @return string
      * @throws Exception
      */
     public function post(): string
@@ -27,34 +30,36 @@ class RegisterApi extends ApiAbstract
             return $this->withCode(403);
 
         //Check fields
-        if (!$this->hasRequest('email') || !$this->hasRequest('first_name') ||
-            !$this->hasRequest('last_name') || !$this->hasRequest('password'))
+        if (!$this->hasRequest('email') || !$this->hasRequest('password'))
             return $this->withCode(401, 'You should fill all fields!');
-
 
         //Check email
         if (!filter_var($this->getRequest('email'), FILTER_VALIDATE_EMAIL)) {
             return $this->withCode(401, 'Invalid email format!');
         }
-        if ($auth->getUserByEmail($this->getRequest('email')) != null)
-            return $this->withCode(401, 'This email is already taken!');
 
-        //Check password
-        if (mb_strlen($this->getRequest('password')) < 6)
-            return $this->withCode(401, 'Your password too short!');
+        //Auth user and write session
+        $session = $auth->authUser($this->getRequest('email'), $this->getRequest('password'),
+            $this->hasRequest('remember'));
 
-        $hash = Auth::hashPassword($this->getRequest('password'));
-        $user = new UserModel(0, trim(strtolower($this->getRequest('email'))), $this->getRequest('first_name'),
-            $this->getRequest('last_name'), $hash['salt'], $hash['hash'], 1);
+        if ($session == null) {
+            return $this->withCode(401, 'Email or password is wrong!');
+        }
 
-        return $this->withData(200, $auth->createUser($user));
+        return $this->withData(200, $session);
     }
 
+    /**
+     * @return string
+     */
     public function put(): string
     {
         return $this->withCode(400);
     }
 
+    /**
+     * @return string
+     */
     public function delete(): string
     {
         return $this->withCode(400);

@@ -1,6 +1,6 @@
 <?php
 
-namespace ie23s\shop\admin\api;
+namespace ie23s\shop\engine\api;
 
 use ie23s\shop\engine\Engine;
 use ie23s\shop\system\api\ApiInterface;
@@ -55,17 +55,32 @@ abstract class ApiAbstract implements ApiInterface
 
     public function getRequest(string $param)
     {
-@        $res = $this->request[$param];
-        if($res == null)
-@            $res = $_REQUEST[$param];
+        @        $res = $this->request[$param];
+        if ($res == null)
+            @            $res = $_REQUEST[$param];
         return $res;
     }
 
-    public function withCode($code, $text = null) {
+    public function hasRequest(string $param): bool
+    {
+        if ($this->getRequest($param) == null)
+            return false;
+        return true;
+    }
+
+    public function withCode($code, $text = null)
+    {
         $this->setCode($code);
         http_response_code($code);
-        if($text != null)
+        if ($text != null)
             return json_encode(['code' => $code, 'text' => $text]);
         return json_encode(['code' => $code, 'text' => Codes::getCodeText($code)]);
+    }
+
+    public function withData($code, array $data)
+    {
+        $this->setCode($code);
+        http_response_code($code);
+        return json_encode(['code' => $code, 'text' => Codes::getCodeText($code), 'data' => $data]);
     }
 }

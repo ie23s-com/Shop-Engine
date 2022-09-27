@@ -4,7 +4,18 @@ namespace ie23s\shop\system;
 
 class Codes
 {
-    public static array $CODES = ['400' => 'Bad Request',
+    public static array $CODES = [
+        '200' => 'OK',
+        '201' => 'Created',
+        '202' => 'Accepted',
+        '203' => 'Non-Authoritative Information',
+        '204' => 'No Content',
+        '205' => 'Reset Content',
+        '206' => 'Partial Content',
+        '207' => 'Multi-Status',
+        '208' => 'Already Reported',
+        '226' => 'IM Used',
+        '400' => 'Bad Request',
         '401' => 'Unauthorized',
         '402' => 'Payment Required',
         '403' => 'Forbidden',

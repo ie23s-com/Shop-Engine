@@ -1,7 +1,7 @@
 <?php
 
 namespace ie23s\shop\admin\api;
-require_once __SHOP_DIR__ . 'admin/api/ApiAbstract.php';
+require_once __SHOP_DIR__ . 'system/api/ApiAbstract.php';
 require_once __SHOP_DIR__ . 'admin/api/ProductsApi.class.php';
 require_once __SHOP_DIR__ . 'admin/api/ProductApi.class.php';
 

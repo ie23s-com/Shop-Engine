@@ -15,7 +15,6 @@ class Session
 
     public function __construct(System $system)
     {
-        session_start();
         /** @var MySQLMod $db */
         $db = $system->getComponent('database');
         $this->db = $db->getConn();
@@ -24,7 +23,7 @@ class Session
     /**
      * @throws Exception
      */
-    public function generateSession($user_id, $expire = 3600)
+    public function generateSession($user_id, $expire = 3600): array
     {
         // This token is used by forms to prevent cross site forgery attempts
         if (!isset($_SESSION['nonce']))
@@ -35,14 +34,7 @@ class Session
 
         $_SESSION['server_id'] = bin2hex(random_bytes(32));
 
-        // Set current session to expire in 1 minute
-        if ($expire != -1) {
-            $_SESSION['OBSOLETE'] = true;
-            $_SESSION['EXPIRES'] = time() + $expire;
-        } else {
-
-            $_SESSION['OBSOLETE'] = false;
-        }
+        $_SESSION['EXPIRES'] = time() + $expire;
 
         session_regenerate_id();
 
@@ -56,6 +48,7 @@ class Session
         session_start();
 
         $this->writeSQLData($newSession, $_SESSION['server_id'], $user_id, $expire);
+        return ['session_id' => $newSession, 'server_id' => $_SESSION['server_id']];
     }
 
     /**
@@ -63,12 +56,10 @@ class Session
      */
     public function checkSession(): int
     {
+        session_start();
         $this->updateExpired();
         try {
-            if ($_SESSION['OBSOLETE'] && ($_SESSION['EXPIRES'] < time()))
-                throw new Exception('Attempt to use expired session.');
-
-            if (isset($_SESSION['server_id']))
+            if (!isset($_SESSION['server_id']))
                 throw new Exception('No session started.');
 
             if ($_SESSION['userAgent'] != $_SERVER['HTTP_USER_AGENT'])
@@ -115,6 +106,6 @@ class Session
     {
         $time = Auth::timeToDate(time());
         $this->db->executeSql("UPDATE sessions SET expired = true
-                WHERE expired = false AND expire_time <= {$time}");
+                WHERE expired = false AND expire_time <= '{$time}'");
     }
 }

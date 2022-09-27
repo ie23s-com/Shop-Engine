@@ -3,6 +3,7 @@
 namespace ie23s\shop\admin\api;
 
 
+use ie23s\shop\engine\api\ApiAbstract;
 use Simplon\Mysql\Mysql;
 use Simplon\Mysql\MysqlException;
 

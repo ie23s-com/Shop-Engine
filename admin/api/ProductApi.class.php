@@ -2,6 +2,7 @@
 
 namespace ie23s\shop\admin\api;
 
+use ie23s\shop\engine\api\ApiAbstract;
 use ie23s\shop\engine\product\Product;
 use ie23s\shop\engine\product\ProductEngine;
 use ie23s\shop\system\System;
@@ -10,6 +11,7 @@ use Simplon\Mysql\MysqlException;
 class ProductApi extends ApiAbstract
 {
     private ProductEngine $productEngine;
+
     public function __construct(System $system)
     {
         parent::__construct($system);
