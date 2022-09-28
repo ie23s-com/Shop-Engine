@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "7bd086aa03b83a82c9299d686b083c35",
+  "content-hash": "16cbb18a00eea52ea365fa4217ed0fc3",
   "packages": [
     {
       "name": "dusank/knapsack",
@@ -15,26 +15,26 @@
         "reference": "cc29a0bbaadbfcb958b98aa4fd69a4ad7d173bba"
       },
       "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/DusanKasan/Knapsack/zipball/cc29a0bbaadbfcb958b98aa4fd69a4ad7d173bba",
-                "reference": "cc29a0bbaadbfcb958b98aa4fd69a4ad7d173bba",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.6.0"
-            },
-            "require-dev": {
-                "ciaranmcnulty/phpspec-typehintedmethods": "^1.0",
-                "henrikbjorn/phpspec-code-coverage": "^2.0",
-                "phpmd/phpmd": "^2.0",
-                "phpspec/phpspec": "^2.0",
-                "phpunit/phpunit": "^5.0",
-                "squizlabs/php_codesniffer": "^2.0",
-                "symfony/console": "^2.7"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
+        "type": "zip",
+        "url": "https://api.github.com/repos/DusanKasan/Knapsack/zipball/cc29a0bbaadbfcb958b98aa4fd69a4ad7d173bba",
+        "reference": "cc29a0bbaadbfcb958b98aa4fd69a4ad7d173bba",
+        "shasum": ""
+      },
+      "require": {
+        "php": ">=5.6.0"
+      },
+      "require-dev": {
+        "ciaranmcnulty/phpspec-typehintedmethods": "^1.0",
+        "henrikbjorn/phpspec-code-coverage": "^2.0",
+        "phpmd/phpmd": "^2.0",
+        "phpspec/phpspec": "^2.0",
+        "phpunit/phpunit": "^5.0",
+        "squizlabs/php_codesniffer": "^2.0",
+        "symfony/console": "^2.7"
+      },
+      "type": "library",
+      "autoload": {
+        "files": [
                     "src/collection_functions.php",
                     "src/utility_functions.php"
                 ],
@@ -182,10 +182,10 @@
                 "source": "https://github.com/myclabs/php-enum/tree/1.8.4"
             },
             "funding": [
-                {
-                    "url": "https://github.com/mnapoli",
-                  "type": "github"
-                },
+              {
+                "url": "https://github.com/mnapoli",
+                "type": "github"
+              },
               {
                 "url": "https://tidelift.com/funding/github/packagist/myclabs/php-enum",
                 "type": "tidelift"
@@ -282,26 +282,26 @@
       "dist": {
         "type": "zip",
         "url": "https://api.github.com/repos/schmittjoh/php-option/zipball/dc5ff11e274a90cc1c743f66c9ad700ce50db9ab",
-                "reference": "dc5ff11e274a90cc1c743f66c9ad700ce50db9ab",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.2.5 || ^8.0"
-            },
-            "require-dev": {
-                "bamarni/composer-bin-plugin": "^1.8",
-                "phpunit/phpunit": "^8.5.28 || ^9.5.21"
-            },
-            "type": "library",
-            "extra": {
-                "bamarni-bin": {
-                    "bin-links": true,
-                    "forward-command": true
-                },
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
+        "reference": "dc5ff11e274a90cc1c743f66c9ad700ce50db9ab",
+        "shasum": ""
+      },
+      "require": {
+        "php": "^7.2.5 || ^8.0"
+      },
+      "require-dev": {
+        "bamarni/composer-bin-plugin": "^1.8",
+        "phpunit/phpunit": "^8.5.28 || ^9.5.21"
+      },
+      "type": "library",
+      "extra": {
+        "bamarni-bin": {
+          "bin-links": true,
+          "forward-command": true
+        },
+        "branch-alias": {
+          "dev-master": "1.9-dev"
+        }
+      },
             "autoload": {
                 "psr-4": {
                     "PhpOption\\": "src/PhpOption/"
@@ -495,44 +495,99 @@
                     "name": "Rodney Rehm",
                     "email": "rodney.rehm@medialize.de"
                 },
-                {
-                    "name": "Simon Wisselink",
-                    "homepage": "https://www.iwink.nl/"
-                }
+              {
+                "name": "Simon Wisselink",
+                "homepage": "https://www.iwink.nl/"
+              }
             ],
-            "description": "Smarty - the compiling PHP template engine",
-            "homepage": "https://smarty-php.github.io/smarty/",
-            "keywords": [
-                "templating"
-            ],
-            "support": {
-                "forum": "https://github.com/smarty-php/smarty/discussions",
-                "issues": "https://github.com/smarty-php/smarty/issues",
-                "source": "https://github.com/smarty-php/smarty/tree/v4.2.1"
-            },
-            "time": "2022-09-14T10:59:01+00:00"
+          "description": "Smarty - the compiling PHP template engine",
+          "homepage": "https://smarty-php.github.io/smarty/",
+          "keywords": [
+            "templating"
+          ],
+          "support": {
+            "forum": "https://github.com/smarty-php/smarty/discussions",
+            "issues": "https://github.com/smarty-php/smarty/issues",
+            "source": "https://github.com/smarty-php/smarty/tree/v4.2.1"
+          },
+          "time": "2022-09-14T10:59:01+00:00"
         },
+    {
+      "name": "soundasleep/html2text",
+      "version": "2.0.0",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/soundasleep/html2text.git",
+        "reference": "aa214620d7beecd5cef8b1c32102a9204edb82f5"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/soundasleep/html2text/zipball/aa214620d7beecd5cef8b1c32102a9204edb82f5",
+        "reference": "aa214620d7beecd5cef8b1c32102a9204edb82f5",
+        "shasum": ""
+      },
+      "require": {
+        "ext-dom": "*",
+        "ext-libxml": "*",
+        "php": "^7.0|^8.0"
+      },
+      "require-dev": {
+        "phpunit/phpunit": "^7.0|^8.0|^9.0",
+        "soundasleep/component-tests": "^0.2"
+      },
+      "type": "library",
+      "autoload": {
+        "psr-4": {
+          "Soundasleep\\": "src"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "MIT"
+      ],
+      "authors": [
         {
-            "name": "symfony/polyfill-ctype",
-            "version": "v1.26.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-ctype.git",
-                "reference": "6fd1b9a79f6e3cf65f9e679b23af304cd9e010d4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/6fd1b9a79f6e3cf65f9e679b23af304cd9e010d4",
-                "reference": "6fd1b9a79f6e3cf65f9e679b23af304cd9e010d4",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1"
-            },
-            "provide": {
-                "ext-ctype": "*"
-            },
-            "suggest": {
+          "name": "Jevon Wright",
+          "homepage": "https://jevon.org",
+          "role": "Developer"
+        }
+      ],
+      "description": "A PHP script to convert HTML into a plain text format",
+      "homepage": "https://github.com/soundasleep/html2text",
+      "keywords": [
+        "email",
+        "html",
+        "php",
+        "text"
+      ],
+      "support": {
+        "email": "support@jevon.org",
+        "issues": "https://github.com/soundasleep/html2text/issues",
+        "source": "https://github.com/soundasleep/html2text/tree/2.0.0"
+      },
+      "time": "2022-01-29T19:05:09+00:00"
+    },
+    {
+      "name": "symfony/polyfill-ctype",
+      "version": "v1.26.0",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/symfony/polyfill-ctype.git",
+        "reference": "6fd1b9a79f6e3cf65f9e679b23af304cd9e010d4"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/6fd1b9a79f6e3cf65f9e679b23af304cd9e010d4",
+        "reference": "6fd1b9a79f6e3cf65f9e679b23af304cd9e010d4",
+        "shasum": ""
+      },
+      "require": {
+        "php": ">=7.1"
+      },
+      "provide": {
+        "ext-ctype": "*"
+      },
+      "suggest": {
                 "ext-ctype": "For best performance"
             },
             "type": "library",

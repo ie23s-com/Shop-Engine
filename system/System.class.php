@@ -9,6 +9,7 @@ use ie23s\shop\engine\Engine;
 use ie23s\shop\system\api\Api;
 use ie23s\shop\system\auth\Auth;
 use ie23s\shop\system\lang\Lang;
+use ie23s\shop\system\mail\Mail;
 use ie23s\shop\system\pages\Pages;
 
 require_once __SHOP_DIR__ . "system/api/Codes.php";
@@ -30,6 +31,8 @@ require_once __SHOP_DIR__ . "engine/Engine.class.php";
 require_once __SHOP_DIR__ . "admin/Admin.class.php";
 //MySQL component loader
 require_once __SHOP_DIR__ . "system/auth/Auth.class.php";
+//MySQL component loader
+require_once __SHOP_DIR__ . "system/mail/Mail.class.php";
 
 
 /**
@@ -68,6 +71,8 @@ class System
         $this->components["sEngine"] = new Engine($this);
         //Init Shop engine
         $this->components["admin"] = new Admin($this);
+        //Init Shop engine
+        $this->components["mail"] = new Mail($this);
     }
 
     public function load()
