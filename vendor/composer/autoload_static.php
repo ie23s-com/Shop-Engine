@@ -26,6 +26,7 @@ class ComposerStaticInitaed255958a41c3d0b05d6d429c390baf
             'Symfony\\Polyfill\\Php80\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
+            'Soundasleep\\' => 12,
             'Simplon\\Mysql\\' => 14,
             'Simplon\\Helper\\' => 15,
         ),
@@ -65,6 +66,10 @@ class ComposerStaticInitaed255958a41c3d0b05d6d429c390baf
         'Symfony\\Polyfill\\Ctype\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
+        ),
+        'Soundasleep\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/soundasleep/html2text/src',
         ),
         'Simplon\\Mysql\\' => 
         array (

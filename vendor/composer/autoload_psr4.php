@@ -10,6 +10,7 @@ return array(
     'Symfony\\Polyfill\\Php80\\' => array($vendorDir . '/symfony/polyfill-php80'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),
+    'Soundasleep\\' => array($vendorDir . '/soundasleep/html2text/src'),
     'Simplon\\Mysql\\' => array($vendorDir . '/simplon/mysql/src'),
     'Simplon\\Helper\\' => array($vendorDir . '/simplon/helper/src'),
     'PhpOption\\' => array($vendorDir . '/phpoption/phpoption/src/PhpOption'),

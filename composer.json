@@ -16,6 +16,7 @@
     "ext-pdo": "*",
     "ext-json": "*",
     "myclabs/php-enum": "^1.8",
-    "phpmailer/phpmailer": "^6.6"
+    "phpmailer/phpmailer": "^6.6",
+    "soundasleep/html2text": "^2.0"
   }
 }
