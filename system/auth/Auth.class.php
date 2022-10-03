@@ -11,6 +11,7 @@ require_once __SHOP_DIR__ . '/system/auth/pages/LoginPage.php';
 require_once __SHOP_DIR__ . '/system/auth/api/RegisterApi.class.php';
 require_once __SHOP_DIR__ . '/system/auth/api/AuthApi.class.php';
 require_once __SHOP_DIR__ . '/system/auth/api/LogoutApi.php';
+require_once __SHOP_DIR__ . '/system/auth/user/groups/Group.php';
 
 
 use Exception;
@@ -20,6 +21,7 @@ use ie23s\shop\system\auth\api\RegisterApi;
 use ie23s\shop\system\auth\pages\LoginPage;
 use ie23s\shop\system\auth\pages\LogoutPage;
 use ie23s\shop\system\auth\pages\RegisterPage;
+use ie23s\shop\system\auth\user\group\Group;
 use ie23s\shop\system\auth\user\Session;
 use ie23s\shop\system\auth\user\User;
 use ie23s\shop\system\auth\user\UserModel;
@@ -33,6 +35,7 @@ class Auth extends Component
     private Session $session;
     private ?User $user;
     private int $currentUserID;
+    private Group $group;
 
     public function __construct($system)
     {
@@ -49,6 +52,7 @@ class Auth extends Component
         $this->db = $this->getSystem()->getComponent('database')->getConn();
         $this->session = new Session($this->getSystem());
         $this->currentUserID = $this->session->checkSession();
+        $this->group = new Group($this->getSystem());
     }
 
     public function loadPages()
@@ -107,7 +111,7 @@ class Auth extends Component
         if ($userData == null)
             return null;
         return new User($userData['id'], $userData['email'], $userData['first_name'], $userData['last_name'], $userData['salt'],
-            $userData['hash'], $userData['group']);
+            $userData['hash'], $userData['group'], $this);
     }
 
     /**
@@ -120,7 +124,7 @@ class Auth extends Component
         if ($userData == null)
             return null;
         return new User($userData['id'], $userData['email'], $userData['first_name'], $userData['last_name'], $userData['salt'],
-            $userData['hash'], $userData['group']);
+            $userData['hash'], $userData['group'], $this);
     }
 
     public function getCurrentUserID(): int
@@ -134,6 +138,8 @@ class Auth extends Component
      */
     public function getCurrentUser(): ?User
     {
+        if(!$this->isAuth())
+            return new User(0, '', '', '', '', '', 1, $this);
         return $this->getUserByID($this->currentUserID);
     }
 
@@ -176,4 +182,14 @@ class Auth extends Component
     public function logout() {
         $this->db->update('sessions', ['session_id' => $this->session->getSessionId()], ['expired' => true]);
     }
+
+    /**
+     * @return Group
+     */
+    public function getGroup(): Group
+    {
+        return $this->group;
+    }
+
+
 }

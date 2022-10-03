@@ -10,7 +10,7 @@
                             <img class="" src="https://materializecss.com/images/office.jpg">
                         </div>
                         <div class="card-content center-align">
-                            <span class="card-title grey-text text-darken-4">{$category->getDisplayName()}</span>
+                            <span class="card-title grey-text text-darken-4 ie23s-break-text">{$category->getDisplayName()}</span>
                         </div>
                     </a>
                 </div>

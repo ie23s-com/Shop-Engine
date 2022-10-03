@@ -26,8 +26,8 @@
                                 <img class="" src="https://materializecss.com/images/office.jpg">
                             </div>
                             <div class="card-content center-align">
-                                <span class="card-title grey-text text-darken-4">{$product->getDisplayName()}</span>
-                                <span class="grey-text text-darken-4">{$product->getCost()}$</span>
+                                <span class="card-title grey-text text-darken-4 ie23s-break-text">{$product->getDisplayName()}</span>
+                                <span class="grey-text text-darken-4 ie23s-break-text">{$product->getCost()}$</span>
                             </div>
                         </a>
                     </div>

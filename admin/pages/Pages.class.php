@@ -27,7 +27,7 @@ class Pages extends Page
     public function request(array $request): string
     {
 
-        if(@$_GET['admin'] != 'ok') {
+        if(!$this->getSystem()->getAuth()->getCurrentUser()->hasPermission('admin')) {
             $this->getPages()->error(403, "Forbidden");
         }
         $this->request = $request;
@@ -46,13 +46,13 @@ class Pages extends Page
     private function loadModules()
     {
         $this->modules['main'] = new MainPage($this->getPages()->getSystem(), 'admin_menu_main',
-            '/administrator/?admin=ok');
+            '/administrator/');
         $this->modules['categories'] = new Categories($this->getPages()->getSystem(), 'admin_menu_categories',
-            '/administrator/categories/?admin=ok');
+            '/administrator/categories/');
         $this->modules['products'] = new ProductsPage($this->getPages()->getSystem(), 'admin_menu_products',
-            '/administrator/products/?admin=ok');
+            '/administrator/products/');
         $this->modules['language'] = new LangPage($this->getPages()->getSystem(), 'admin_menu_lang',
-            '/administrator/language/?admin=ok');
+            '/administrator/language/');
     }
 
     private function getCurrentPage() {

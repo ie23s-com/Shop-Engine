@@ -21,6 +21,8 @@ class AdminApi
 
     public function loadApiMethods(): void
     {
+        if(!$this->system->getAuth()->getCurrentUser()->hasPermission('admin'))
+            return;
         $this->system->getApi()->addPath('products', new ProductsApi($this->system));
         $this->system->getApi()->addPath('product', new ProductApi($this->system));
     }

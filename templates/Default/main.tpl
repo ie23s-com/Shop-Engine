@@ -33,7 +33,7 @@
     <!-- Dropdown Structure -->
     <ul id='profile-dropdown' class='dropdown-content ie23s-margin-64'>
         {if $currentUser->hasPermission('admin')}
-            <li><a href="/administrator/?admin=ok">Admin</a></li>
+            <li><a href="/administrator/">Admin</a></li>
         {/if}
         <li><a href="/logout">Logout</a></li>
     </ul>
@@ -42,10 +42,6 @@
             <a href="/" class="brand-logo">IE23S Shop</a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="sass.html">Sass</a></li>
-                <li><a href="badges.html">Components</a></li>
-                <li><a href="collapsible.html">Javascript</a></li>
-                <li><a href="mobile.html">Mobile</a></li>
 
                 <li><a href="#" class="login unAuth {if $isAuth}hidden{/if}">Sign in</a></li>
                 <li><a href="#" class="register unAuth {if $isAuth}hidden{/if}">Sign up</a></li>
@@ -55,21 +51,16 @@
 
                 </li>
 
-                <li><a href="https://shop.ie23s.com/administrator/categories/?admin=ok">Admin</a></li>
+                <li></li>
             </ul>
         </div>
     </nav>
     <ul class="sidenav" id="mobile-demo">
-        <li><a href="sass.html">Sass</a></li>
-        <li><a href="badges.html">Components</a></li>
-        <li><a href="collapsible.html">Javascript</a></li>
-        <li><a href="mobile.html">Mobile</a></li>
         <li><a href="#" class="login">Sign in</a></li>
         <li><a href="#" class="register">Sign up</a></li>
-        <li><a href="https://shop.ie23s.com/administrator/categories/?admin=ok">Admin</a></li>
     </ul>
 </header>
-<div id="auth-div" class="modal"  style="max-width: 800px;">
+<div id="auth-div" class="modal" style="max-width: 800px;">
     <div class="progress" style="display: none">
         <div class="indeterminate"></div>
     </div>
