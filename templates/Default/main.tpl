@@ -30,6 +30,13 @@
     <div class="progress">
         <div class="indeterminate"></div>
     </div>
+    <!-- Dropdown Structure -->
+    <ul id='profile-dropdown' class='dropdown-content ie23s-margin-64'>
+        {if $currentUser->hasPermission('admin')}
+            <li><a href="/administrator/?admin=ok">Admin</a></li>
+        {/if}
+        <li><a href="/logout">Logout</a></li>
+    </ul>
     <nav>
         <div class="nav-wrapper">
             <a href="/" class="brand-logo">IE23S Shop</a>
@@ -45,10 +52,6 @@
                 <li>
                     <a href="#" class="profile authOnly dropdown-trigger {if ! $isAuth}hidden{/if}"
                        data-target='profile-dropdown'>Profile</a>
-                    <!-- Dropdown Structure -->
-                    <ul id='profile-dropdown' class='dropdown-content'>
-                        <li><a href="/logout">Logout</a></li>
-                    </ul>
 
                 </li>
 

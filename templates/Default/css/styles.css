@@ -23,3 +23,13 @@
 .hidden {
     display: none;
 }
+
+.ie23s-margin-64 {
+    top: 64px !important;
+}
+
+.ie23s-break-text {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
