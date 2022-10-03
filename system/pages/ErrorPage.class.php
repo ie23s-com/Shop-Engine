@@ -2,6 +2,7 @@
 
 namespace ie23s\shop\system\pages;
 
+use Simplon\Mysql\MysqlException;
 use SmartyException;
 
 class ErrorPage extends Page
@@ -27,12 +28,12 @@ class ErrorPage extends Page
         http_response_code($error);
         try {
             $this->getPages()->unload();
-        } catch (SmartyException $e) {
+        } catch (SmartyException|MysqlException $e) {
+            $this->getSystem()->getComponent('mail')->sendMail(
+                ['name' => 'Ilya Evtukhov', 'email' => 'evtukhov23@gmail.com'],
+                'An error ' . $error, "Haha! You've got an error:<br>{$e->getTraceAsString()}");
             echo($e->getTraceAsString());
         }
-        $this->getSystem()->getComponent('mail')->sendMail(
-            ['name' => 'Ilya Evtukhov', 'email' => 'evtukhov23@gmail.com'],
-            'An error ' . $error, "Haha! You've got an error:<br>{$text}");
         die();
     }
 

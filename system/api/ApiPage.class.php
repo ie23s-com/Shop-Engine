@@ -15,6 +15,7 @@ class ApiPage extends Page
     public function request(array $request): string
     {
         define('offTimer', 'off');
+        $this->needTheme(false);
         $this->addHeader('Content-Type: application/json; charset=utf-8');
         $module = $this->api->getPath($request);
         if ($module != null)
@@ -40,8 +41,4 @@ class ApiPage extends Page
         $this->api = $api;
     }
 
-    public function needTheme(): bool
-    {
-        return false;
-    }
 }

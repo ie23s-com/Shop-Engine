@@ -140,4 +140,10 @@ class System
         $r = $this->getComponent('api');
         return $r;
     }
+    public function getAuth(): Auth
+    {
+        /** @var $r Auth */
+        $r = $this->getComponent('auth');
+        return $r;
+    }
 }

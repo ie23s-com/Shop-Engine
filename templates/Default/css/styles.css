@@ -19,3 +19,7 @@
 .ie23s-hidden {
     display: none;
 }
+
+.hidden {
+    display: none;
+}

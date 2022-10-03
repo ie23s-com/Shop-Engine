@@ -26,7 +26,7 @@ class AuthApi extends ApiAbstract
         /** @var Auth $auth */
         $auth = $this->getSystem()->getComponent('auth');
 
-        if ($auth->getCurrentUser() != -1)
+        if ($auth->getCurrentUserID() != -1)
             return $this->withCode(403);
 
         //Check fields

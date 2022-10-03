@@ -11,6 +11,7 @@ abstract class Page
     private Pages $pages;
     private array $paths;
     private array $headers = [];
+    private bool $needTheme = true;
 
     /**
      * @param $name
@@ -65,9 +66,11 @@ abstract class Page
         return $this->paths;
     }
 
-    public function needTheme(): bool
+    public function needTheme($b = 3): bool
     {
-        return true;
+        if($b != 3)
+            $this->needTheme = $b;
+        return $this->needTheme;
     }
 
     /**

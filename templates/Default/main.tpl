@@ -27,7 +27,7 @@
 <body>
 
 <header>
-    <div class="progress" style="display: none">
+    <div class="progress">
         <div class="indeterminate"></div>
     </div>
     <nav>
@@ -39,6 +39,19 @@
                 <li><a href="badges.html">Components</a></li>
                 <li><a href="collapsible.html">Javascript</a></li>
                 <li><a href="mobile.html">Mobile</a></li>
+
+                <li><a href="#" class="login unAuth {if $isAuth}hidden{/if}">Sign in</a></li>
+                <li><a href="#" class="register unAuth {if $isAuth}hidden{/if}">Sign up</a></li>
+                <li>
+                    <a href="#" class="profile authOnly dropdown-trigger {if ! $isAuth}hidden{/if}"
+                       data-target='profile-dropdown'>Profile</a>
+                    <!-- Dropdown Structure -->
+                    <ul id='profile-dropdown' class='dropdown-content'>
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+
+                </li>
+
                 <li><a href="https://shop.ie23s.com/administrator/categories/?admin=ok">Admin</a></li>
             </ul>
         </div>
@@ -48,9 +61,19 @@
         <li><a href="badges.html">Components</a></li>
         <li><a href="collapsible.html">Javascript</a></li>
         <li><a href="mobile.html">Mobile</a></li>
+        <li><a href="#" class="login">Sign in</a></li>
+        <li><a href="#" class="register">Sign up</a></li>
         <li><a href="https://shop.ie23s.com/administrator/categories/?admin=ok">Admin</a></li>
     </ul>
 </header>
+<div id="auth-div" class="modal"  style="max-width: 800px;">
+    <div class="progress" style="display: none">
+        <div class="indeterminate"></div>
+    </div>
+    <div class="modal-content">
+        <div class="content"></div>
+    </div>
+</div>
 {$content}
 </body>
 </html>

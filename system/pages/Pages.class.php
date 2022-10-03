@@ -73,18 +73,21 @@ class Pages extends Component
 
     /**
      * @return void
-     * @throws SmartyException
+     * @throws SmartyException|MysqlException
      */
     public function unload()
     {
         $module = $this->getModule();
         $module->runHeaders();
+        $r = $module->request($this->path);
+        $this->theme->addObject('isAuth', $this->getSystem()->getAuth()->isAuth());
+        $this->theme->addObject('currentUser', $this->getSystem()->getAuth()->getCurrentUser());
         if ($module->needTheme()) {
-            $this->theme->addBlock('content', $module->request($this->path));
+            $this->theme->addBlock('content', $r);
             $this->theme->addBlock("title", $this->title);
             echo $this->theme->getTpl('main');
         } else {
-            echo $module->request($this->path);
+            echo $r;
         }
     }
 

@@ -6,6 +6,8 @@ require_once __SHOP_DIR__ . '/system/auth/user/UserModel.class.php';
 require_once __SHOP_DIR__ . '/system/auth/user/User.class.php';
 require_once __SHOP_DIR__ . '/system/auth/user/Session.class.php';
 require_once __SHOP_DIR__ . '/system/auth/pages/RegisterPage.php';
+require_once __SHOP_DIR__ . '/system/auth/pages/LogoutPage.php';
+require_once __SHOP_DIR__ . '/system/auth/pages/LoginPage.php';
 require_once __SHOP_DIR__ . '/system/auth/api/RegisterApi.class.php';
 require_once __SHOP_DIR__ . '/system/auth/api/AuthApi.class.php';
 require_once __SHOP_DIR__ . '/system/auth/api/LogoutApi.php';
@@ -15,6 +17,8 @@ use Exception;
 use ie23s\shop\system\auth\api\AuthApi;
 use ie23s\shop\system\auth\api\LogoutApi;
 use ie23s\shop\system\auth\api\RegisterApi;
+use ie23s\shop\system\auth\pages\LoginPage;
+use ie23s\shop\system\auth\pages\LogoutPage;
 use ie23s\shop\system\auth\pages\RegisterPage;
 use ie23s\shop\system\auth\user\Session;
 use ie23s\shop\system\auth\user\User;
@@ -28,6 +32,7 @@ class Auth extends Component
     private Mysql $db;
     private Session $session;
     private ?User $user;
+    private int $currentUserID;
 
     public function __construct($system)
     {
@@ -37,16 +42,20 @@ class Auth extends Component
 
     /**
      * @inheritDoc
+     * @throws MysqlException
      */
     public function load()
     {
         $this->db = $this->getSystem()->getComponent('database')->getConn();
         $this->session = new Session($this->getSystem());
+        $this->currentUserID = $this->session->checkSession();
     }
 
     public function loadPages()
     {
         new RegisterPage('register', $this->getSystem()->getPages(), 'register');
+        new LoginPage('login', $this->getSystem()->getPages(), 'login');
+        new LogoutPage('logout', $this->getSystem()->getPages(), 'logout');
 
         $this->system->getApi()->addPath('register', new RegisterApi($this->system));
         $this->system->getApi()->addPath('auth', new AuthApi($this->system));
@@ -104,9 +113,33 @@ class Auth extends Component
     /**
      * @throws MysqlException
      */
-    public function getCurrentUser(): int
+    public function getUserByID(int $id): ?User
     {
-        return $this->session->checkSession();
+
+        $userData = $this->db->fetchRow('SELECT * FROM users WHERE `id` = :id', ['id' => $id]);
+        if ($userData == null)
+            return null;
+        return new User($userData['id'], $userData['email'], $userData['first_name'], $userData['last_name'], $userData['salt'],
+            $userData['hash'], $userData['group']);
+    }
+
+    public function getCurrentUserID(): int
+    {
+        return $this->currentUserID;
+    }
+
+
+    /**
+     * @throws MysqlException
+     */
+    public function getCurrentUser(): ?User
+    {
+        return $this->getUserByID($this->currentUserID);
+    }
+
+    public function isAuth(): bool
+    {
+        return $this->getCurrentUserID() != -1;
     }
 
     /**
