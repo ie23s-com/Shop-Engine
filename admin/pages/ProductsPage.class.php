@@ -20,7 +20,7 @@ class ProductsPage extends AdminPage
         $this->categoriesEngine = $this->getEngine()->getCategoriesEngine();
         $this->productsEngine = $this->getEngine()->getProductEngine();
 
-        $theme = new Theme();
+        $theme = $this->getSystem()->getPages()->getTheme();
         if(@$_POST['type'] == 'edit')
             $this->edit();
         elseif (@$_POST['type'] == 'add')

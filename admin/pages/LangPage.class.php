@@ -12,7 +12,7 @@ class LangPage extends AdminPage
     function getPage(): string
     {
         $this->lang = $this->getSystem()->getLang();
-        $theme = new Theme();
+        $theme = $this->getSystem()->getPages()->getTheme();
         if(@$_POST['type'] == 'edit')
             $this->edit();
         elseif (@$_POST['type'] == 'add')

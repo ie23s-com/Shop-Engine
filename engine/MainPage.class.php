@@ -17,7 +17,7 @@ class MainPage extends Page
         $engine = $this->getSystem()->getEngine();
         $mainCategory = $engine->getCategoriesEngine()->getCategory(0);
         $engine->getCategoriesEngine()->findChildren($mainCategory);
-        $theme = new Theme();
+        $theme = $this->getPages()->getTheme();
         $theme->addObject('categories_list', $mainCategory->getChildrenArray());
 
 

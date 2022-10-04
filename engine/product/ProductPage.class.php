@@ -22,7 +22,7 @@ class ProductPage extends Page
         $product = $this->productEngine->getProductById($request[1]);
         if ($product == null)
             $this->getPages()->error(404, "This product not found");
-        $theme = new Theme();
+        $theme = $this->getPages()->getTheme();
         $theme->addBlock('product_name', $this->getLang()->getEditableRow("product-name", $product->getId()));
         $theme->addBlock('product_description', $this->getLang()->
         getEditableRow("product-description", $product->getId()));

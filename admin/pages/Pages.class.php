@@ -33,7 +33,7 @@ class Pages extends Page
         $this->request = $request;
         $this->loadModules();
 
-        $this->theme = new Theme();
+        $this->theme = $this->getPages()->getTheme();
         $this->loadButtons();
         $this->theme->addBlock('admin_content', $this->getCurrentPage()->getPage());
         return $this->theme->getTpl('admin/admin');

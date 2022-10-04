@@ -28,7 +28,7 @@ class CategoryPage extends Page
         $ce->findParents($cat);
         $ce->findChildren($cat);
 
-        $theme = new Theme();
+        $theme = $this->getPages()->getTheme();
         $theme->addObject('category_parent_categories', $cat->getParentsArray());
         $theme->addObject('category_children_categories', $cat->getChildrenArray());
         $theme->addObject('category_current', $cat);

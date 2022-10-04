@@ -10,7 +10,7 @@ class RegisterPage extends Page
 
     public function request(array $request): string
     {
-        $theme = new Theme();
+        $theme = $this->getPages()->getTheme();
 
         if(isset($request[1]) && $request[1] == 'tonly'){
             $this->needTheme(false);

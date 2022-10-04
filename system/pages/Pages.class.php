@@ -132,4 +132,14 @@ class Pages extends Component
         $this->errorPage->setError($num, $text);
     }
 
+    /**
+     * @return Theme
+     */
+    public function getTheme(): Theme
+    {
+        return $this->theme;
+    }
+
+
+
 }

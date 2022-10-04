@@ -20,7 +20,7 @@ class Categories extends AdminPage
     {
         $this->categoriesEngine = $this->getEngine()->getCategoriesEngine();
 
-        $theme = new Theme();
+        $theme = $this->getSystem()->getPages()->getTheme();
         if (@$_POST['type'] == 'add')
             $this->add();
         elseif (@$_POST['type'] == 'remove')
