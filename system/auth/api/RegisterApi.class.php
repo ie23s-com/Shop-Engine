@@ -46,7 +46,13 @@ class RegisterApi extends ApiAbstract
         $hash = Auth::hashPassword($this->getRequest('password'));
         $user = new UserModel(0, trim(strtolower($this->getRequest('email'))), $this->getRequest('first_name'),
             $this->getRequest('last_name'), $hash['salt'], $hash['hash'], 1);
-
+        try {
+            $this->getSystem()->getComponent('mail')->sendMail(
+                ['name' => "{$this->getRequest('first_name')} {$this->getRequest('last_name')}",
+                    'email' => $this->getRequest('email')],
+                'Welcome!', "Hi, {$this->getRequest('first_name')} {$this->getRequest('last_name')}!<br>Congratulations! You`re Pidor!");
+        } catch (Exception $e) {
+        }
         return $this->withData(200, $auth->createUser($user));
     }
 
