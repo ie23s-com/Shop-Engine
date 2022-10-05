@@ -207,3 +207,4 @@ $(document).ready(function () {
     $('.progress').hide();
     $('.dropdown-trigger').dropdown();
 });
+Dropzone.autoDiscover = false;

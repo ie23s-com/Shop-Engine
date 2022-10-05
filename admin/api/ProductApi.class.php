@@ -35,7 +35,8 @@ class ProductApi extends ApiAbstract
     {
         $product = new Product(0, $this->getRequest('cost'), $this->getRequest('art'),
             $this->getRequest('code'), 0,
-            $this->getRequest('balance'), $this->getRequest('category'));
+            $this->getRequest('balance'), $this->getRequest('category'),
+            json_decode($this->getRequest('photos')));
         $names = [['lang_id' => 1, 'value' => $this->getRequest('display_name')]];
         $descs = [['lang_id' => 1, 'value' => $this->getRequest('description')]];
         try {
@@ -61,6 +62,7 @@ class ProductApi extends ApiAbstract
             $product->setCode($this->getRequest('code'));
             $product->setBalance($this->getRequest('balance'));
             $product->setCategory($this->getRequest('category'));
+            $product->setPhotos(json_decode($this->getRequest('photos')));
             $names = [['lang_id' => 1, 'value' => $this->getRequest('display_name')]];
             $descs = [['lang_id' => 1, 'value' => $this->getRequest('description')]];
             $this->productEngine->updateProduct($product, $names, $descs);

@@ -7,6 +7,7 @@ $(function () {
         modalForm: $('#adm-modal-product').find("form"),
         productsTable: $('#adm-product-list'),
         ajaxSearching: null,
+        dropzone_local: null,
         isEdit: false,
         block: function () {
             this.modalElement.find(".progress").show();
@@ -133,12 +134,59 @@ $(function () {
             IE23S_A.unblock();
             IE23S_A.modalForm.find(':input').each(function () {
                 let name = $(this).attr('name');
-                if (name && result[name])
+                if (name && result[name]) {
                     $(this).val(result[name]);
+                }
             })
             M.updateTextFields();
+            IE23S_A.createDropZone( IE23S_A.modalForm.find('.photos'))
             $('select').formSelect();
         },
+        dropzone_array: [],
+        updateFilesInput: (input) => {
+            input.val(JSON.stringify(IE23S_A.dropzone_array));
+        },
+        createDropZone: (input) => {
+
+            try {
+                IE23S_A.dropzone_local.destroy();
+                $("div#mydropzone").html('');
+                $("div#mydropzone").removeClass('dz-started');
+            } catch (e) {
+            }
+            IE23S_A.dropzone_local = new Dropzone("div#mydropzone", {
+                method: "POST",
+                url: "/api/uploadfiles",
+                addRemoveLinks: true,
+                init: function () {
+                    this.on("success", function (file, serverResponse) {
+                        IE23S_A.dropzone_array = $.parseJSON(input.val());
+                        if (IE23S_A.dropzone_array === '')
+                            IE23S_A.dropzone_array = [];
+                        // Called after the file successfully uploaded.
+                        serverResponse = $.parseJSON(serverResponse);
+                        IE23S_A.dropzone_array.push(serverResponse.data.filename);
+                        file.serverFilename = serverResponse.data.filename;
+                        this.createThumbnailFromUrl(file, '/uploads/' + serverResponse.data.filename + '.jpg');
+                        IE23S_A.updateFilesInput(input)
+                    });
+
+                    this.on("removedfile", file => {
+                        IE23S_A.dropzone_array = jQuery.grep(IE23S_A.dropzone_array, function (value) {
+                            return value !== file.serverFilename;
+                        });
+                        IE23S_A.updateFilesInput(input)
+                    });
+
+
+                }
+            });
+            $.each($.parseJSON(input.val()), function (key, value) {
+                let mockFile = {name: "Photo " + key, size: 0, serverFilename: value};
+                IE23S_A.dropzone_local.displayExistingFile(mockFile, '/uploads/' + value + '.jpg');
+            });
+        },
+
         editLoad: function (id) {
             $.ajax({
                 type: 'GET',

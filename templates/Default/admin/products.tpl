@@ -53,6 +53,11 @@
                 </div>
             </div>
             <div class="row ie23s-auto-margin-0">
+                <div class="input-field col s12">
+                    <div class="dropzone" id="mydropzone"> </div>
+                </div>
+            </div>
+            <div class="row ie23s-auto-margin-0">
                 <div class="input-field col s6">
                     <button class="btn waves-effect waves-block waves-light center-block" name="cancel" type="button">
                         Cancel
@@ -67,6 +72,7 @@
                 </div>
             </div>
             <input name="id" type="hidden" value="0">
+            <input name="photos" type="hidden" value='' class="photos">
         </div>
     </form>
 </div>

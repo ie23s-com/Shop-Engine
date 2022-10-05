@@ -2700,8 +2700,8 @@ video.responsive-video {
   }
 }
 .breadcrumb {
-    font-size: 18px;
-    color: #039be5;
+  font-size: 18px;
+  color: #039be5;
 }
 .breadcrumb i,
 .breadcrumb [class^=mdi-], .breadcrumb [class*=mdi-],
@@ -2711,21 +2711,21 @@ video.responsive-video {
   font-size: 24px;
 }
 .breadcrumb:before {
-    content: "\e5cc";
-    color: #039be5;
-    vertical-align: top;
-    display: inline-block;
-    font-family: "Material Icons";
-    font-weight: normal;
-    font-style: normal;
-    margin: 0 10px 0 8px;
-    -webkit-font-smoothing: antialiased;
+  content: "\e5cc";
+  color: #039be5;
+  vertical-align: top;
+  display: inline-block;
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  margin: 0 10px 0 8px;
+  -webkit-font-smoothing: antialiased;
 }
 .breadcrumb:first-child:before {
   display: none;
 }
 .breadcrumb:last-child {
-    color: #26a69a;
+  color: #26a69a;
 }
 
 .parallax-container {
@@ -3072,15 +3072,15 @@ table.responsive-table td {
 }
 
 .progress {
-    margin: 0 !important;
-    position: relative;
-    height: 4px;
-    display: block;
-    width: 100%;
-    background-color: #acece6;
-    border-radius: 2px;
-    margin: 0.5rem 0 1rem 0;
-    overflow: hidden;
+  margin: 0 !important;
+  position: relative;
+  height: 4px;
+  display: block;
+  width: 100%;
+  background-color: #acece6;
+  border-radius: 2px;
+  margin: 0.5rem 0 1rem 0;
+  overflow: hidden;
 }
 .progress .determinate {
   position: absolute;
@@ -5243,18 +5243,18 @@ body.keyboard-focused .dropdown-content li:focus {
 }
 
 .modal {
-    display: none;
-    position: fixed;
-    left: 0;
-    right: 0;
-    background-color: #fafafa;
-    padding: 0;
-    max-height: 80%;
-    width: 55%;
-    margin: auto;
-    overflow-y: auto;
-    border-radius: 2px;
-    will-change: top, opacity;
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  background-color: #fafafa;
+  padding: 0;
+  max-height: 80%;
+  width: 55%;
+  margin: auto;
+  overflow-y: auto;
+  border-radius: 2px;
+  will-change: top, opacity;
 }
 .modal:focus {
   outline: none;

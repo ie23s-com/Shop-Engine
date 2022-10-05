@@ -94,6 +94,7 @@ class Pages extends Component
     public function loadModule(Page $page)
     {
         foreach ($page->getPaths() as $path) {
+            $path = strtolower($path);
             if(isset($this->pathsModules[$path])) {
                 $this->error(503, "Conflict modules! Module [{$page->getName()}] is going to reserve
                 path '$path' which used by {$this->pathsModules[$path]}!");
@@ -114,6 +115,7 @@ class Pages extends Component
     public static function fromPath(string $path): array
     {
         $do = preg_replace('|(/+)|', '/', trim($path, '/'));
+        $do = strtolower($do);
         return explode('/', $do);
     }
 
