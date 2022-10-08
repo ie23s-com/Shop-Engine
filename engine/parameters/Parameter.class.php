@@ -1,6 +1,6 @@
 <?php
 
-namespace ie23s\shop\engine\parameters;
+namespace ie23s\shop\engine\utils\breadcrumbs\parameters;
 
 class Parameter
 {

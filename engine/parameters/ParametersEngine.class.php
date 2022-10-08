@@ -1,8 +1,8 @@
 <?php
 
-namespace ie23s\shop\engine\parameters;
+namespace ie23s\shop\engine\utils\breadcrumbs\parameters;
 
-use ie23s\shop\engine\Engine;
+use ie23s\shop\engine\utils\breadcrumbs\Engine;
 
 require_once __SHOP_DIR__ . 'engine/parameters/ParameterType.enum.php';
 require_once __SHOP_DIR__ . 'engine/parameters/Parameter.class.php';

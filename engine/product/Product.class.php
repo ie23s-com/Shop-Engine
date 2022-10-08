@@ -1,6 +1,6 @@
 <?php
 
-namespace ie23s\shop\engine\product;
+namespace ie23s\shop\engine\utils\breadcrumbs\product;
 
 class Product
 {

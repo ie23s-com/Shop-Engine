@@ -1,11 +1,11 @@
 <?php
 
-namespace ie23s\shop\engine\product;
+namespace ie23s\shop\engine\utils\breadcrumbs\product;
 
 require_once __SHOP_DIR__ . '/engine/product/Product.class.php';
 require_once __SHOP_DIR__ . '/engine/product/ProductPage.class.php';
 
-use ie23s\shop\engine\Engine;
+use ie23s\shop\engine\utils\breadcrumbs\Engine;
 use ie23s\shop\system\pages\Pages;
 use Simplon\Mysql\MysqlException;
 
@@ -25,7 +25,7 @@ class ProductEngine
 
     public function load()
     {
-        (new ProductPage('product', $this->pages, 'product'))->load($this);
+        (new ProductPage('product', $this->pages, 'product'))->load($this->engine);
     }
 
     /**

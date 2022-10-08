@@ -3,7 +3,7 @@
 namespace ie23s\shop\system\files;
 
 use Exception;
-use ie23s\shop\engine\api\ApiAbstract;
+use ie23s\shop\engine\utils\breadcrumbs\api\ApiAbstract;
 
 class UploadApi extends ApiAbstract
 {

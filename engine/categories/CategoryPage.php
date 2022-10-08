@@ -1,9 +1,8 @@
 <?php
 
-namespace ie23s\shop\engine\categories;
+namespace ie23s\shop\engine\utils\breadcrumbs\categories;
 
 use ie23s\shop\system\pages\Page;
-use ie23s\shop\system\pages\Theme;
 use Simplon\Mysql\MysqlException;
 use SmartyException;
 use TypeError;

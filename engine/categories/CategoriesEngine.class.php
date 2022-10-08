@@ -1,12 +1,12 @@
 <?php
 
-namespace ie23s\shop\engine\categories;
+namespace ie23s\shop\engine\utils\breadcrumbs\categories;
 
 require_once __SHOP_DIR__ . 'engine/categories/Category.class.php';
 require_once __SHOP_DIR__ . 'engine/categories/CategoryPage.php';
 
 use Category;
-use ie23s\shop\engine\Engine;
+use ie23s\shop\engine\utils\breadcrumbs\Engine;
 use ie23s\shop\system\pages\Pages;
 use Simplon\Mysql\MysqlException;
 use SmartyException;

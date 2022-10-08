@@ -5,7 +5,7 @@ namespace ie23s\shop\system;
 //Component interface loader
 use Exception;
 use ie23s\shop\admin\Admin;
-use ie23s\shop\engine\Engine;
+use ie23s\shop\engine\utils\breadcrumbs\Engine;
 use ie23s\shop\system\api\Api;
 use ie23s\shop\system\auth\Auth;
 use ie23s\shop\system\files\Files;

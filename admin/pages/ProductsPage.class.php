@@ -2,10 +2,9 @@
 
 namespace ie23s\shop\admin\pages;
 
-use ie23s\shop\engine\categories\CategoriesEngine;
-use ie23s\shop\engine\product\Product;
-use ie23s\shop\engine\product\ProductEngine;
-use ie23s\shop\system\pages\Theme;
+use ie23s\shop\engine\utils\breadcrumbs\categories\CategoriesEngine;
+use ie23s\shop\engine\utils\breadcrumbs\product\Product;
+use ie23s\shop\engine\utils\breadcrumbs\product\ProductEngine;
 
 require_once __SHOP_DIR__ . 'admin/pages/ProductsPage.class.php';
 

@@ -7562,10 +7562,7 @@ input[type=range]::-ms-thumb {
 }
 .carousel .carousel-item {
   visibility: hidden;
-  width: 200px;
-  height: 200px;
   position: absolute;
-  top: 0;
   left: 0;
 }
 .carousel .carousel-item > img {

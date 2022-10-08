@@ -1,9 +1,9 @@
 <?php
-namespace ie23s\shop\engine;
+namespace ie23s\shop\engine\utils\breadcrumbs;
 
-use ie23s\shop\engine\categories\CategoriesEngine;
-use ie23s\shop\engine\parameters\ParametersEngine;
-use ie23s\shop\engine\product\ProductEngine;
+use ie23s\shop\engine\utils\breadcrumbs\categories\CategoriesEngine;
+use ie23s\shop\engine\utils\breadcrumbs\parameters\ParametersEngine;
+use ie23s\shop\engine\utils\breadcrumbs\product\ProductEngine;
 use ie23s\shop\system\Component;
 use ie23s\shop\system\database\MySQLMod;
 use ie23s\shop\system\System;
@@ -11,6 +11,7 @@ use Simplon\Mysql\Mysql;
 use Simplon\Mysql\MysqlException;
 
 require_once __SHOP_DIR__ . '/engine/categories/CategoriesEngine.class.php';
+require_once __SHOP_DIR__ . '/engine/utils/breadcrumbs/Breadcrumbs.class.php';
 require_once __SHOP_DIR__ . '/engine/product/ProductEngine.class.php';
 require_once __SHOP_DIR__ . '/engine/parameters/ParametersEngine.class.php';
 require_once __SHOP_DIR__ . '/engine/MainPage.class.php';
@@ -24,9 +25,6 @@ class Engine extends Component
     private ProductEngine $productEngine;
     private ParametersEngine $parametersEngine;
 
-    /**
-     * @throws MysqlException
-     */
     public function __construct(System $system)
     {
         parent::__construct($system);

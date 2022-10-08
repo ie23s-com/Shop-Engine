@@ -199,6 +199,15 @@ IE23S_LOGIN = {
 $(document).ready(function () {
     $('select').formSelect();
     $('.sidenav').sidenav();
+    //carousel
+    $('.carousel').carousel({
+        fullWidth: true,
+        numVisible: true
+    });
+    $('.previous-image').click(() => $('.carousel').carousel('prev'));
+    $('.next-image').click(() => $('.carousel').carousel('next'));
+
+    //end carousel
     M.updateTextFields();
     IE23S_REGISTER.registerInit('.register');
     IE23S_REGISTER.modalInit('#auth-div');

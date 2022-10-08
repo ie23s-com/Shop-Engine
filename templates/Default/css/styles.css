@@ -33,3 +33,27 @@
     white-space: nowrap;
     overflow: hidden;
 }
+
+.previous-image {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.next-image {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.previous-image > i, .next-image > i {
+    font-size: 3em !important;
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
+
+}

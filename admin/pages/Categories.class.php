@@ -3,8 +3,7 @@
 namespace ie23s\shop\admin\pages;
 
 use Category;
-use ie23s\shop\engine\categories\CategoriesEngine;
-use ie23s\shop\system\pages\Theme;
+use ie23s\shop\engine\utils\breadcrumbs\categories\CategoriesEngine;
 use Simplon\Mysql\MysqlException;
 use SmartyException;
 

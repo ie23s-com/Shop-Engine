@@ -2,7 +2,7 @@
 
 namespace ie23s\shop\system\auth\api;
 
-use ie23s\shop\engine\api\ApiAbstract;
+use ie23s\shop\engine\utils\breadcrumbs\api\ApiAbstract;
 use ie23s\shop\system\auth\Auth;
 use Simplon\Mysql\MysqlException;
 

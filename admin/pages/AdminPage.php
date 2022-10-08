@@ -2,7 +2,7 @@
 
 namespace ie23s\shop\admin\pages;
 
-use ie23s\shop\engine\Engine;
+use ie23s\shop\engine\utils\breadcrumbs\Engine;
 use ie23s\shop\system\System;
 use Simplon\Mysql\MysqlException;
 

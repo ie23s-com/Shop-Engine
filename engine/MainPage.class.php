@@ -1,9 +1,8 @@
 <?php
 
-namespace ie23s\shop\engine;
+namespace ie23s\shop\engine\utils\breadcrumbs;
 
 use ie23s\shop\system\pages\Page;
-use ie23s\shop\system\pages\Theme;
 use SmartyException;
 
 class MainPage extends Page

@@ -1,8 +1,8 @@
 <?php
 
-namespace ie23s\shop\engine\api;
+namespace ie23s\shop\engine\utils\breadcrumbs\api;
 
-use ie23s\shop\engine\Engine;
+use ie23s\shop\engine\utils\breadcrumbs\Engine;
 use ie23s\shop\system\api\ApiInterface;
 use ie23s\shop\system\Codes;
 use ie23s\shop\system\System;

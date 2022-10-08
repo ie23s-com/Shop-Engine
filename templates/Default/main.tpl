@@ -72,6 +72,19 @@
         <div class="content"></div>
     </div>
 </div>
+{if isset($breadcrumbs)}
+    <div class="row" style="margin: 20px 0">
+        <div class="col s12">
+            <div class="nav-wrapper">
+                <a href="/" class="breadcrumb text-darken-4">Main</a>
+                {while $breadcrumbs->next()}
+                    <a href="{$breadcrumbs->get()->getUrl()}"
+                       class="breadcrumb text-darken-4">{$breadcrumbs->get()->getName()}</a>
+                {/while}
+            </div>
+        </div>
+    </div>
+{/if}
 {$content}
 </body>
 </html>
