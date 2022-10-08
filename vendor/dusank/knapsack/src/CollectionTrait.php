@@ -3,6 +3,8 @@
 namespace DusanKasan\Knapsack;
 
 use DusanKasan\Knapsack\Exceptions\InvalidReturnValue;
+use DusanKasan\Knapsack\Exceptions\ItemNotFound;
+use Traversable;
 
 trait CollectionTrait
 {
@@ -14,6 +16,14 @@ trait CollectionTrait
     public function toArray()
     {
         return toArray($this->getItems());
+    }
+
+    /**
+     * @return array|Traversable
+     */
+    protected function getItems()
+    {
+        return $this;
     }
 
     /**
@@ -40,7 +50,7 @@ trait CollectionTrait
     /**
      * Returns a lazy collection with items from all $collections passed as argument appended together
      *
-     * @param array|\Traversable ...$collections
+     * @param array|Traversable ...$collections
      * @return Collection
      */
     public function concat(...$collections)
@@ -99,7 +109,7 @@ trait CollectionTrait
      */
     public function sort(callable $function)
     {
-        return \DusanKasan\Knapsack\sort($this->getItems(), $function);
+        return sort($this->getItems(), $function);
     }
 
     /**
@@ -145,7 +155,7 @@ trait CollectionTrait
      */
     public function each(callable $function)
     {
-        return \DusanKasan\Knapsack\each($this->getItems(), $function);
+        return each($this->getItems(), $function);
     }
 
     /**
@@ -166,7 +176,7 @@ trait CollectionTrait
      * @param mixed $key
      * @param bool $convertToCollection
      * @return mixed|Collection
-     * @throws \DusanKasan\Knapsack\Exceptions\ItemNotFound
+     * @throws ItemNotFound
      */
     public function get($key, $convertToCollection = false)
     {
@@ -184,7 +194,7 @@ trait CollectionTrait
      * @param mixed $default
      * @param bool $convertToCollection
      * @return mixed|Collection
-     * @throws \DusanKasan\Knapsack\Exceptions\ItemNotFound
+     * @throws ItemNotFound
      */
     public function getOrDefault($key, $default = null, $convertToCollection = false)
     {
@@ -371,7 +381,7 @@ trait CollectionTrait
      * Returns a lazy collection of first item from first collection, first item from second, second from first and
      * so on. Accepts any number of collections.
      *
-     * @param array|\Traversable ...$collections
+     * @param array|Traversable ...$collections
      * @return Collection
      */
     public function interleave(...$collections)
@@ -476,7 +486,7 @@ trait CollectionTrait
      * Returns a lazy collection with items from this collection but values that are found in keys of $replacementMap
      * are replaced by their values.
      *
-     * @param array|\Traversable $replacementMap
+     * @param array|Traversable $replacementMap
      * @return Collection
      */
     public function replace($replacementMap)
@@ -514,7 +524,7 @@ trait CollectionTrait
      */
     public function shuffle()
     {
-        return \DusanKasan\Knapsack\shuffle($this->getItems());
+        return shuffle($this->getItems());
     }
 
     /**
@@ -526,7 +536,7 @@ trait CollectionTrait
      *
      * @param int $numberOfItems
      * @param int $step
-     * @param array|\Traversable $padding
+     * @param array|Traversable $padding
      * @return Collection
      */
     public function partition($numberOfItems, $step = 0, $padding = [])
@@ -583,7 +593,7 @@ trait CollectionTrait
      *
      * @param bool $convertToCollection
      * @return mixed|Collection
-     * @throws \DusanKasan\Knapsack\Exceptions\ItemNotFound
+     * @throws ItemNotFound
      */
     public function first($convertToCollection = false)
     {
@@ -598,7 +608,7 @@ trait CollectionTrait
      *
      * @param bool $convertToCollection
      * @return mixed|Collection
-     * @throws \DusanKasan\Knapsack\Exceptions\ItemNotFound
+     * @throws ItemNotFound
      */
     public function last($convertToCollection = false)
     {
@@ -624,7 +634,7 @@ trait CollectionTrait
      *
      * @param bool $convertToCollection
      * @return mixed|Collection
-     * @throws \DusanKasan\Knapsack\Exceptions\ItemNotFound
+     * @throws ItemNotFound
      */
     public function second($convertToCollection = false)
     {
@@ -637,9 +647,9 @@ trait CollectionTrait
      * Combines the values of this collection as keys, with values of $collection as values.  The resulting collection
      * has length equal to the size of smaller collection.
      *
-     * @param array|\Traversable $collection
+     * @param array|Traversable $collection
      * @return Collection
-     * @throws \DusanKasan\Knapsack\Exceptions\ItemNotFound
+     * @throws ItemNotFound
      */
     public function combine($collection)
     {
@@ -649,7 +659,7 @@ trait CollectionTrait
     /**
      * Returns a lazy collection without the items associated to any of the keys from $keys.
      *
-     * @param array|\Traversable $keys
+     * @param array|Traversable $keys
      * @return Collection
      */
     public function except($keys)
@@ -660,7 +670,7 @@ trait CollectionTrait
     /**
      * Returns a lazy collection of items associated to any of the keys from $keys.
      *
-     * @param array|\Traversable $keys
+     * @param array|Traversable $keys
      * @return Collection
      */
     public function only($keys)
@@ -672,7 +682,7 @@ trait CollectionTrait
      * Returns a lazy collection of items that are in $this but are not in any of the other arguments, indexed by the
      * keys from the first collection. Note that the ...$collections are iterated non-lazily.
      *
-     * @param array|\Traversable ...$collections
+     * @param array|Traversable ...$collections
      * @return Collection
      */
     public function diff(...$collections)
@@ -705,7 +715,7 @@ trait CollectionTrait
      * Returns a lazy collection of non-lazy collections of items from nth position from this collection and each
      * passed collection. Stops when any of the collections don't have an item at the nth position.
      *
-     * @param array|\Traversable ...$collections
+     * @param array|Traversable ...$collections
      * @return Collection
      */
     public function zip(...$collections)
@@ -755,14 +765,14 @@ trait CollectionTrait
      */
     public function extract($keyPath)
     {
-        return \DusanKasan\Knapsack\extract($this->getItems(), $keyPath);
+        return extract($this->getItems(), $keyPath);
     }
 
     /**
      * Returns a lazy collection of items that are in $this and all the other arguments, indexed by the keys from
      * the first collection. Note that the ...$collections are iterated non-lazily.
      *
-     * @param array|\Traversable ...$collections
+     * @param array|Traversable ...$collections
      * @return Collection
      */
     public function intersect(...$collections)
@@ -843,7 +853,7 @@ trait CollectionTrait
      */
     public function max()
     {
-        return \DusanKasan\Knapsack\max($this->getItems());
+        return max($this->getItems());
     }
 
     /**
@@ -853,7 +863,7 @@ trait CollectionTrait
      */
     public function min()
     {
-        return \DusanKasan\Knapsack\min($this->getItems());
+        return min($this->getItems());
     }
 
     /**
@@ -870,7 +880,7 @@ trait CollectionTrait
      * Returns a lazy collection with items from $collection, but items with keys  that are found in keys of
      * $replacementMap are replaced by their values.
      *
-     * @param array|\Traversable $replacementMap
+     * @param array|Traversable $replacementMap
      * @return Collection
      */
     public function replaceByKeys($replacementMap)

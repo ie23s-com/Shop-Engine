@@ -53,6 +53,8 @@ class UploadApi extends ApiAbstract
 
         $tmp = imagecreatetruecolor($width, $height);
         imagecopyresampled($tmp, $src, 0, 0, 0, 0, $width, $height, $width, $height);
+        $bgcolor = imagecolorallocate($tmp, 255, 255, 255);
+        imagefill($tmp, 0, 0, $bgcolor);
         imagejpeg($tmp, $path . $dst . ".jpg");
 
 

@@ -41,6 +41,9 @@ class Product
         $this->sold = $sold;
         $this->balance = $balance;
         $this->category = $category;
+
+        if (empty($photos))
+            $photos[] = 'no-product-photo';
         $this->photos = $photos;
         $this->display_name = $display_name;
         $this->description = $description;
@@ -160,6 +163,8 @@ class Product
      */
     public function setPhotos(array $photos): void
     {
+        if (empty($photos))
+            $photos[] = 'no-product-photo';
         $this->photos = $photos;
     }
 

@@ -91,8 +91,8 @@ class ProductEngine
                         WHERE language_editable.`type` = \'product-description\' AND `external_id` = products.id
                         AND lang_id = :lang_id)
                             as description
-                    FROM products WHERE category LIKE CONCAT(\'%\', :category) ORDER BY `id` DESC',
-            array('lang_id' => 1, 'category' => $category ?? ''));
+                    FROM products WHERE category LIKE CONCAT(:category) ORDER BY `id` DESC',
+            array('lang_id' => 1, 'category' => $category ?? '%'));
         if ($products == null)
             return [];
         foreach ($products as $product) {

@@ -31,7 +31,7 @@
 <body>
 
 <header>
-    <div class="progress">
+    <div class="progress" style="position: absolute; top:0; left:0; right:0">
         <div class="indeterminate"></div>
     </div>
     <!-- Dropdown Structure -->

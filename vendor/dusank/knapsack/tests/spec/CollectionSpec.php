@@ -9,11 +9,13 @@ use DusanKasan\Knapsack\Exceptions\InvalidArgument;
 use DusanKasan\Knapsack\Exceptions\InvalidReturnValue;
 use DusanKasan\Knapsack\Exceptions\ItemNotFound;
 use DusanKasan\Knapsack\Exceptions\NoMoreItems;
+use DusanKasan\Knapsack\Tests\Helpers\Car;
 use DusanKasan\Knapsack\Tests\Helpers\PlusOneAdder;
 use IteratorAggregate;
 use PhpSpec\ObjectBehavior;
 use Serializable;
 use Traversable;
+use function DusanKasan\Knapsack\concat;
 
 /**
  * @mixin Collection
@@ -129,7 +131,7 @@ class CollectionSpec extends ObjectBehavior
 
     function it_can_convert_to_array()
     {
-        $iterator = new \ArrayIterator([
+        $iterator = new ArrayIterator([
             'foo',
         ]);
 
@@ -1314,8 +1316,8 @@ class CollectionSpec extends ObjectBehavior
                 [1, 2, 3],
                 new ArrayIterator(['a', 'b', 'c']),
                 true,
-                new \DusanKasan\Knapsack\Tests\Helpers\Car('sedan', 5),
-                \DusanKasan\Knapsack\concat([1], [1]),
+                new Car('sedan', 5),
+                concat([1], [1]),
             ]
         );
 

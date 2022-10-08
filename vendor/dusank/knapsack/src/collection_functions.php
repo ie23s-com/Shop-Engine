@@ -7,6 +7,7 @@ use DusanKasan\Knapsack\Exceptions\ItemNotFound;
 use DusanKasan\Knapsack\Exceptions\NoMoreItems;
 use Iterator;
 use IteratorIterator;
+use ReflectionObject;
 use Traversable;
 
 /**
@@ -1727,7 +1728,7 @@ function dump($input, $maxItemsPerCollection = null, $maxDepth = null)
             return '^^^';
         }
 
-        $reflection = new \ReflectionObject($input);
+        $reflection = new ReflectionObject($input);
         $normalizedProperties = [];
         foreach ($reflection->getProperties() as $property) {
             $property->setAccessible(true);
