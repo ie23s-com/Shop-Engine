@@ -26,7 +26,7 @@ function getIntegerReport()
 
     for ($j = 0; $j < REPEAT_COUNT; $j++) {
         $array = $fixtureProvider();
-        
+
         $arrayMapStart = microtime(true);
         $mappedArray = array_map($mapper, $array);
         foreach ($mappedArray as $item) {
@@ -43,8 +43,8 @@ function getIntegerReport()
 
     return [
         'name' => 'array_map vs Collection::map on ' . NUMBER_OF_ITEMS . ' integers (addition)',
-        'native' => (float) $arrayMapDeltas / REPEAT_COUNT,
-        'collection' => (float) $collectionMapDeltas / REPEAT_COUNT
+        'native' => (float)$arrayMapDeltas / REPEAT_COUNT,
+        'collection' => (float)$collectionMapDeltas / REPEAT_COUNT
     ];
 }
 
@@ -83,8 +83,8 @@ function getStringReport()
 
     return [
         'name' => 'array_map vs Collection::map on ' . NUMBER_OF_ITEMS . ' strings (concatenation)',
-        'native' => (float) $arrayMapDeltas / REPEAT_COUNT,
-        'collection' => (float) $collectionMapDeltas / REPEAT_COUNT
+        'native' => (float)$arrayMapDeltas / REPEAT_COUNT,
+        'collection' => (float)$collectionMapDeltas / REPEAT_COUNT
     ];
 }
 
@@ -125,8 +125,8 @@ function getObjectReport()
 
     return [
         'name' => 'array_map vs Collection::map on ' . NUMBER_OF_ITEMS . ' objects (object to field value)',
-        'native' => (float) $arrayMapDeltas / REPEAT_COUNT,
-        'collection' => (float) $collectionMapDeltas / REPEAT_COUNT
+        'native' => (float)$arrayMapDeltas / REPEAT_COUNT,
+        'collection' => (float)$collectionMapDeltas / REPEAT_COUNT
     ];
 }
 
@@ -170,8 +170,8 @@ function getComplexOperationReport()
 
     return [
         'name' => 'array_map vs Collection::map on ' . NUMBER_OF_ITEMS . ' integers n, counting sum(0, n) the naive way',
-        'native' => (float) $arrayMapDeltas / REPEAT_COUNT,
-        'collection' => (float) $collectionMapDeltas / REPEAT_COUNT
+        'native' => (float)$arrayMapDeltas / REPEAT_COUNT,
+        'collection' => (float)$collectionMapDeltas / REPEAT_COUNT
     ];
 }
 
@@ -210,8 +210,8 @@ function getHashReport()
 
     return [
         'name' => 'array_map vs Collection::map on ' . NUMBER_OF_ITEMS . ' md5 invocations',
-        'native' => (float) $arrayMapDeltas / REPEAT_COUNT,
-        'collection' => (float) $collectionMapDeltas / REPEAT_COUNT
+        'native' => (float)$arrayMapDeltas / REPEAT_COUNT,
+        'collection' => (float)$collectionMapDeltas / REPEAT_COUNT
     ];
 }
 
@@ -221,7 +221,7 @@ function addReportToTable(Table $table, $reportData)
         $reportData['name'],
         $reportData['native'] . 's',
         $reportData['collection'] . 's',
-        ((int) (($reportData['collection'] / $reportData['native']) * 100)) . '%',
+        ((int)(($reportData['collection'] / $reportData['native']) * 100)) . '%',
     ];
 
     $table->addRow($row);

@@ -20,7 +20,7 @@ class ProductsPage extends AdminPage
         $this->productsEngine = $this->getEngine()->getProductEngine();
 
         $theme = $this->getSystem()->getPages()->getTheme();
-        if(@$_POST['type'] == 'edit')
+        if (@$_POST['type'] == 'edit')
             $this->edit();
         elseif (@$_POST['type'] == 'add')
             $this->add();
@@ -33,7 +33,8 @@ class ProductsPage extends AdminPage
         return $theme->getTpl('admin/products');
     }
 
-    private function edit() {
+    private function edit()
+    {
         $product = $this->productsEngine->getProductById($_POST['id']);
 
         $product->setCost($_POST['cost']);
@@ -46,14 +47,18 @@ class ProductsPage extends AdminPage
         $descs = [['lang_id' => 1, 'value' => $_POST['description']]];
         $this->productsEngine->updateProduct($product, $names, $descs);
     }
-    private function add() {
-        $product = new Product(0, $_POST['cost'],$_POST['art'],$_POST['code'],$_POST['sold'],$_POST['balance'],
+
+    private function add()
+    {
+        $product = new Product(0, $_POST['cost'], $_POST['art'], $_POST['code'], $_POST['sold'], $_POST['balance'],
             $_POST['category']);
         $names = [['lang_id' => 1, 'value' => $_POST['display_name']]];
         $descs = [['lang_id' => 1, 'value' => $_POST['description']]];
         $this->productsEngine->createProduct($product, $names, $descs);
     }
-    private function remove() {
+
+    private function remove()
+    {
         $product = $this->productsEngine->getProductById($_POST['id']);
         $this->productsEngine->removeProduct($product);
     }

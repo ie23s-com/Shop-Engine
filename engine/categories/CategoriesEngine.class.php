@@ -32,11 +32,6 @@ class CategoriesEngine
         $this->pages = $engine->getSystem()->getPages();
     }
 
-    public function load()
-    {
-        new CategoryPage('category', $this->pages, 'category', 'cat');
-    }
-
     /**
      * @throws MysqlException
      */
@@ -56,13 +51,9 @@ class CategoriesEngine
         $this->categories[0] = new Category(0, 'main', -1, []);
     }
 
-    /**
-     * @param int $id
-     * @return ?Category
-     */
-    public function getCategory(int $id): ?Category
+    public function load()
     {
-        return $this->categories[$id] ?? null;
+        new CategoryPage('category', $this->pages, 'category', 'cat');
     }
 
     /**
@@ -72,7 +63,6 @@ class CategoriesEngine
     {
         return $this->categories;
     }
-
 
     public function findParents(Category $category)
     {
@@ -84,14 +74,13 @@ class CategoriesEngine
         }
     }
 
-    public function findChildren(Category $category)
+    /**
+     * @param int $id
+     * @return ?Category
+     */
+    public function getCategory(int $id): ?Category
     {
-
-        foreach ($this->categories as $mChild) {
-            if ($category->getId() == $mChild->getParentId()) {
-                $category->addChild($mChild);
-            }
-        }
+        return $this->categories[$id] ?? null;
     }
 
     /**
@@ -134,6 +123,16 @@ class CategoriesEngine
         foreach ($categoriesToDelete as $id) {
             $this->engine->getSystem()->getLang()->deleteEditableRow("category-name", $id);
             unset($this->categories[$id]);
+        }
+    }
+
+    public function findChildren(Category $category)
+    {
+
+        foreach ($this->categories as $mChild) {
+            if ($category->getId() == $mChild->getParentId()) {
+                $category->addChild($mChild);
+            }
         }
     }
 

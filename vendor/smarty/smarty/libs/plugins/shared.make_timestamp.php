@@ -9,11 +9,11 @@
  * Function: smarty_make_timestamp
  * Purpose:  used by other smarty functions to make a timestamp from a string.
  *
- * @author Monte Ohrt <monte at ohrt dot com>
- *
  * @param DateTime|int|string $string date object, timestamp or string that can be converted using strtotime()
  *
  * @return int
+ * @author Monte Ohrt <monte at ohrt dot com>
+ *
  */
 function smarty_make_timestamp($string)
 {
@@ -21,7 +21,7 @@ function smarty_make_timestamp($string)
         // use "now":
         return time();
     } elseif ($string instanceof DateTime
-              || (interface_exists('DateTimeInterface', false) && $string instanceof DateTimeInterface)
+        || (interface_exists('DateTimeInterface', false) && $string instanceof DateTimeInterface)
     ) {
         return (int)$string->format('U'); // PHP 5.2 BC
     } elseif (strlen($string) === 14 && ctype_digit($string)) {

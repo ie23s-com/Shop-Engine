@@ -14,7 +14,7 @@ class LogoutPage extends Page
     public function request(array $request): string
     {
         $auth = $this->getSystem()->getAuth();
-        if($auth->getCurrentUserID() != -1) {
+        if ($auth->getCurrentUserID() != -1) {
             $auth->logout();
         }
         header("Location: /");

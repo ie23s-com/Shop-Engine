@@ -68,9 +68,16 @@ abstract class Page
 
     public function needTheme($b = 3): bool
     {
-        if($b != 3)
+        if ($b != 3)
             $this->needTheme = $b;
         return $this->needTheme;
+    }
+
+    public function runHeaders(): void
+    {
+        foreach ($this->headers as $header) {
+            header($header);
+        }
     }
 
     /**
@@ -79,12 +86,5 @@ abstract class Page
     protected function addHeader(string $header): void
     {
         $this->headers[] = $header;
-    }
-
-    public function runHeaders(): void
-    {
-        foreach ($this->headers as $header) {
-            header($header);
-        }
     }
 }

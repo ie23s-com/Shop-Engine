@@ -139,7 +139,7 @@ $(function () {
                 }
             })
             M.updateTextFields();
-            IE23S_A.createDropZone( IE23S_A.modalForm.find('.photos'))
+            IE23S_A.createDropZone(IE23S_A.modalForm.find('.photos'))
             $('select').formSelect();
         },
         dropzone_array: [],

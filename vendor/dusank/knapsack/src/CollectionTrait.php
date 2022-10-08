@@ -918,12 +918,4 @@ trait CollectionTrait
     {
         return printDump($this->getItems(), $maxItemsPerCollection, $maxDepth);
     }
-
-    /**
-     * @return array|\Traversable
-     */
-    protected function getItems()
-    {
-        return $this;
-    }
 }

@@ -18,6 +18,7 @@ class Admin extends Component
         new Pages('admin', $system->getPages(), 'administrator', 'adm');
 
     }
+
     /**
      * @return void
      */

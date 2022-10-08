@@ -23,9 +23,46 @@ abstract class Smarty_CacheResource
     protected static $sysplugins = array('file' => 'smarty_internal_cacheresource_file.php',);
 
     /**
+     * Load Cache Resource Handler
+     *
+     * @param Smarty $smarty Smarty object
+     * @param string $type name of the cache resource
+     *
+     * @return Smarty_CacheResource Cache Resource Handler
+     * @throws SmartyException
+     */
+    public static function load(Smarty $smarty, $type = null)
+    {
+        if (!isset($type)) {
+            $type = $smarty->caching_type;
+        }
+        // try smarty's cache
+        if (isset($smarty->_cache['cacheresource_handlers'][$type])) {
+            return $smarty->_cache['cacheresource_handlers'][$type];
+        }
+        // try registered resource
+        if (isset($smarty->registered_cache_resources[$type])) {
+            // do not cache these instances as they may vary from instance to instance
+            return $smarty->_cache['cacheresource_handlers'][$type] = $smarty->registered_cache_resources[$type];
+        }
+        // try sysplugins dir
+        if (isset(self::$sysplugins[$type])) {
+            $cache_resource_class = 'Smarty_Internal_CacheResource_' . ucfirst($type);
+            return $smarty->_cache['cacheresource_handlers'][$type] = new $cache_resource_class();
+        }
+        // try plugins dir
+        $cache_resource_class = 'Smarty_CacheResource_' . ucfirst($type);
+        if ($smarty->loadPlugin($cache_resource_class)) {
+            return $smarty->_cache['cacheresource_handlers'][$type] = new $cache_resource_class();
+        }
+        // give up
+        throw new SmartyException("Unable to load cache resource '{$type}'");
+    }
+
+    /**
      * populate Cached Object with meta data from Resource
      *
-     * @param Smarty_Template_Cached $cached    cached object
+     * @param Smarty_Template_Cached $cached cached object
      * @param Smarty_Internal_Template $_template template object
      *
      * @return void
@@ -42,25 +79,10 @@ abstract class Smarty_CacheResource
     abstract public function populateTimestamp(Smarty_Template_Cached $cached);
 
     /**
-     * Read the cached template and process header
-     *
-     * @param Smarty_Internal_Template $_template template object
-     * @param Smarty_Template_Cached   $cached    cached object
-     * @param boolean                  $update    flag if called because cache update
-     *
-     * @return boolean true or false if the cached content does not exist
-     */
-    abstract public function process(
-        Smarty_Internal_Template $_template,
-        Smarty_Template_Cached $cached = null,
-        $update = false
-    );
-
-    /**
      * Write the rendered template output to cache
      *
      * @param Smarty_Internal_Template $_template template object
-     * @param string                   $content   content to cache
+     * @param string $content content to cache
      *
      * @return boolean success
      */
@@ -94,9 +116,24 @@ abstract class Smarty_CacheResource
     }
 
     /**
+     * Read the cached template and process header
+     *
+     * @param Smarty_Internal_Template $_template template object
+     * @param Smarty_Template_Cached $cached cached object
+     * @param boolean $update flag if called because cache update
+     *
+     * @return boolean true or false if the cached content does not exist
+     */
+    abstract public function process(
+        Smarty_Internal_Template $_template,
+        Smarty_Template_Cached   $cached = null,
+                                 $update = false
+    );
+
+    /**
      * Empty cache
      *
-     * @param Smarty  $smarty   Smarty object
+     * @param Smarty $smarty Smarty object
      * @param integer $exp_time expiration time (number of seconds, not timestamp)
      *
      * @return integer number of cache files deleted
@@ -106,18 +143,18 @@ abstract class Smarty_CacheResource
     /**
      * Empty cache for a specific template
      *
-     * @param Smarty  $smarty        Smarty object
-     * @param string  $resource_name template name
-     * @param string  $cache_id      cache id
-     * @param string  $compile_id    compile id
-     * @param integer $exp_time      expiration time (number of seconds, not timestamp)
+     * @param Smarty $smarty Smarty object
+     * @param string $resource_name template name
+     * @param string $cache_id cache id
+     * @param string $compile_id compile id
+     * @param integer $exp_time expiration time (number of seconds, not timestamp)
      *
      * @return integer number of cache files deleted
      */
     abstract public function clear(Smarty $smarty, $resource_name, $cache_id, $compile_id, $exp_time);
 
     /**
-     * @param Smarty                 $smarty
+     * @param Smarty $smarty
      * @param Smarty_Template_Cached $cached
      *
      * @return bool|null
@@ -141,7 +178,7 @@ abstract class Smarty_CacheResource
     /**
      * Check is cache is locked for this template
      *
-     * @param Smarty                 $smarty
+     * @param Smarty $smarty
      * @param Smarty_Template_Cached $cached
      *
      * @return bool
@@ -155,7 +192,7 @@ abstract class Smarty_CacheResource
     /**
      * Lock cache for this template
      *
-     * @param Smarty                 $smarty
+     * @param Smarty $smarty
      * @param Smarty_Template_Cached $cached
      *
      * @return bool
@@ -169,7 +206,7 @@ abstract class Smarty_CacheResource
     /**
      * Unlock cache for this template
      *
-     * @param Smarty                 $smarty
+     * @param Smarty $smarty
      * @param Smarty_Template_Cached $cached
      *
      * @return bool
@@ -178,42 +215,5 @@ abstract class Smarty_CacheResource
     {
         // release lock
         return true;
-    }
-
-    /**
-     * Load Cache Resource Handler
-     *
-     * @param Smarty $smarty Smarty object
-     * @param string $type   name of the cache resource
-     *
-     * @throws SmartyException
-     * @return Smarty_CacheResource Cache Resource Handler
-     */
-    public static function load(Smarty $smarty, $type = null)
-    {
-        if (!isset($type)) {
-            $type = $smarty->caching_type;
-        }
-        // try smarty's cache
-        if (isset($smarty->_cache[ 'cacheresource_handlers' ][ $type ])) {
-            return $smarty->_cache[ 'cacheresource_handlers' ][ $type ];
-        }
-        // try registered resource
-        if (isset($smarty->registered_cache_resources[ $type ])) {
-            // do not cache these instances as they may vary from instance to instance
-            return $smarty->_cache[ 'cacheresource_handlers' ][ $type ] = $smarty->registered_cache_resources[ $type ];
-        }
-        // try sysplugins dir
-        if (isset(self::$sysplugins[ $type ])) {
-            $cache_resource_class = 'Smarty_Internal_CacheResource_' . ucfirst($type);
-            return $smarty->_cache[ 'cacheresource_handlers' ][ $type ] = new $cache_resource_class();
-        }
-        // try plugins dir
-        $cache_resource_class = 'Smarty_CacheResource_' . ucfirst($type);
-        if ($smarty->loadPlugin($cache_resource_class)) {
-            return $smarty->_cache[ 'cacheresource_handlers' ][ $type ] = new $cache_resource_class();
-        }
-        // give up
-        throw new SmartyException("Unable to load cache resource '{$type}'");
     }
 }

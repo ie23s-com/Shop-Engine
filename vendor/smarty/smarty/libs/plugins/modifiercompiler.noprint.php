@@ -11,8 +11,8 @@
  * Name:     noprint
  * Purpose:  return an empty string
  *
- * @author Uwe Tews
  * @return string with compiled code
+ * @author Uwe Tews
  */
 function smarty_modifiercompiler_noprint()
 {

@@ -3,7 +3,6 @@
 namespace ie23s\shop\admin\pages;
 
 use ie23s\shop\system\lang\Lang;
-use ie23s\shop\system\pages\Theme;
 
 class LangPage extends AdminPage
 {
@@ -13,7 +12,7 @@ class LangPage extends AdminPage
     {
         $this->lang = $this->getSystem()->getLang();
         $theme = $this->getSystem()->getPages()->getTheme();
-        if(@$_POST['type'] == 'edit')
+        if (@$_POST['type'] == 'edit')
             $this->edit();
         elseif (@$_POST['type'] == 'add')
             $this->add();
@@ -34,6 +33,7 @@ class LangPage extends AdminPage
     {
         $this->lang->addRow($_POST['key'], $_POST['value']);
     }
+
     private function remove()
     {
         echo 1;

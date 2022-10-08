@@ -2,7 +2,7 @@
 
 namespace ie23s\shop\system\auth\user\group;
 
-require_once __SHOP_DIR__.'/system/auth/user/groups/GroupModel.php';
+require_once __SHOP_DIR__ . '/system/auth/user/groups/GroupModel.php';
 
 use ie23s\shop\system\System;
 use Simplon\Mysql\Mysql;
@@ -41,7 +41,7 @@ class Group
     {
         $c = $this->db->fetchColumn('SELECT COUNT(*) FROM `group_permissions` WHERE `group_id` IN (:ids)
                                            AND permission = :perm',
-                                ['ids' => explode(',', $groups), 'perm' => $perm]);
+            ['ids' => explode(',', $groups), 'perm' => $perm]);
 
         return $c > 0;
     }

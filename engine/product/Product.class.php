@@ -63,51 +63,19 @@ class Product
     }
 
     /**
-     * @return int
-     */
-    public function getArt(): int
-    {
-        return $this->art;
-    }
-
-    /**
-     * @return int
-     */
-    public function getCode(): int
-    {
-        return $this->code;
-    }
-
-    /**
-     * @return int
-     */
-    public function getSold(): int
-    {
-        return $this->sold;
-    }
-
-    /**
-     * @return int
-     */
-    public function getBalance(): int
-    {
-        return $this->balance;
-    }
-
-    /**
-     * @return int
-     */
-    public function getCategory(): int
-    {
-        return $this->category;
-    }
-
-    /**
      * @param float $cost
      */
     public function setCost(float $cost): void
     {
         $this->cost = $cost;
+    }
+
+    /**
+     * @return int
+     */
+    public function getArt(): int
+    {
+        return $this->art;
     }
 
     /**
@@ -119,11 +87,27 @@ class Product
     }
 
     /**
+     * @return int
+     */
+    public function getCode(): int
+    {
+        return $this->code;
+    }
+
+    /**
      * @param int $code
      */
     public function setCode(int $code): void
     {
         $this->code = $code;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSold(): int
+    {
+        return $this->sold;
     }
 
     /**
@@ -135,11 +119,27 @@ class Product
     }
 
     /**
+     * @return int
+     */
+    public function getBalance(): int
+    {
+        return $this->balance;
+    }
+
+    /**
      * @param int $balance
      */
     public function setBalance(int $balance): void
     {
         $this->balance = $balance;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCategory(): int
+    {
+        return $this->category;
     }
 
     /**
@@ -150,17 +150,17 @@ class Product
         $this->category = $category;
     }
 
+    public function getPhotos(): array
+    {
+        return $this->photos;
+    }
+
     /**
      * @param array $photos
      */
     public function setPhotos(array $photos): void
     {
         $this->photos = $photos;
-    }
-
-    public function getPhotos(): array
-    {
-        return $this->photos;
     }
 
     /**

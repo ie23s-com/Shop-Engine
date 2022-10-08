@@ -26,7 +26,7 @@
  * @author Monte Ohrt <monte at ohrt dot com>
  * @author Ralf Strehle (minor optimization) <ralf dot strehle at yahoo dot de>
  *
- * @param array                     $params parameters
+ * @param array $params parameters
  *
  * @param Smarty_Internal_Template $template
  *
@@ -40,7 +40,7 @@ function smarty_function_html_options($params, Smarty_Internal_Template $templat
         array(
             array(
                 'function' => 'smarty_function_escape_special_chars',
-                'file'     => SMARTY_PLUGINS_DIR . 'shared.escape_special_chars.php'
+                'file' => SMARTY_PLUGINS_DIR . 'shared.escape_special_chars.php'
             )
         )
     );
@@ -84,7 +84,7 @@ function smarty_function_html_options($params, Smarty_Internal_Template $templat
                         } else {
                             $_sel = smarty_function_escape_special_chars((string)$_sel);
                         }
-                        $selected[ $_sel ] = true;
+                        $selected[$_sel] = true;
                     }
                 } elseif (is_object($_val)) {
                     if (method_exists($_val, '__toString')) {
@@ -104,7 +104,7 @@ function smarty_function_html_options($params, Smarty_Internal_Template $templat
                 break;
             case 'disabled':
             case 'readonly':
-                if (!empty($params[ 'strict' ])) {
+                if (!empty($params['strict'])) {
                     if (!is_scalar($_val)) {
                         trigger_error(
                             "html_options: {$_key} attribute must be a scalar, only boolean true or string '{$_key}' will actually add the attribute",
@@ -139,7 +139,7 @@ function smarty_function_html_options($params, Smarty_Internal_Template $templat
         }
     } else {
         foreach ($values as $_i => $_key) {
-            $_val = isset($output[ $_i ]) ? $output[ $_i ] : '';
+            $_val = isset($output[$_i]) ? $output[$_i] : '';
             $_html_result .= smarty_function_html_options_optoutput($_key, $_val, $selected, $id, $class, $_idx);
         }
     }
@@ -169,7 +169,7 @@ function smarty_function_html_options_optoutput($key, $value, $selected, $id, $c
         $_key = smarty_function_escape_special_chars($key);
         $_html_result = '<option value="' . $_key . '"';
         if (is_array($selected)) {
-            if (isset($selected[ $_key ])) {
+            if (isset($selected[$_key])) {
                 $_html_result .= ' selected="selected"';
             }
         } elseif ($_key === $selected) {

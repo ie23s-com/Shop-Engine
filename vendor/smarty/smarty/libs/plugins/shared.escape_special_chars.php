@@ -11,11 +11,11 @@
  * Purpose:  used by other smarty functions to escape
  *           special chars except for already escaped ones
  *
- * @author Monte Ohrt <monte at ohrt dot com>
- *
  * @param string $string text that should by escaped
  *
  * @return string
+ * @author Monte Ohrt <monte at ohrt dot com>
+ *
  */
 function smarty_function_escape_special_chars($string)
 {

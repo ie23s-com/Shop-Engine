@@ -3,7 +3,6 @@
 namespace ie23s\shop\system\auth\pages;
 
 use ie23s\shop\system\pages\Page;
-use ie23s\shop\system\pages\Theme;
 
 class RegisterPage extends Page
 {
@@ -12,7 +11,7 @@ class RegisterPage extends Page
     {
         $theme = $this->getPages()->getTheme();
 
-        if(isset($request[1]) && $request[1] == 'tonly'){
+        if (isset($request[1]) && $request[1] == 'tonly') {
             $this->needTheme(false);
         }
         return $theme->getTpl('auth/register');

@@ -17,16 +17,6 @@ class MySQLMod extends Component
     private Mysql\Mysql $dbConnection;
 
     /**
-     * @return Mysql\Mysql
-     */
-    public function getConn(): Mysql\Mysql
-    {
-        return $this->dbConnection;
-    }
-
-    //Database info init
-
-    /**
      * MysqlConnection init
      * @throws Exception
      */
@@ -41,6 +31,16 @@ class MySQLMod extends Component
         );
         $this->pdoConnection = $pdo->connect('utf8', []); // charset, ops
         // $pdoConnection->setAttribute($attribute, $value);
+    }
+
+    //Database info init
+
+    /**
+     * @return Mysql\Mysql
+     */
+    public function getConn(): Mysql\Mysql
+    {
+        return $this->dbConnection;
     }
 
     /**

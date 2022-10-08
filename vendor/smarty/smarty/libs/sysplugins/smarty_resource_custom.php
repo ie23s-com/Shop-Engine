@@ -17,32 +17,9 @@
 abstract class Smarty_Resource_Custom extends Smarty_Resource
 {
     /**
-     * fetch template and its modification time from data source
-     *
-     * @param string  $name    template name
-     * @param string  &$source template source
-     * @param integer &$mtime  template modification timestamp (epoch)
-     */
-    abstract protected function fetch($name, &$source, &$mtime);
-
-    /**
-     * Fetch template's modification timestamp from data source
-     * {@internal implementing this method is optional.
-     *  Only implement it if modification times can be accessed faster than loading the complete template source.}}
-     *
-     * @param string $name template name
-     *
-     * @return integer|boolean timestamp (epoch) the template was modified, or false if not found
-     */
-    protected function fetchTimestamp($name)
-    {
-        return null;
-    }
-
-    /**
      * populate Source Object with meta data from Resource
      *
-     * @param Smarty_Template_Source   $source    source object
+     * @param Smarty_Template_Source $source source object
      * @param Smarty_Internal_Template $_template template object
      */
     public function populate(Smarty_Template_Source $source, Smarty_Internal_Template $_template = null)
@@ -61,6 +38,29 @@ abstract class Smarty_Resource_Custom extends Smarty_Resource
         }
         $source->exists = !!$source->timestamp;
     }
+
+    /**
+     * Fetch template's modification timestamp from data source
+     * {@internal implementing this method is optional.
+     *  Only implement it if modification times can be accessed faster than loading the complete template source.}}
+     *
+     * @param string $name template name
+     *
+     * @return integer|boolean timestamp (epoch) the template was modified, or false if not found
+     */
+    protected function fetchTimestamp($name)
+    {
+        return null;
+    }
+
+    /**
+     * fetch template and its modification time from data source
+     *
+     * @param string $name template name
+     * @param string  &$source template source
+     * @param integer &$mtime template modification timestamp (epoch)
+     */
+    abstract protected function fetch($name, &$source, &$mtime);
 
     /**
      * Load template's source into current template object

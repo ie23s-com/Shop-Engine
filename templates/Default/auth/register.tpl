@@ -39,7 +39,7 @@
     <div class="row ie23s-auto-margin-0">
         <div class="input-field col s6">
             <button class="btn waves-effect waves-block waves-light center-block cancel" name="cancel" type="button"
-            style="display: none">
+                    style="display: none">
                 Cancel
                 <i class="material-icons right">cancel</i>
             </button>

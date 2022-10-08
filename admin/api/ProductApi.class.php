@@ -25,7 +25,7 @@ class ProductApi extends ApiAbstract
         } catch (MysqlException $e) {
             return $this->withCode(500);
         }
-        if($product == null) {
+        if ($product == null) {
             return $this->withCode(404);
         }
         return json_encode($product);
@@ -44,7 +44,7 @@ class ProductApi extends ApiAbstract
         } catch (MysqlException $e) {
             return $this->withCode(500);
         }
-        return $this->withCode(200, json_encode(['id'=>$product->getId()]));
+        return $this->withCode(200, json_encode(['id' => $product->getId()]));
     }
 
     public function put(): string
@@ -52,10 +52,10 @@ class ProductApi extends ApiAbstract
         try {
             $product = $this->productEngine->getProductById($this->getRequest('id'));
 
-            parse_str(file_get_contents("php://input"),$putData);
+            parse_str(file_get_contents("php://input"), $putData);
 
-            if($product == null) {
-                return $this->withCode(404 );
+            if ($product == null) {
+                return $this->withCode(404);
             }
             $product->setCost($this->getRequest('cost'));
             $product->setArt($this->getRequest('art'));
@@ -76,7 +76,7 @@ class ProductApi extends ApiAbstract
     {
         try {
             $product = $this->productEngine->getProductById($this->getRequest('id'));
-            if($product == null) {
+            if ($product == null) {
                 return $this->withCode(404);
             }
             $this->productEngine->removeProduct($product);

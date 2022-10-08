@@ -12,9 +12,9 @@
  * Purpose:  capitalize words in the string
  * {@internal {$string|capitalize:true:true} is the fastest option for MBString enabled systems }}
  *
- * @param string  $string    string to capitalize
+ * @param string $string string to capitalize
  * @param boolean $uc_digits also capitalize "x123" to "X123"
- * @param boolean $lc_rest   capitalize first letters, lowercase all following letters "aAa" to "Aaa"
+ * @param boolean $lc_rest capitalize first letters, lowercase all following letters "aAa" to "Aaa"
  *
  * @return string capitalized string
  * @author Monte Ohrt <monte at ohrt dot com>
@@ -22,7 +22,7 @@
  */
 function smarty_modifier_capitalize($string, $uc_digits = false, $lc_rest = false)
 {
-	$string = (string) $string;
+    $string = (string)$string;
 
     if (Smarty::$_MBSTRING) {
         if ($lc_rest) {
@@ -45,13 +45,13 @@ function smarty_modifier_capitalize($string, $uc_digits = false, $lc_rest = fals
                 PREG_OFFSET_CAPTURE
             )
             ) {
-                foreach ($matches[ 1 ] as $match) {
+                foreach ($matches[1] as $match) {
                     $upper_string =
                         substr_replace(
                             $upper_string,
-                            mb_strtolower($match[ 0 ], Smarty::$_CHARSET),
-                            $match[ 1 ],
-                            strlen($match[ 0 ])
+                            mb_strtolower($match[0], Smarty::$_CHARSET),
+                            $match[1],
+                            strlen($match[0])
                         );
                 }
             }
@@ -84,9 +84,9 @@ function smarty_modifier_capitalize($string, $uc_digits = false, $lc_rest = fals
             PREG_OFFSET_CAPTURE
         )
         ) {
-            foreach ($matches[ 1 ] as $match) {
+            foreach ($matches[1] as $match) {
                 $upper_string =
-                    substr_replace($upper_string, strtolower($match[ 0 ]), $match[ 1 ], strlen($match[ 0 ]));
+                    substr_replace($upper_string, strtolower($match[0]), $match[1], strlen($match[0]));
             }
         }
     }
@@ -113,7 +113,7 @@ function smarty_modifier_capitalize($string, $uc_digits = false, $lc_rest = fals
  */
 function smarty_mod_cap_mbconvert_cb($matches)
 {
-    return stripslashes($matches[ 1 ]) . mb_convert_case(stripslashes($matches[ 2 ]), MB_CASE_UPPER, Smarty::$_CHARSET);
+    return stripslashes($matches[1]) . mb_convert_case(stripslashes($matches[2]), MB_CASE_UPPER, Smarty::$_CHARSET);
 }
 
 /**
@@ -123,7 +123,7 @@ function smarty_mod_cap_mbconvert_cb($matches)
  */
 function smarty_mod_cap_mbconvert2_cb($matches)
 {
-    return stripslashes($matches[ 1 ]) . mb_convert_case(stripslashes($matches[ 3 ]), MB_CASE_UPPER, Smarty::$_CHARSET);
+    return stripslashes($matches[1]) . mb_convert_case(stripslashes($matches[3]), MB_CASE_UPPER, Smarty::$_CHARSET);
 }
 
 /**
@@ -133,7 +133,7 @@ function smarty_mod_cap_mbconvert2_cb($matches)
  */
 function smarty_mod_cap_ucfirst_cb($matches)
 {
-    return stripslashes($matches[ 1 ]) . ucfirst(stripslashes($matches[ 2 ]));
+    return stripslashes($matches[1]) . ucfirst(stripslashes($matches[2]));
 }
 
 /**
@@ -143,5 +143,5 @@ function smarty_mod_cap_ucfirst_cb($matches)
  */
 function smarty_mod_cap_ucfirst2_cb($matches)
 {
-    return stripslashes($matches[ 1 ]) . ucfirst(stripslashes($matches[ 3 ]));
+    return stripslashes($matches[1]) . ucfirst(stripslashes($matches[3]));
 }

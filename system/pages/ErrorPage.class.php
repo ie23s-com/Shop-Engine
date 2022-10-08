@@ -9,6 +9,7 @@ class ErrorPage extends Page
 {
     private int $error;
     private string $text;
+
     /**
      * @throws SmartyException
      */

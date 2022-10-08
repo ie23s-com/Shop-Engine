@@ -54,7 +54,7 @@
             </div>
             <div class="row ie23s-auto-margin-0">
                 <div class="input-field col s12">
-                    <div class="dropzone" id="mydropzone"> </div>
+                    <div class="dropzone" id="mydropzone"></div>
                 </div>
             </div>
             <div class="row ie23s-auto-margin-0">
@@ -107,17 +107,19 @@
     </tr>
     <tr class="preloader" style="display: none;">
         <th colspan="10">
-        <div class="preloader-wrapper big active ie23s-auto-margin-0">
-            <div class="spinner-layer spinner-blue-only">
-                <div class="circle-clipper left">
-                    <div class="circle"></div>
-                </div><div class="gap-patch">
-                    <div class="circle"></div>
-                </div><div class="circle-clipper right">
-                    <div class="circle"></div>
+            <div class="preloader-wrapper big active ie23s-auto-margin-0">
+                <div class="spinner-layer spinner-blue-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
                 </div>
             </div>
-        </div>
     </tr>
     </thead>
     <tbody>
@@ -139,7 +141,8 @@
                    class="waves-effect waves-light btn-small"><i class="material-icons center">open_in_new
                     </i></a></td>
             <td><a href="#" data-id="{$product->getId()}"
-                   class="waves-effect waves-light btn-small product-remove ie23s-red-gb"><i class="material-icons center">cancel
+                   class="waves-effect waves-light btn-small product-remove ie23s-red-gb"><i
+                            class="material-icons center">cancel
                     </i></a></td>
 
         </tr>
@@ -151,27 +154,29 @@
     <div class="ie23s-hidden" id="adm-product-template">
         <table>
             <tbody>
-        <tr>
-            <td>{id}</td>
-            <td>{display_name}</td>
-            <td>{category}</td>
-            <td>{cost}</td>
-            <td>{description}</td>
-            <td>{art}</td>
-            <td>{code}</td>
-            <td>{sold}</td>
-            <td>{balance}</td>
-            <td><a href="#" data-id="{id}"
-                   class="waves-effect waves-light btn-small product-edit"><i class="material-icons center">mode_edit
-                    </i></a></td>
-            <td><a href="/product/{id}" target="_blank"
-                   class="waves-effect waves-light btn-small"><i class="material-icons center">open_in_new
-                    </i></a></td>
-            <td><a href="#" data-id="{id}"
-                   class="waves-effect waves-light btn-small product-remove ie23s-red-gb"><i class="material-icons center">cancel
-                    </i></a></td>
+            <tr>
+                <td>{id}</td>
+                <td>{display_name}</td>
+                <td>{category}</td>
+                <td>{cost}</td>
+                <td>{description}</td>
+                <td>{art}</td>
+                <td>{code}</td>
+                <td>{sold}</td>
+                <td>{balance}</td>
+                <td><a href="#" data-id="{id}"
+                       class="waves-effect waves-light btn-small product-edit"><i class="material-icons center">mode_edit
+                        </i></a></td>
+                <td><a href="/product/{id}" target="_blank"
+                       class="waves-effect waves-light btn-small"><i class="material-icons center">open_in_new
+                        </i></a></td>
+                <td><a href="#" data-id="{id}"
+                       class="waves-effect waves-light btn-small product-remove ie23s-red-gb"><i
+                                class="material-icons center">cancel
+                        </i></a></td>
 
-        </tr></tbody>
+            </tr>
+            </tbody>
         </table>
     </div>
 {/literal}

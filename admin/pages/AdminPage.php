@@ -28,6 +28,14 @@ abstract class AdminPage
     }
 
     /**
+     * @return Engine
+     */
+    public function getEngine(): Engine
+    {
+        return $this->engine;
+    }
+
+    /**
      * @return System
      */
     public function getSystem(): System
@@ -51,15 +59,7 @@ abstract class AdminPage
         return $this->uri;
     }
 
-    abstract function getPage() : string;
-
-    /**
-     * @return Engine
-     */
-    public function getEngine(): Engine
-    {
-        return $this->engine;
-    }
+    abstract function getPage(): string;
 
 
 }

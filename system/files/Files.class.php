@@ -2,7 +2,7 @@
 
 namespace ie23s\shop\system\files;
 
-require_once __SHOP_DIR__.'/system/files/UploadApi.php';
+require_once __SHOP_DIR__ . '/system/files/UploadApi.php';
 
 use ie23s\shop\system\Component;
 

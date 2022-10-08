@@ -249,7 +249,7 @@ function filter($collection, callable $function = null)
 {
     if (null === $function) {
         $function = function ($value) {
-            return (bool) $value;
+            return (bool)$value;
         };
     }
 
@@ -441,6 +441,7 @@ function groupByKey($collection, $key)
 
     return new Collection($generatorFactory);
 }
+
 /**
  * Executes $function for each item in $collection
  *
@@ -1581,7 +1582,7 @@ function average($collection)
         $count++;
     }
 
-    return $count ? $sum/$count : 0;
+    return $count ? $sum / $count : 0;
 }
 
 /**
@@ -1635,7 +1636,7 @@ function toString($collection)
     $result = '';
 
     foreach ($collection as $value) {
-        $result .= (string) $value;
+        $result .= (string)$value;
     }
 
     return $result;
@@ -1710,7 +1711,7 @@ function dump($input, $maxItemsPerCollection = null, $maxDepth = null)
                     $normalizedProperties[$betterKey] = dump(
                         $value,
                         $maxItemsPerCollection,
-                        $maxDepth>0 ? $maxDepth-1 : null
+                        $maxDepth > 0 ? $maxDepth - 1 : null
                     );
 
                     break;
@@ -1732,7 +1733,7 @@ function dump($input, $maxItemsPerCollection = null, $maxDepth = null)
             $property->setAccessible(true);
             $normalizedProperties[$property->getName()] = $property->getValue($input);
         }
-        return [get_class($input) => dump($normalizedProperties, null, $maxDepth>0 ? $maxDepth-1 : null)];
+        return [get_class($input) => dump($normalizedProperties, null, $maxDepth > 0 ? $maxDepth - 1 : null)];
     }
 
     return gettype($input);

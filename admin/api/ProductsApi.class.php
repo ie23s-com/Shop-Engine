@@ -19,7 +19,7 @@ class ProductsApi extends ApiAbstract
          * @var MySQL $db
          */
         $db = $this->getSystem()->getComponent('database')->getConn();
-        $query = '%'. str_replace(' ', '%', trim($this->getRequest('q'))) . '%';
+        $query = '%' . str_replace(' ', '%', trim($this->getRequest('q'))) . '%';
         $response = $db->fetchRowMany('SELECT *, (SELECT language_editable.value
                         FROM language_editable
                         WHERE language_editable.`type` = \'product-name\' AND `external_id` = products.id

@@ -12,8 +12,8 @@
  * Name:     explode
  * Purpose:  split a string by a string
  *
- * @param string   $separator
- * @param string   $string
+ * @param string $separator
+ * @param string $string
  * @param int|null $limit
  *
  * @return array

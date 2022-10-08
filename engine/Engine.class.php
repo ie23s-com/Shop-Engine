@@ -1,4 +1,5 @@
 <?php
+
 namespace ie23s\shop\engine\utils\breadcrumbs;
 
 use ie23s\shop\engine\utils\breadcrumbs\categories\CategoriesEngine;

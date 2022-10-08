@@ -35,7 +35,7 @@
  * @author  credits to Monte Ohrt <monte at ohrt dot com>
  * @version 1.0
  *
- * @param array                    $params   parameters
+ * @param array $params parameters
  * @param Smarty_Internal_Template $template template object
  *
  * @return string
@@ -48,7 +48,7 @@ function smarty_function_html_checkboxes($params, Smarty_Internal_Template $temp
         array(
             array(
                 'function' => 'smarty_function_escape_special_chars',
-                'file'     => SMARTY_PLUGINS_DIR . 'shared.escape_special_chars.php'
+                'file' => SMARTY_PLUGINS_DIR . 'shared.escape_special_chars.php'
             )
         )
     );
@@ -99,7 +99,7 @@ function smarty_function_html_checkboxes($params, Smarty_Internal_Template $temp
                         } else {
                             $_sel = smarty_function_escape_special_chars((string)$_sel);
                         }
-                        $selected[ $_sel ] = true;
+                        $selected[$_sel] = true;
                     }
                 } elseif (is_object($_val)) {
                     if (method_exists($_val, '__toString')) {
@@ -128,7 +128,7 @@ function smarty_function_html_checkboxes($params, Smarty_Internal_Template $temp
                 break;
             case 'disabled':
             case 'readonly':
-                if (!empty($params[ 'strict' ])) {
+                if (!empty($params['strict'])) {
                     if (!is_scalar($_val)) {
                         trigger_error(
                             "html_options: {$_key} attribute must be a scalar, only boolean true or string '{$_key}' will actually add the attribute",
@@ -172,7 +172,7 @@ function smarty_function_html_checkboxes($params, Smarty_Internal_Template $temp
         }
     } else {
         foreach ($values as $_i => $_key) {
-            $_val = isset($output[ $_i ]) ? $output[ $_i ] : '';
+            $_val = isset($output[$_i]) ? $output[$_i] : '';
             $_html_result[] =
                 smarty_function_html_checkboxes_output(
                     $name,
@@ -187,8 +187,8 @@ function smarty_function_html_checkboxes($params, Smarty_Internal_Template $temp
                 );
         }
     }
-    if (!empty($params[ 'assign' ])) {
-        $template->assign($params[ 'assign' ], $_html_result);
+    if (!empty($params['assign'])) {
+        $template->assign($params['assign'], $_html_result);
     } else {
         return implode("\n", $_html_result);
     }
@@ -217,7 +217,8 @@ function smarty_function_html_checkboxes_output(
     $labels,
     $label_ids,
     $escape = true
-) {
+)
+{
     $_output = '';
     if (is_object($value)) {
         if (method_exists($value, '__toString')) {
@@ -271,7 +272,7 @@ function smarty_function_html_checkboxes_output(
         $_output .= ' id="' . $_id . '"';
     }
     if (is_array($selected)) {
-        if (isset($selected[ $value ])) {
+        if (isset($selected[$value])) {
             $_output .= ' checked="checked"';
         }
     } elseif ($value === $selected) {

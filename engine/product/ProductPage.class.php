@@ -47,12 +47,6 @@ class ProductPage extends Page
         return $theme->getTpl('product');
     }
 
-    public function load(Engine $param)
-    {
-        $this->productEngine = $param->getProductEngine();
-        $this->categoryEngine = $param->getCategoriesEngine();
-    }
-
     private function createBreadcrumbs(Category $category, Product $product)
     {
         $this->breadcrumbs = new Breadcrumbs();
@@ -66,5 +60,11 @@ class ProductPage extends Page
         $this->breadcrumbs->add(new BreadcrumbModel($category->getDisplayName(), '/category/' . $category->getId()));
 
         $this->breadcrumbs->add(new BreadcrumbModel($product->getDisplayName(), 'javascript:void(0)'));
+    }
+
+    public function load(Engine $param)
+    {
+        $this->productEngine = $param->getProductEngine();
+        $this->categoryEngine = $param->getCategoriesEngine();
     }
 }

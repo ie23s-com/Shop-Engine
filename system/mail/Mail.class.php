@@ -23,6 +23,26 @@ class Mail extends Component
     }
 
     /**
+     * @throws MysqlException
+     * @throws Exception
+     * @throws Html2TextException
+     */
+    public function sendMail(array $receiver, string $subject, string $template, ...$params)
+    {
+        $mail = $this->initMailer();
+        if (isset($receiver['name']))
+            $mail->addAddress($receiver['email'], $receiver['name']);
+        else
+            $mail->addAddress($receiver['email']);
+        $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->Subject = "[{$this->system->getLang()->getRow('title')}] {$subject}";
+
+        $mail->Body = $template;
+        $mail->AltBody = Html2Text::convert($template);
+        $mail->send();
+    }
+
+    /**
      * @throws MysqlException|Exception
      */
     private function initMailer(): PHPMailer
@@ -41,25 +61,5 @@ class Mail extends Component
 
         $mail->setFrom($_ENV['SENDER'], $this->system->getLang()->getRow('title'));
         return $mail;
-    }
-
-    /**
-     * @throws MysqlException
-     * @throws Exception
-     * @throws Html2TextException
-     */
-    public function sendMail(array $receiver, string $subject, string $template, ...$params)
-    {
-        $mail = $this->initMailer();
-        if (isset($receiver['name']))
-            $mail->addAddress($receiver['email'], $receiver['name']);
-        else
-            $mail->addAddress($receiver['email']);
-        $mail->isHTML(true);                                  //Set email format to HTML
-        $mail->Subject = "[{$this->system->getLang()->getRow('title')}] {$subject}";
-
-        $mail->Body = $template;
-        $mail->AltBody = Html2Text::convert($template);
-        $mail->send();
     }
 }

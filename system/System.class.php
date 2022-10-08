@@ -110,6 +110,13 @@ class System
         $this->components["pages"]->unload();
     }
 
+    public function getLang(): Lang
+    {
+        /** @var $r Lang */
+        $r = $this->getComponent('lang');
+        return $r;
+    }
+
     /**
      * @param $component
      * @return Component
@@ -117,13 +124,6 @@ class System
     public function getComponent($component): Component
     {
         return $this->components[$component];
-    }
-
-    public function getLang(): Lang
-    {
-        /** @var $r Lang */
-        $r = $this->getComponent('lang');
-        return $r;
     }
 
     public function getPages(): Pages
@@ -146,6 +146,7 @@ class System
         $r = $this->getComponent('api');
         return $r;
     }
+
     public function getAuth(): Auth
     {
         /** @var $r Auth */

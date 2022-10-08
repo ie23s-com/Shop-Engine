@@ -23,10 +23,10 @@
  * @link   https://www.smarty.net/manual/en/language.function.textformat.php {textformat}
  *         (Smarty online manual)
  *
- * @param array                    $params   parameters
- * @param string                   $content  contents of the block
+ * @param array $params parameters
+ * @param string $content contents of the block
  * @param Smarty_Internal_Template $template template object
- * @param boolean                  &$repeat  repeat flag
+ * @param boolean                  &$repeat repeat flag
  *
  * @return string content re-formatted
  * @author Monte Ohrt <monte at ohrt dot com>
@@ -42,7 +42,7 @@ function smarty_block_textformat($params, $content, Smarty_Internal_Template $te
             array(
                 array(
                     'function' => 'smarty_modifier_mb_wordwrap',
-                    'file'     => SMARTY_PLUGINS_DIR . 'modifier.mb_wordwrap.php'
+                    'file' => SMARTY_PLUGINS_DIR . 'modifier.mb_wordwrap.php'
                 )
             )
         );

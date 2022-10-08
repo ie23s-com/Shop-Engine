@@ -17,34 +17,33 @@ IE23S_REGISTER = {
     },
     validPassword: () => {
         let p = IE23S_REGISTER.modalContainer.find('.content').find('#password');
-        if(p.val().length < 6) {
-            p.removeClass( "valid" ).addClass( "invalid" );
+        if (p.val().length < 6) {
+            p.removeClass("valid").addClass("invalid");
         } else {
-            p.removeClass( "invalid" ).addClass( "valid" );
+            p.removeClass("invalid").addClass("valid");
         }
     },
     validPassword1: () => {
         let p1 = IE23S_REGISTER.modalContainer.find('.content').find('#password1');
-        if(p1.val() ===
+        if (p1.val() ===
             IE23S_REGISTER.modalContainer.find('.content').find('#password').val()) {
-            p1.removeClass( "invalid" ).addClass( "valid" );
+            p1.removeClass("invalid").addClass("valid");
         } else {
-            p1.removeClass( "valid" ).addClass( "invalid" );
+            p1.removeClass("valid").addClass("invalid");
         }
     },
     loadedForm: function (res) {
         $('.progress').hide();
         IE23S_REGISTER.modalContainer.find('.content').html(res);
         IE23S_REGISTER.modalContainer.find('.content').find('#password')
-            .on("focusout",  () => {
+            .on("focusout", () => {
                 IE23S_REGISTER.validPassword();
                 IE23S_REGISTER.validPassword1();
             });
         IE23S_REGISTER.modalContainer.find('.content').find('#password1')
-            .on("focusout",  IE23S_REGISTER.validPassword1);
+            .on("focusout", IE23S_REGISTER.validPassword1);
         IE23S_REGISTER.modalContainer.find('.content').find('.cancel').show();
-        IE23S_REGISTER.modalContainer.find('.content').find('.cancel').
-            on('click',  () => IE23S_REGISTER.modal.close());
+        IE23S_REGISTER.modalContainer.find('.content').find('.cancel').on('click', () => IE23S_REGISTER.modal.close());
 
         IE23S_REGISTER.form = IE23S_LOGIN.modalContainer.find('.content').find('form');
         IE23S_REGISTER.form.submit(function (e) {
@@ -52,12 +51,12 @@ IE23S_REGISTER = {
             IE23S_REGISTER.register();
         });
     },
-    modalInit: function(e) {
+    modalInit: function (e) {
         this.modal = M.Modal.init(document.querySelector(e));
         this.modalContainer = $(e);
     },
     registerInit: function (e) {
-        $(e).on( "click", function (event) {
+        $(e).on("click", function (event) {
 
             event.preventDefault();
             IE23S_REGISTER.loadForm();
@@ -76,9 +75,9 @@ IE23S_REGISTER = {
         this.form.find('button').prop('disabled', false);
         this.form.find('textarea').prop('disabled', false);
     },
-    successAuth: function(r) {
+    successAuth: function (r) {
         IE23S_REGISTER.unblock();
-        $('.unAuth'). hide();
+        $('.unAuth').hide();
         $('.authOnly').show();
         IE23S_REGISTER.modal.close();
     },
@@ -129,8 +128,7 @@ IE23S_LOGIN = {
         $('.progress').hide();
         IE23S_LOGIN.modalContainer.find('.content').html(res);
         IE23S_LOGIN.modalContainer.find('.content').find('.cancel').show();
-        IE23S_LOGIN.modalContainer.find('.content').find('.cancel').
-            on('click', () => IE23S_LOGIN.modal.close());
+        IE23S_LOGIN.modalContainer.find('.content').find('.cancel').on('click', () => IE23S_LOGIN.modal.close());
         IE23S_LOGIN.form = IE23S_LOGIN.modalContainer.find('.content').find('form');
         IE23S_LOGIN.form.submit(function (e) {
             e.preventDefault();
@@ -151,9 +149,9 @@ IE23S_LOGIN = {
         this.form.find('button').prop('disabled', false);
         this.form.find('textarea').prop('disabled', false);
     },
-    successAuth: function(r) {
+    successAuth: function (r) {
         IE23S_LOGIN.unblock();
-        $('.unAuth'). hide();
+        $('.unAuth').hide();
         $('.authOnly').show();
         IE23S_LOGIN.modal.close();
     },
@@ -171,23 +169,23 @@ IE23S_LOGIN = {
         IE23S_LOGIN.unblock();
     },
     auth: function () {
-            $.ajax({
-                type: 'POST',
-                url: '/api/auth',
-                dataType: 'json',
-                beforeSend: () => IE23S_LOGIN.block(),
-                data: IE23S_LOGIN.form.serialize(),
-                success: IE23S_LOGIN.successAuth,
-                error: IE23S_LOGIN.failedAuth
+        $.ajax({
+            type: 'POST',
+            url: '/api/auth',
+            dataType: 'json',
+            beforeSend: () => IE23S_LOGIN.block(),
+            data: IE23S_LOGIN.form.serialize(),
+            success: IE23S_LOGIN.successAuth,
+            error: IE23S_LOGIN.failedAuth
 
-            });
-        },
-    modalInit: function(e) {
+        });
+    },
+    modalInit: function (e) {
         this.modal = M.Modal.init(document.querySelector(e));
         this.modalContainer = $(e);
     },
     loginInit: function (e) {
-        $(e).on( "click", function (event) {
+        $(e).on("click", function (event) {
 
             event.preventDefault();
             IE23S_LOGIN.loadForm();

@@ -15,10 +15,10 @@
  *          regex_replace (Smarty online manual)
  * @author Monte Ohrt <monte at ohrt dot com>
  *
- * @param string       $string  input string
- * @param string|array $search  regular expression(s) to search for
+ * @param string $string input string
+ * @param string|array $search regular expression(s) to search for
  * @param string|array $replace string(s) that should be replaced
- * @param int          $limit   the maximum number of replacements
+ * @param int $limit the maximum number of replacements
  *
  * @return string
  */
@@ -26,7 +26,7 @@ function smarty_modifier_regex_replace($string, $search, $replace, $limit = -1)
 {
     if (is_array($search)) {
         foreach ($search as $idx => $s) {
-            $search[ $idx ] = _smarty_regex_replace_check($s);
+            $search[$idx] = _smarty_regex_replace_check($s);
         }
     } else {
         $search = _smarty_regex_replace_check($search);
@@ -35,7 +35,7 @@ function smarty_modifier_regex_replace($string, $search, $replace, $limit = -1)
 }
 
 /**
- * @param  string $search string(s) that should be replaced
+ * @param string $search string(s) that should be replaced
  *
  * @return string
  * @ignore
@@ -48,8 +48,8 @@ function _smarty_regex_replace_check($search)
         $search = substr($search, 0, $pos);
     }
     // remove eval-modifier from $search
-    if (preg_match('!([a-zA-Z\s]+)$!s', $search, $match) && (strpos($match[ 1 ], 'e') !== false)) {
-        $search = substr($search, 0, -strlen($match[ 1 ])) . preg_replace('![e\s]+!', '', $match[ 1 ]);
+    if (preg_match('!([a-zA-Z\s]+)$!s', $search, $match) && (strpos($match[1], 'e') !== false)) {
+        $search = substr($search, 0, -strlen($match[1])) . preg_replace('![e\s]+!', '', $match[1]);
     }
     return $search;
 }

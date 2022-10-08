@@ -40,6 +40,18 @@ class Pages extends Component
 
     }
 
+    public static function fromPath(string $path): array
+    {
+        $do = preg_replace('|(/+)|', '/', trim($path, '/'));
+        $do = strtolower($do);
+        return explode('/', $do);
+    }
+
+    public static function toPath(array $array): string
+    {
+        return implode('/', $array);
+    }
+
     /**
      * @return void
      * @throws MysqlException
@@ -51,17 +63,6 @@ class Pages extends Component
         $this->theme->addBlock("theme_path", __SHOP_DIR__ . 'templates/' . $this->theme->getThemeName());
         $this->theme->addBlock("time", time());
 
-    }
-
-    private function getModule(): Page
-    {
-        if (!isset($this->path[0]) || empty($this->path[0])) {
-            $this->path[0] = 'index';
-        }
-        $name = $this->pathsModules[$this->path[0]] ?? null;
-        if ($name == null)
-            $this->error(404, 'Not found. Please, try to find other page!');
-        return $this->modules[$name];
     }
 
     /**
@@ -91,11 +92,32 @@ class Pages extends Component
         }
     }
 
+    private function getModule(): Page
+    {
+        if (!isset($this->path[0]) || empty($this->path[0])) {
+            $this->path[0] = 'index';
+        }
+        $name = $this->pathsModules[$this->path[0]] ?? null;
+        if ($name == null)
+            $this->error(404, 'Not found. Please, try to find other page!');
+        return $this->modules[$name];
+    }
+
+    /**
+     * @return void
+     */
+    public function error($num, $text = "")
+    {
+        $this->title = "{$num} error";
+        $this->path[0] = 'error';
+        $this->errorPage->setError($num, $text);
+    }
+
     public function loadModule(Page $page)
     {
         foreach ($page->getPaths() as $path) {
             $path = strtolower($path);
-            if(isset($this->pathsModules[$path])) {
+            if (isset($this->pathsModules[$path])) {
                 $this->error(503, "Conflict modules! Module [{$page->getName()}] is going to reserve
                 path '$path' which used by {$this->pathsModules[$path]}!");
             }
@@ -112,28 +134,6 @@ class Pages extends Component
         return $this->path;
     }
 
-    public static function fromPath(string $path): array
-    {
-        $do = preg_replace('|(/+)|', '/', trim($path, '/'));
-        $do = strtolower($do);
-        return explode('/', $do);
-    }
-
-    public static function toPath(array $array): string
-    {
-        return implode('/', $array);
-    }
-
-    /**
-     * @return void
-     */
-    public function error($num, $text = "")
-    {
-        $this->title = "{$num} error";
-        $this->path[0] = 'error';
-        $this->errorPage->setError($num, $text);
-    }
-
     /**
      * @return Theme
      */
@@ -141,7 +141,6 @@ class Pages extends Component
     {
         return $this->theme;
     }
-
 
 
 }

@@ -14,9 +14,9 @@
  * @link   https://www.smarty.net/docs/en/language.modifier.escape
  * @author Monte Ohrt <monte at ohrt dot com>
  *
- * @param string  $string        input string
- * @param string  $esc_type      escape type
- * @param string  $char_set      character set, used for htmlspecialchars() or htmlentities()
+ * @param string $string input string
+ * @param string $esc_type escape type
+ * @param string $char_set character set, used for htmlspecialchars() or htmlentities()
  * @param boolean $double_encode encode already encoded entitites again, used for htmlspecialchars() or htmlentities()
  *
  * @return string escaped input string
@@ -129,7 +129,7 @@ function smarty_modifier_escape($string, $esc_type = 'html', $char_set = null, $
             $return = '';
             $_length = strlen($string);
             for ($x = 0; $x < $_length; $x++) {
-                $return .= '%' . bin2hex($string[ $x ]);
+                $return .= '%' . bin2hex($string[$x]);
             }
             return $return;
         case 'hexentity':
@@ -150,7 +150,7 @@ function smarty_modifier_escape($string, $esc_type = 'html', $char_set = null, $
             // no MBString fallback
             $_length = strlen($string);
             for ($x = 0; $x < $_length; $x++) {
-                $return .= '&#x' . bin2hex($string[ $x ]) . ';';
+                $return .= '&#x' . bin2hex($string[$x]) . ';';
             }
             return $return;
         case 'decentity':
@@ -171,7 +171,7 @@ function smarty_modifier_escape($string, $esc_type = 'html', $char_set = null, $
             // no MBString fallback
             $_length = strlen($string);
             for ($x = 0; $x < $_length; $x++) {
-                $return .= '&#' . ord($string[ $x ]) . ';';
+                $return .= '&#' . ord($string[$x]) . ';';
             }
             return $return;
         case 'javascript':
@@ -180,15 +180,15 @@ function smarty_modifier_escape($string, $esc_type = 'html', $char_set = null, $
                 $string,
                 array(
                     '\\' => '\\\\',
-                    "'"  => "\\'",
-                    '"'  => '\\"',
+                    "'" => "\\'",
+                    '"' => '\\"',
                     "\r" => '\\r',
                     "\n" => '\\n',
                     '</' => '<\/',
                     // see https://html.spec.whatwg.org/multipage/scripting.html#restrictions-for-contents-of-script-elements
                     '<!--' => '<\!--',
-                    '<s'   => '<\s',
-                    '<S'   => '<\S'
+                    '<s' => '<\s',
+                    '<S' => '<\S'
                 )
             );
         case 'mail':

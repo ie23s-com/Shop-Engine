@@ -57,13 +57,17 @@ class CollectionSpec extends ObjectBehavior
 
     function it_can_be_instantiated_from_callable_returning_an_array()
     {
-        $this->beConstructedWith(function () { return [1, 2, 3]; });
+        $this->beConstructedWith(function () {
+            return [1, 2, 3];
+        });
         $this->toArray()->shouldReturn([1, 2, 3]);
     }
 
     function it_can_be_instantiated_from_callable_returning_an_iterator()
     {
-        $this->beConstructedWith(function () { return new ArrayIterator([1, 2, 3]); });
+        $this->beConstructedWith(function () {
+            return new ArrayIterator([1, 2, 3]);
+        });
         $this->toArray()->shouldReturn([1, 2, 3]);
     }
 
@@ -79,7 +83,9 @@ class CollectionSpec extends ObjectBehavior
 
     function it_will_throw_when_passed_callable_will_return_something_other_than_array_or_traversable()
     {
-        $this->beConstructedWith(function () { return 1; });
+        $this->beConstructedWith(function () {
+            return 1;
+        });
         $this->shouldThrow(InvalidReturnValue::class)->duringInstantiation();
     }
 
@@ -91,7 +97,9 @@ class CollectionSpec extends ObjectBehavior
 
     function it_can_be_created_to_iterate_over_function_infinitely()
     {
-        $this->beConstructedThrough('iterate', [1, function ($i) {return $i + 1;}]);
+        $this->beConstructedThrough('iterate', [1, function ($i) {
+            return $i + 1;
+        }]);
         $this->take(2)->toArray()->shouldReturn([1, 2]);
     }
 
@@ -528,8 +536,7 @@ class CollectionSpec extends ObjectBehavior
                 2 => 3,
                 1 => 3,
                 0 => 1,
-            ])
-        ;
+            ]);
     }
 
     function it_can_reduce_from_right()
@@ -1101,40 +1108,40 @@ class CollectionSpec extends ObjectBehavior
     function it_can_extract_data_from_nested_collections()
     {
         $input = [
-                    [
-                        'a' => [
-                            'b' => 1
-                        ]
-                    ],
-                    [
-                        'a' => [
-                            'b' => 2
-                        ]
-                    ],
-                    [
-                        '*' => [
-                            'b' => 3
-                        ]
-                    ],
-                    [
-                        '.' => [
-                            'b' => 4
-                        ],
-                        'c' => [
-                            'b' => 5
-                        ],
-                        [
-                            'a'
-                        ]
-                    ]
-                ];
-                $this->beConstructedWith($input);
+            [
+                'a' => [
+                    'b' => 1
+                ]
+            ],
+            [
+                'a' => [
+                    'b' => 2
+                ]
+            ],
+            [
+                '*' => [
+                    'b' => 3
+                ]
+            ],
+            [
+                '.' => [
+                    'b' => 4
+                ],
+                'c' => [
+                    'b' => 5
+                ],
+                [
+                    'a'
+                ]
+            ]
+        ];
+        $this->beConstructedWith($input);
 
-                $this->extract('')->toArray()->shouldReturn($input);
-                $this->extract('a.b')->toArray()->shouldReturn([1, 2]);
-                $this->extract('*.b')->toArray()->shouldReturn([1, 2, 3, 4, 5]);
-                $this->extract('\*.b')->toArray()->shouldReturn([3]);
-                $this->extract('\..b')->toArray()->shouldReturn([4]);
+        $this->extract('')->toArray()->shouldReturn($input);
+        $this->extract('a.b')->toArray()->shouldReturn([1, 2]);
+        $this->extract('*.b')->toArray()->shouldReturn([1, 2, 3, 4, 5]);
+        $this->extract('\*.b')->toArray()->shouldReturn([3]);
+        $this->extract('\..b')->toArray()->shouldReturn([4]);
     }
 
     function it_can_get_the_intersect_of_collections()
@@ -1325,7 +1332,7 @@ class CollectionSpec extends ObjectBehavior
                 [
                     'DusanKasan\Knapsack\Tests\Helpers\Car' => [
                         'numberOfSeats' => 5,
-                     ],
+                    ],
 
                 ],
                 [1, '0//1' => 1]

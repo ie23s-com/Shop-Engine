@@ -44,6 +44,25 @@ class Auth extends Component
     }
 
     /**
+     * This method make hash of written password
+     *
+     * @param string $password - user created password
+     * @throws Exception
+     */
+    public static function hashPassword(string $password): array
+    {
+        $salt = base64_encode(random_bytes(12));
+
+        $hash = password_hash($salt . $_ENV['PEPPER'] . $password, PASSWORD_BCRYPT);
+        return ['salt' => $salt, 'hash' => $hash];
+    }
+
+    public static function timeToDate($unixTimestamp)
+    {
+        return date("Y-m-d H:i:s", $unixTimestamp);
+    }
+
+    /**
      * @inheritDoc
      * @throws MysqlException
      */
@@ -68,7 +87,6 @@ class Auth extends Component
 
     }
 
-
     /**
      * This function creates new user and writes all data to database
      *
@@ -83,6 +101,14 @@ class Auth extends Component
             'last_name' => $user->getLastName(), 'salt' => $user->getSalt(), 'hash' => $user->getHash(),
             'group' => $user->getGroup()]);
         return $this->session->generateSession($id, -1);
+    }
+
+    /**
+     * @return Group
+     */
+    public function getGroup(): Group
+    {
+        return $this->group;
     }
 
     /**
@@ -117,28 +143,9 @@ class Auth extends Component
     /**
      * @throws MysqlException
      */
-    public function getUserByID(int $id): ?User
-    {
-
-        $userData = $this->db->fetchRow('SELECT * FROM users WHERE `id` = :id', ['id' => $id]);
-        if ($userData == null)
-            return null;
-        return new User($userData['id'], $userData['email'], $userData['first_name'], $userData['last_name'], $userData['salt'],
-            $userData['hash'], $userData['group'], $this);
-    }
-
-    public function getCurrentUserID(): int
-    {
-        return $this->currentUserID;
-    }
-
-
-    /**
-     * @throws MysqlException
-     */
     public function getCurrentUser(): ?User
     {
-        if(!$this->isAuth())
+        if (!$this->isAuth())
             return new User(0, '', '', '', '', '', 1, $this);
         return $this->getUserByID($this->currentUserID);
     }
@@ -148,24 +155,22 @@ class Auth extends Component
         return $this->getCurrentUserID() != -1;
     }
 
-    /**
-     * This method make hash of written password
-     *
-     * @param string $password - user created password
-     * @throws Exception
-     */
-    public static function hashPassword(string $password): array
+    public function getCurrentUserID(): int
     {
-        $salt = base64_encode(random_bytes(12));
-
-        $hash = password_hash($salt . $_ENV['PEPPER'] . $password, PASSWORD_BCRYPT);
-        return ['salt' => $salt, 'hash' => $hash];
+        return $this->currentUserID;
     }
 
-
-    public static function timeToDate($unixTimestamp)
+    /**
+     * @throws MysqlException
+     */
+    public function getUserByID(int $id): ?User
     {
-        return date("Y-m-d H:i:s", $unixTimestamp);
+
+        $userData = $this->db->fetchRow('SELECT * FROM users WHERE `id` = :id', ['id' => $id]);
+        if ($userData == null)
+            return null;
+        return new User($userData['id'], $userData['email'], $userData['first_name'], $userData['last_name'], $userData['salt'],
+            $userData['hash'], $userData['group'], $this);
     }
 
     /**
@@ -179,16 +184,9 @@ class Auth extends Component
     /**
      * @throws MysqlException
      */
-    public function logout() {
-        $this->db->update('sessions', ['session_id' => $this->session->getSessionId()], ['expired' => true]);
-    }
-
-    /**
-     * @return Group
-     */
-    public function getGroup(): Group
+    public function logout()
     {
-        return $this->group;
+        $this->db->update('sessions', ['session_id' => $this->session->getSessionId()], ['expired' => true]);
     }
 
 

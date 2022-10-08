@@ -14,7 +14,7 @@
  * @link   https://www.smarty.net/manual/en/language.modifier.spacify.php spacify (Smarty online manual)
  * @author Monte Ohrt <monte at ohrt dot com>
  *
- * @param string $string       input string
+ * @param string $string input string
  * @param string $spacify_char string to insert between characters.
  *
  * @return string

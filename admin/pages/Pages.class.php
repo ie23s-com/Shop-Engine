@@ -27,7 +27,7 @@ class Pages extends Page
     public function request(array $request): string
     {
 
-        if(!$this->getSystem()->getAuth()->getCurrentUser()->hasPermission('admin')) {
+        if (!$this->getSystem()->getAuth()->getCurrentUser()->hasPermission('admin')) {
             $this->getPages()->error(403, "Forbidden");
         }
         $this->request = $request;
@@ -55,24 +55,26 @@ class Pages extends Page
             '/administrator/language/');
     }
 
-    private function getCurrentPage() {
-        if(!isset($this->request[1]))
-            $this->request[1] = 'main';
-        $page = $this->request[1];
-        if(!isset($this->modules[$page]))
-            $this->getPages()->error(404, "Not found!");
-        return $this->modules[$page];
-
-    }
-
-    private function loadButtons() {
+    private function loadButtons()
+    {
 
         $buttons = array();
         /** @var AdminPage $module */
-        foreach ($this->modules as $module){
+        foreach ($this->modules as $module) {
 
             $buttons[] = array('name' => $module->getName(), 'uri' => $module->getUri());
         }
         $this->theme->addObject('admin_buttons', $buttons);
+    }
+
+    private function getCurrentPage()
+    {
+        if (!isset($this->request[1]))
+            $this->request[1] = 'main';
+        $page = $this->request[1];
+        if (!isset($this->modules[$page]))
+            $this->getPages()->error(404, "Not found!");
+        return $this->modules[$page];
+
     }
 }

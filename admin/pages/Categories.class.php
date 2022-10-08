@@ -32,21 +32,6 @@ class Categories extends AdminPage
         return $theme->getTpl('admin/categories');
     }
 
-    private function editableCategories() : array {
-        $r = array();
-        /** @var Category $category */
-        foreach ($this->categoriesEngine->getCategories() as $category) {
-            $r[] = array(
-                'id' => $category->getId(),
-                'name' => $category->getName(),
-                'display_name' => $category->getDisplayName(),
-                'parent_id' => $category->getParentId()
-
-            );
-        }
-        return $r;
-    }
-
     /**
      * @throws MysqlException
      */
@@ -78,5 +63,21 @@ class Categories extends AdminPage
         $category->setParentId($_POST['parent']);
 //        $names = [['lang_id' => 1, 'value' => $_POST['display_name']]];
         $this->categoriesEngine->updateCategory($category);
+    }
+
+    private function editableCategories(): array
+    {
+        $r = array();
+        /** @var Category $category */
+        foreach ($this->categoriesEngine->getCategories() as $category) {
+            $r[] = array(
+                'id' => $category->getId(),
+                'name' => $category->getName(),
+                'display_name' => $category->getDisplayName(),
+                'parent_id' => $category->getParentId()
+
+            );
+        }
+        return $r;
     }
 }

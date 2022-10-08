@@ -21,15 +21,7 @@ abstract class ApiAbstract implements ApiInterface
     {
         $this->system = $system;
         $this->engine = $system->getEngine();
-        parse_str(file_get_contents("php://input"),$this->request);
-    }
-
-    /**
-     * @return System
-     */
-    public function getSystem(): System
-    {
-        return $this->system;
+        parse_str(file_get_contents("php://input"), $this->request);
     }
 
     /**
@@ -40,17 +32,24 @@ abstract class ApiAbstract implements ApiInterface
         return $this->engine;
     }
 
+    /**
+     * @return System
+     */
+    public function getSystem(): System
+    {
+        return $this->system;
+    }
+
     public function code(): int
     {
         return $this->code;
     }
 
-    /**
-     * @param int $code
-     */
-    public function setCode(int $code): void
+    public function hasRequest(string $param): bool
     {
-        $this->code = $code;
+        if ($this->getRequest($param) == null)
+            return false;
+        return true;
     }
 
     public function getRequest(string $param)
@@ -61,13 +60,6 @@ abstract class ApiAbstract implements ApiInterface
         return $res;
     }
 
-    public function hasRequest(string $param): bool
-    {
-        if ($this->getRequest($param) == null)
-            return false;
-        return true;
-    }
-
     public function withCode($code, $text = null)
     {
         $this->setCode($code);
@@ -75,6 +67,14 @@ abstract class ApiAbstract implements ApiInterface
         if ($text != null)
             return json_encode(['code' => $code, 'text' => $text]);
         return json_encode(['code' => $code, 'text' => Codes::getCodeText($code)]);
+    }
+
+    /**
+     * @param int $code
+     */
+    public function setCode(int $code): void
+    {
+        $this->code = $code;
     }
 
     public function withData($code, array $data)
