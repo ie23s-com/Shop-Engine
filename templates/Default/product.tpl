@@ -1,11 +1,11 @@
 <div>
-    <div class="row">
+    <div class="row margin-10">
         <div class="col s12 m10 l10">
-            <h4>{$product_name}</h4>
+            <h4 class="margin-0">{$product_name}</h4>
         </div>
     </div>
     <div class="row">
-        <div class="col s12 m6 l7">
+        <div class="col s12 m6 l6">
             <div class="carousel valign-wrapper">
                 <div class="valign-wrapper previous-image">
                     <i class="material-icons">chevron_left</i>

@@ -200,7 +200,8 @@ $(document).ready(function () {
     //carousel
     $('.carousel').carousel({
         fullWidth: true,
-        numVisible: true
+        numVisible: 0
+
     });
     $('.previous-image').click(() => $('.carousel').carousel('prev'));
     $('.next-image').click(() => $('.carousel').carousel('next'));

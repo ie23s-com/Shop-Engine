@@ -8,19 +8,19 @@
             <h4>Create product</h4>
 
             <div class="red-text center-align error-message"></div>
-            <div class="row ie23s-auto-margin-0">
+            <div class="row margin-0">
                 <div class="input-field col s12">
                     <input id="display_name" name="display_name" type="text" class="validate">
                     <label for="display_name">Display name</label>
                 </div>
             </div>
-            <div class="row ie23s-auto-margin-0">
+            <div class="row margin-0">
                 <div class="input-field col s12">
                     <textarea id="description" name="description" class="materialize-textarea"></textarea>
                     <label for="description">Description</label>
                 </div>
             </div>
-            <div class="row ie23s-auto-margin-0">
+            <div class="row margin-0">
                 <div class="input-field col s6">
                     <input id="cost" name="cost" type="number" class="validate">
                     <label for="cost">Cost</label>
@@ -30,7 +30,7 @@
                     <label for="balance">Balance</label>
                 </div>
             </div>
-            <div class="row ie23s-auto-margin-0">
+            <div class="row margin-0">
                 <div class="input-field col s6">
                     <input id="art" name="art" type="number" class="validate">
                     <label for="art">Code</label>
@@ -41,7 +41,7 @@
                 </div>
             </div>
 
-            <div class="row ie23s-auto-margin-0">
+            <div class="row margin-0">
                 <div class="input-field col s12">
                     <select name="category">
                         <option value="0" selected>none</option>
@@ -52,12 +52,12 @@
                     <label for="category">Category</label>
                 </div>
             </div>
-            <div class="row ie23s-auto-margin-0">
+            <div class="row margin-0">
                 <div class="input-field col s12">
                     <div class="dropzone" id="mydropzone"></div>
                 </div>
             </div>
-            <div class="row ie23s-auto-margin-0">
+            <div class="row margin-0">
                 <div class="input-field col s6">
                     <button class="btn waves-effect waves-block waves-light center-block" name="cancel" type="button">
                         Cancel
@@ -76,14 +76,14 @@
         </div>
     </form>
 </div>
-<div class="row ie23s-auto-margin-0">
+<div class="row margin-0">
     <div class="col s11"></div>
     <button class="btn create-product col s1">Create</button>
 </div>
-<div class="row ie23s-auto-margin-0">
-    <form class="col s12 ie23s-auto-margin-0" id="adm-products-search">
-        <div class="row ie23s-auto-margin-0">
-            <div class="input-field col s12 ie23s-auto-margin-0">
+<div class="row margin-0">
+    <form class="col s12 margin-0" id="adm-products-search">
+        <div class="row margin-0">
+            <div class="input-field col s12 margin-0">
                 <i class="material-icons prefix">search</i>
                 <input id="icon_prefix" name="search" type="text" class="validate">
                 <label for="icon_prefix">Search</label>
@@ -107,7 +107,7 @@
     </tr>
     <tr class="preloader" style="display: none;">
         <th colspan="10">
-            <div class="preloader-wrapper big active ie23s-auto-margin-0">
+            <div class="preloader-wrapper big active margin-0">
                 <div class="spinner-layer spinner-blue-only">
                     <div class="circle-clipper left">
                         <div class="circle"></div>
