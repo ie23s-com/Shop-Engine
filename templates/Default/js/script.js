@@ -75,7 +75,7 @@ IE23S_REGISTER = {
         this.form.find('button').prop('disabled', false);
         this.form.find('textarea').prop('disabled', false);
     },
-    successAuth: function (r) {
+    successAuth: function () {
         IE23S_REGISTER.unblock();
         $('.unAuth').hide();
         $('.authOnly').show();
@@ -149,7 +149,7 @@ IE23S_LOGIN = {
         this.form.find('button').prop('disabled', false);
         this.form.find('textarea').prop('disabled', false);
     },
-    successAuth: function (r) {
+    successAuth: function () {
         IE23S_LOGIN.unblock();
         $('.unAuth').hide();
         $('.authOnly').show();
@@ -198,13 +198,14 @@ $(document).ready(function () {
     $('select').formSelect();
     $('.sidenav').sidenav();
     //carousel
-    $('.carousel').carousel({
+    let carousel = $('.carousel');
+    carousel.carousel({
         fullWidth: true,
         numVisible: 0
 
     });
-    $('.previous-image').click(() => $('.carousel').carousel('prev'));
-    $('.next-image').click(() => $('.carousel').carousel('next'));
+    $('.previous-image').click(() => carousel.carousel('prev'));
+    $('.next-image').click(() => carousel.carousel('next'));
 
     //end carousel
     M.updateTextFields();
@@ -212,7 +213,11 @@ $(document).ready(function () {
     IE23S_REGISTER.modalInit('#auth-div');
     IE23S_LOGIN.loginInit('.login');
     IE23S_LOGIN.modalInit('#auth-div');
-    $('.progress').hide();
     $('.dropdown-trigger').dropdown();
+    let instance = M.Tabs.init(document.querySelectorAll('.tabs'), {
+        swipeable: false
+    });
+    $('.progress').hide();
+
 });
 Dropzone.autoDiscover = false;

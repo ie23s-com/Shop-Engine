@@ -30,11 +30,8 @@ class ProductPage extends Page
         if ($product == null)
             $this->getPages()->error(404, "This product not found");
         $theme = $this->getPages()->getTheme();
+        $theme->addObject('product', $product);
         $theme->addBlock('product_name', $this->getLang()->getEditableRow("product-name", $product->getId()));
-        $theme->addBlock('product_description', $this->getLang()->
-        getEditableRow("product-description", $product->getId()));
-        $theme->addBlock('product_cost', $product->getCost());
-        $theme->addBlock('product_art', $product->getArt());
 
         //Breadcrumb
         $category = $this->categoryEngine->getCategory($product->getCategory());
