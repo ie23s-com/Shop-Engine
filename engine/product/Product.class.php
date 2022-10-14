@@ -163,7 +163,7 @@ class Product
      */
     public function setPhotos(array $photos): void
     {
-        if (empty($photos))
+        if (count($photos) == 0)
             $photos[] = 'no-product-photo';
         $this->photos = $photos;
     }
