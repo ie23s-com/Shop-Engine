@@ -42,7 +42,11 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col s12 divider"></div>
+                <div class="col s12">
+
+                    <div class="divider"></div>
+
+                </div>
             </div>
 
             <div class="row">
