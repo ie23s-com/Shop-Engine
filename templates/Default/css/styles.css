@@ -81,7 +81,7 @@
 .in-stock {
     padding: 3px 8px;
     color: green;
-    background-color: lightgreen;
+    background-color: #c8e6c9;
     border: 1px solid limegreen;
     display: inline-block;
     border-radius: 5px;
@@ -95,9 +95,17 @@
 
 .in-stock i {
     display: block;
+    border-radius: 50%;
+    border: 1px solid green;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.15rem 0.1rem 0.15rem;
 }
 
 .in-stock td {
     padding: 0;
     vertical-align: middle;
+}
+
+.add-to-cart {
+    background-color: #4caf50;
 }
