@@ -78,15 +78,32 @@ class Pages extends Component
      */
     public function unload()
     {
+        $this->theme->addObject('LANG', $this->getSystem()->getLang());
         $module = $this->getModule();
+
+        $noreload = $this->path[count($this->path) - 1] == 'noreload';
+
+        if ($noreload) {
+            $module->addHeader('Content-Type: application/json; charset=utf-8');
+            $module->needTheme(false);
+        }
+
         $module->runHeaders();
+
+
         $r = $module->request($this->path);
         $this->theme->addObject('isAuth', $this->getSystem()->getAuth()->isAuth());
         $this->theme->addObject('currentUser', $this->getSystem()->getAuth()->getCurrentUser());
+
         if ($module->needTheme()) {
             $this->theme->addBlock('content', $r);
             $this->theme->addBlock("title", $this->title);
             echo $this->theme->getTpl('main');
+        } elseif ($noreload) {
+            define('offTimer', 'off');
+            echo json_encode([  'title' => $this->title,
+                                'content' => $r
+            ]);
         } else {
             echo $r;
         }
@@ -96,6 +113,10 @@ class Pages extends Component
     {
         if (!isset($this->path[0]) || empty($this->path[0])) {
             $this->path[0] = 'index';
+        }
+        if ($this->path[0] == 'noreload') {
+            $this->path[0] = 'index';
+            $this->path[1] = 'noreload';
         }
         $name = $this->pathsModules[$this->path[0]] ?? null;
         if ($name == null)

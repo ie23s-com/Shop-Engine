@@ -85,7 +85,15 @@ class Lang extends Component
         return $this->mySQL->getConn()->fetchColumn("SELECT `value`
                                                         FROM `language`
                                                         WHERE lang_id = :id AND `key` = :key",
-            ['id' => $this->lang_id, 'key' => $key]);
+            ['id' => $this->lang_id, 'key' => $key]) ?? 'undefined';
+    }
+
+    /**
+     * @throws MysqlException
+     */
+    public function s($key): string
+    {
+        return $this->getRow($key);
     }
 
     /**

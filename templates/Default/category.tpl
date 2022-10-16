@@ -2,7 +2,7 @@
     <div class="col s12 m2 l2"> <!-- Note that "m4 l3" was added -->
         <div id="category_children_categories">
             {foreach $category_children_categories as $category}<p><a
-                        href="/category/{$category->getId()}">{$category->getDisplayName()}</a></p>{/foreach}
+                        href="/category/{$category->getId()}"  data-reload="false">{$category->getDisplayName()}</a></p>{/foreach}
         </div>
     </div>
 
@@ -13,7 +13,7 @@
             {foreach $category_products as $product}
                 <div class="col s12 m6 l3 xl3 ie23s-padding-card">
                     <div class="card">
-                        <a href="/product/{$product->getId()}">
+                        <a href="/product/{$product->getId()}"  data-reload="false">
                             <div class="card-image waves-block waves-light">
                                 <img class="" src="https://materializecss.com/images/office.jpg">
                             </div>

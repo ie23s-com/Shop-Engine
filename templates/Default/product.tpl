@@ -6,9 +6,9 @@
     </div>
     <div class="row">
         <ul class="tabs product-nav">
-            <li class="tab col s3"><a class="active" href="#product-main">About</a></li>
-            <li class="tab col s3"><a href="#product-characters">Characters</a></li>
-            <li class="tab col s3"><a href="#product-reviews">Reviews</a></li>
+            <li class="tab col s3"><a class="active" href="#product-main">{$LANG->s('about')}</a></li>
+            <li class="tab col s3"><a href="#product-characters">{$LANG->s('characteristics')}</a></li>
+            <li class="tab col s3"><a href="#product-reviews">{$LANG->s('reviews')}</a></li>
         </ul>
     </div>
     <div id="product-main" class="row product-info">
@@ -33,7 +33,7 @@
                             <tr>
                                 <td><i class="tiny material-icons">done</i></td>
                                 <td>
-                                    <div style="margin-left:4px;">In stock</div>
+                                    <div style="margin-left:4px;">{$LANG->s('in_stock')}</div>
                                 </td>
 
                             </tr>
@@ -52,7 +52,7 @@
             <div class="row">
                 <div class="col s6">
                     <a class="waves-effect waves-light btn add-to-cart">
-                        <i class="material-icons right">add_shopping_cart</i>To cart
+                        <i class="material-icons right">add_shopping_cart</i>{$LANG->s('to_cart')}
                     </a>
                 </div>
 

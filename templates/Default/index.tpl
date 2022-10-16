@@ -5,7 +5,7 @@
         {foreach $categories_list as $category}
             <div class="col s12 m6 l3 xl3 ie23s-padding-card">
                 <div class="card">
-                    <a href="/category/{$category->getId()}">
+                    <a href="/category/{$category->getId()}" data-reload="false">
                         <div class="card-image waves-block waves-light">
                             <img class="" src="https://materializecss.com/images/office.jpg">
                         </div>

@@ -193,31 +193,70 @@ IE23S_LOGIN = {
     },
 }
 
+let IE23S_LOAD = {
+    first: function () {
+        $('select').formSelect();
+        $('.sidenav').sidenav();
+
+        M.updateTextFields();
+
+        IE23S_REGISTER.registerInit('.register');
+        IE23S_REGISTER.modalInit('#auth-div');
+        IE23S_LOGIN.loginInit('.login');
+        IE23S_LOGIN.modalInit('#auth-div');
+        this.loadedPart();
+    },
+    carousel: function () {
+        let carousel = $('.carousel');
+        carousel.carousel({
+            fullWidth: true,
+            numVisible: 0
+
+        });
+        $('.previous-image').click(() => carousel.carousel('prev'));
+        $('.next-image').click(() => carousel.carousel('next'));
+    },
+    loadedPart: function () {
+        this.carousel();
+        $('.dropdown-trigger').dropdown();
+
+        let instance = M.Tabs.init(document.querySelectorAll('.tabs'), {
+            swipeable: false
+        });
+        $('.progress').hide();
+
+        $('a[data-reload="false"]').click(function(e) {
+                e.preventDefault();
+                $(this).attr('data-reload', true);
+                IE23S_LOAD.loadPart( $(this).attr('href'));
+        })
+    },
+    insertPart: function (r) {
+        $('#loaded-content').html(r.content);
+        IE23S_LOAD.loadedPart();
+        document.title=r.title;
+    },
+    changeURL: function (url)
+    {
+        window.history.pushState("data","Title",url);
+    },
+    loadPart: function (href) {
+
+        IE23S_LOAD.changeURL(href);
+        if(href === '/')
+            href = '';
+        $('.progress').show();
+        $.ajax({
+            type: 'GET',
+            url: href + '/noreload',
+            success: IE23S_LOAD.insertPart,
+        });
+    }
+}
 
 $(document).ready(function () {
-    $('select').formSelect();
-    $('.sidenav').sidenav();
-    //carousel
-    let carousel = $('.carousel');
-    carousel.carousel({
-        fullWidth: true,
-        numVisible: 0
 
-    });
-    $('.previous-image').click(() => carousel.carousel('prev'));
-    $('.next-image').click(() => carousel.carousel('next'));
-
-    //end carousel
-    M.updateTextFields();
-    IE23S_REGISTER.registerInit('.register');
-    IE23S_REGISTER.modalInit('#auth-div');
-    IE23S_LOGIN.loginInit('.login');
-    IE23S_LOGIN.modalInit('#auth-div');
-    $('.dropdown-trigger').dropdown();
-    let instance = M.Tabs.init(document.querySelectorAll('.tabs'), {
-        swipeable: false
-    });
-    $('.progress').hide();
+    IE23S_LOAD.first();
 
 });
 Dropzone.autoDiscover = false;

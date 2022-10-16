@@ -37,21 +37,21 @@
     <!-- Dropdown Structure -->
     <ul id='profile-dropdown' class='dropdown-content ie23s-margin-64'>
         {if $currentUser->hasPermission('admin')}
-            <li><a href="/administrator/">Admin</a></li>
+            <li><a href="/administrator/">{$LANG->s('admin')}</a></li>
         {/if}
-        <li><a href="/logout">Logout</a></li>
+        <li><a href="/logout">{$LANG->s('logout')}</a></li>
     </ul>
     <nav>
         <div class="nav-wrapper">
-            <a href="/" class="brand-logo">IE23S Shop</a>
+            <a href="/" class="brand-logo"  data-reload="false">{$LANG->s('title')}</a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
 
-                <li><a href="#" class="login unAuth {if $isAuth}hidden{/if}">Sign in</a></li>
-                <li><a href="#" class="register unAuth {if $isAuth}hidden{/if}">Sign up</a></li>
+                <li><a href="#" class="login unAuth {if $isAuth}hidden{/if}">{$LANG->s('signin')}</a></li>
+                <li><a href="#" class="register unAuth {if $isAuth}hidden{/if}">{$LANG->s('signup')}</a></li>
                 <li>
                     <a href="#" class="profile authOnly dropdown-trigger {if ! $isAuth}hidden{/if}"
-                       data-target='profile-dropdown'>Profile</a>
+                       data-target='profile-dropdown'>{$LANG->s('profile')}</a>
 
                 </li>
 
@@ -60,8 +60,8 @@
         </div>
     </nav>
     <ul class="sidenav" id="mobile-demo">
-        <li><a href="#" class="login">Sign in</a></li>
-        <li><a href="#" class="register">Sign up</a></li>
+        <li><a href="#" class="login">{$LANG->s('signin')}</a></li>
+        <li><a href="#" class="register">{$LANG->s('signup')}</a></li>
     </ul>
 </header>
 <div id="auth-div" class="modal" style="max-width: 800px;">
@@ -77,7 +77,7 @@
         <div class="row" style="margin: 10px 0">
             <div class="col s12">
                 <div class="nav-wrapper">
-                    <a href="/" class="breadcrumb text-darken-4">Main</a>
+                    <a href="/" class="breadcrumb text-darken-4">{$LANG->s('main')}</a>
                     {while $breadcrumbs->next()}
                         <a href="{$breadcrumbs->get()->getUrl()}"
                            class="breadcrumb text-darken-4">{$breadcrumbs->get()->getName()}</a>
@@ -87,7 +87,9 @@
         </div>
         <div class="divider"></div>
     {/if}
-    {$content}
+    <div id="loaded-content">
+        {$content}
+    </div>
 </div>
 </body>
 </html>

@@ -83,7 +83,7 @@ abstract class Page
     /**
      * @param string $header
      */
-    protected function addHeader(string $header): void
+    public function addHeader(string $header): void
     {
         $this->headers[] = $header;
     }
