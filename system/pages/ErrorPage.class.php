@@ -30,11 +30,12 @@ class ErrorPage extends Page
         try {
             $this->getPages()->unload();
         } catch (SmartyException|MysqlException $e) {
-            $this->getSystem()->getComponent('mail')->sendMail(
-                ['name' => 'Ilya Evtukhov', 'email' => 'evtukhov23@gmail.com'],
-                'An error ' . $error, "Haha! You've got an error:<br>{$e->getTraceAsString()}");
             echo($e->getTraceAsString());
         }
+        $this->getSystem()->getComponent('mail')->sendMail(
+            ['name' => 'Ilya Evtukhov', 'email' => 'evtukhov23@gmail.com'],
+            'An error ' . $error, "Haha! You've got an error:<br>{$text}");
+
         die();
     }
 
