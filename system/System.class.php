@@ -9,6 +9,7 @@ use ie23s\shop\engine\utils\breadcrumbs\Engine;
 use ie23s\shop\system\api\Api;
 use ie23s\shop\system\auth\Auth;
 use ie23s\shop\system\files\Files;
+use ie23s\shop\system\install\Install;
 use ie23s\shop\system\lang\Lang;
 use ie23s\shop\system\mail\Mail;
 use ie23s\shop\system\pages\Pages;
@@ -37,6 +38,10 @@ require_once __SHOP_DIR__ . "system/mail/Mail.class.php";
 //MySQL component loader
 require_once __SHOP_DIR__ . "system/files/Files.class.php";
 
+//Install script
+//This file will be deleted
+@include_once __SHOP_DIR__ . "system/install/Install.class.php";
+
 
 /**
  * This class loads all system components
@@ -55,7 +60,10 @@ class System
 
         //Init Config
         $config = new config\Config($this);
-        $config->load();
+        try {
+            $config->load();
+        } catch (Exception $e) {
+        }
         $config = null;
         //Init Theme
         $this->components["pages"] = new Pages($this);
@@ -104,13 +112,27 @@ class System
 
     }
 
+    /**
+     * @throws Exception
+     */
+    public function install()
+    {
+        //Init Theme
+        $this->components["pages"] = new Pages($this);
+        try {
+            $this->components["install"] = new Install($this);
+            $this->components["install"]->load();
+        } catch (Exception $e) {
+        }
+    }
+
     public function unload()
     {
         //Unload Theme
         $this->components["pages"]->unload();
     }
 
-    public function getLang(): Lang
+    public function getLang(): ?Lang
     {
         /** @var $r Lang */
         $r = $this->getComponent('lang');
@@ -119,9 +141,9 @@ class System
 
     /**
      * @param $component
-     * @return Component
+     * @return ?Component
      */
-    public function getComponent($component): Component
+    public function getComponent($component): ?Component
     {
         return $this->components[$component];
     }
@@ -147,7 +169,7 @@ class System
         return $r;
     }
 
-    public function getAuth(): Auth
+    public function getAuth(): ?Auth
     {
         /** @var $r Auth */
         $r = $this->getComponent('auth');

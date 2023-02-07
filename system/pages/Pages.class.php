@@ -92,8 +92,13 @@ class Pages extends Component
 
 
         $r = $module->request($this->path);
-        $this->theme->addObject('isAuth', $this->getSystem()->getAuth()->isAuth());
-        $this->theme->addObject('currentUser', $this->getSystem()->getAuth()->getCurrentUser());
+        if ($this->getSystem()->getAuth() != null) {
+            $this->theme->addObject('isAuth', $this->getSystem()->getAuth()->isAuth());
+            $this->theme->addObject('currentUser', $this->getSystem()->getAuth()->getCurrentUser());
+        } else {
+            $this->theme->addObject('isAuth', false);
+            $this->theme->addObject('currentUser', 0);
+        }
 
         if ($module->needTheme()) {
             $this->theme->addBlock('content', $r);
@@ -101,8 +106,8 @@ class Pages extends Component
             echo $this->theme->getTpl('main');
         } elseif ($noreload) {
             define('offTimer', 'off');
-            echo json_encode([  'title' => $this->title,
-                                'content' => $r
+            echo json_encode(['title' => $this->title,
+                'content' => $r
             ]);
         } else {
             echo $r;
@@ -153,6 +158,14 @@ class Pages extends Component
     public function getPath(): array
     {
         return $this->path;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPathString(): string
+    {
+        return self::toPath($this->path);
     }
 
     /**

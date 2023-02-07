@@ -19,6 +19,7 @@ class ErrorPage extends Page
         $theme->addBlock('error_num', $this->error);
         $theme->addBlock('error_text', $this->text);
         $this->getPages()->setTitle($this->error);
+        $this->needTheme(false);
         return $theme->getTpl('error');
     }
 
@@ -32,9 +33,9 @@ class ErrorPage extends Page
         } catch (SmartyException|MysqlException $e) {
             echo($e->getTraceAsString());
         }
-        $this->getSystem()->getComponent('mail')->sendMail(
-            ['name' => 'Ilya Evtukhov', 'email' => 'evtukhov23@gmail.com'],
-            'An error ' . $error, "Haha! You've got an error:<br>{$text}");
+//        $this->getSystem()->getComponent('mail')->sendMail(
+//            ['name' => 'Ilya Evtukhov', 'email' => 'evtukhov23@gmail.com'],
+//            'An error ' . $error, "Haha! You've got an error:<br>{$text}");
 
         die();
     }

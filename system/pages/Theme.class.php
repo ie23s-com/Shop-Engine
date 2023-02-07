@@ -15,7 +15,8 @@ class Theme
 
     public function __construct()
     {
-        $this->theme = $_ENV['THEME'];
+
+        $this->theme = $_ENV['THEME'] ?? 'default';
         $this->smarty = new Smarty();
 
         $this->smarty->setTemplateDir(__SHOP_DIR__ . 'templates/' . $this->theme);
